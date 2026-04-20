@@ -566,6 +566,10 @@
         .pro-close-all{width:100%;padding:12px;margin-top:12px;background:rgba(255,61,61,0.1);border:1px solid rgba(255,61,61,0.2);border-radius:10px;color:#FF5252;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s ease}
         .pro-close-all:active{background:rgba(255,61,61,0.2)}
         
+        /* Trading Scroll */
+        .trading-scroll-content{flex:1;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+        .trading-scroll-content::-webkit-scrollbar{display:none}
+        
         /* Pro Position Card */
         .pro-pos-card{display:flex;align-items:center;gap:12px;padding:14px;background:rgba(255,255,255,0.03);border-radius:14px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.05)}
         .pro-pos-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;background:rgba(255,255,255,0.05)}
@@ -578,6 +582,81 @@
         .pro-pos-pnl-value.loss{color:#FF5252}
         .pro-pos-close{width:32px;height:32px;border-radius:8px;background:rgba(255,61,61,0.1);border:none;color:#FF5252;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
         .pro-pos-close:active{background:rgba(255,61,61,0.2)}
+        
+        /* MT5 Trade Layout */
+        .mt5-trade-layout{display:flex;flex-direction:column;height:100%;background:#1a1a1e}
+        .mt5-trade-header{padding:16px;background:#242428;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .mt5-header-title{font-size:20px;font-weight:700;color:#fff;margin-bottom:12px}
+        .mt5-balance-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+        .mt5-balance-item{display:flex;flex-direction:column;gap:2px}
+        .mt5-balance-label{font-size:10px;color:#8b8b8f;text-transform:uppercase;letter-spacing:0.3px}
+        .mt5-balance-value{font-size:14px;font-weight:600;color:#fff}
+        
+        /* MT5 Tabs */
+        .mt5-tabs{display:flex;background:#242428;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .mt5-tab{flex:1;padding:14px 8px;background:transparent;border:none;color:#8b8b8f;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s ease;position:relative;display:flex;align-items:center;justify-content:center;gap:6px}
+        .mt5-tab.active{color:#4CAF50}
+        .mt5-tab.active::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:#4CAF50}
+        .mt5-tab-count{font-size:10px;color:#fff;background:rgba(255,255,255,0.15);padding:2px 6px;border-radius:8px}
+        .mt5-tab.active .mt5-tab-count{background:#4CAF50}
+        
+        /* MT5 Content */
+        .mt5-trade-content{flex:1;overflow-y:auto;scrollbar-width:none;background:#1a1a1e}
+        .mt5-trade-content::-webkit-scrollbar{display:none}
+        .mt5-panel{display:none;padding:12px}
+        .mt5-panel.active{display:block}
+        
+        /* MT5 Position Card */
+        .mt5-pos-card{background:#242428;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid rgba(255,255,255,0.05)}
+        .mt5-pos-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+        .mt5-pos-symbol{display:flex;align-items:center;gap:10px}
+        .mt5-pos-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;background:rgba(255,255,255,0.05)}
+        .mt5-pos-pair{font-size:15px;font-weight:700;color:#fff}
+        .mt5-pos-type{font-size:11px;padding:3px 8px;border-radius:6px;font-weight:600;text-transform:uppercase}
+        .mt5-pos-type.buy{background:rgba(76,175,80,0.15);color:#4CAF50}
+        .mt5-pos-type.sell{background:rgba(244,67,54,0.15);color:#F44336}
+        .mt5-pos-close-btn{width:28px;height:28px;border-radius:6px;background:rgba(244,67,54,0.1);border:none;color:#F44336;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px}
+        .mt5-pos-details{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .mt5-pos-detail{display:flex;flex-direction:column;gap:2px}
+        .mt5-pos-label{font-size:10px;color:#8b8b8f;text-transform:uppercase}
+        .mt5-pos-value{font-size:13px;font-weight:600;color:#fff}
+        .mt5-pos-footer{display:flex;align-items:center;justify-content:space-between}
+        .mt5-pos-pnl{display:flex;flex-direction:column;align-items:flex-end;gap:2px}
+        .mt5-pos-pnl-value{font-size:18px;font-weight:700}
+        .mt5-pos-pnl-value.profit{color:#4CAF50}
+        .mt5-pos-pnl-value.loss{color:#F44336}
+        .mt5-pos-pnl-pct{font-size:11px;color:#8b8b8f}
+        
+        /* MT5 Empty State */
+        .mt5-empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;color:#8b8b8f}
+        .mt5-empty-state svg{width:48px;height:48px;opacity:0.3;margin-bottom:16px}
+        .mt5-empty-state p{font-size:14px}
+        
+        /* MT5 Order Card */
+        .mt5-order-card{background:#242428;border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:12px}
+        .mt5-order-type{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;background:rgba(255,255,255,0.05)}
+        .mt5-order-type.buy{background:rgba(76,175,80,0.15);color:#4CAF50}
+        .mt5-order-type.sell{background:rgba(244,67,54,0.15);color:#F44336}
+        .mt5-order-info{flex:1}
+        .mt5-order-pair{font-size:14px;font-weight:700;color:#fff}
+        .mt5-order-detail{font-size:11px;color:#8b8b8f;margin-top:2px}
+        .mt5-order-price{font-size:14px;font-weight:600;color:#fff;text-align:right}
+        .mt5-order-cancel{width:28px;height:28px;border-radius:6px;background:rgba(255,255,255,0.05);border:none;color:#8b8b8f;cursor:pointer;display:flex;align-items:center;justify-content:center}
+        
+        /* MT5 History Card */
+        .mt5-history-card{background:#242428;border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid rgba(255,255,255,0.05)}
+        .mt5-history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+        .mt5-history-left{display:flex;align-items:center;gap:10px}
+        .mt5-history-pair{font-size:14px;font-weight:700;color:#fff}
+        .mt5-history-type{font-size:10px;padding:2px 6px;border-radius:4px;font-weight:600}
+        .mt5-history-type.buy{background:rgba(76,175,80,0.15);color:#4CAF50}
+        .mt5-history-type.sell{background:rgba(244,67,54,0.15);color:#F44336}
+        .mt5-history-date{font-size:11px;color:#8b8b8f}
+        .mt5-history-body{display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,255,255,0.05)}
+        .mt5-history-detail{font-size:12px;color:#8b8b8f}
+        .mt5-history-pnl{font-size:16px;font-weight:700}
+        .mt5-history-pnl.profit{color:#4CAF50}
+        .mt5-history-pnl.loss{color:#F44336}
         
         /* Behavior Analysis */
         .behavior-section{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;padding:20px;margin-bottom:24px}
@@ -752,154 +831,199 @@
 
                 <div class="tab-panel" id="tabTrading">
                     <div class="trading-pro-layout">
-                        <!-- Top Toolbar -->
-                        <div class="pro-toolbar">
-                            <button class="pro-toolbar-btn" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></button>
-                            <div class="pro-symbol-center" onclick="openSymbolSearch()">
-                                <span class="pro-symbol-pair" id="chartSymbol">EURUSD</span>
-                                <span class="pro-symbol-desc" id="symbolDesc">Euro / US Dollar</span>
-                            </div>
-                            <button class="pro-toolbar-btn" onclick="toggleObjectsMenu(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></button>
-                        </div>
-
-                        <!-- Timeframe Bar -->
-                        <div class="pro-timeframe-scroll">
-                            <div class="pro-timeframe-bar">
-                                <button class="pro-tf-btn" data-tf="1m">1m</button>
-                                <button class="pro-tf-btn" data-tf="5m">5m</button>
-                                <button class="pro-tf-btn active" data-tf="15m">15m</button>
-                                <button class="pro-tf-btn" data-tf="30m">30m</button>
-                                <button class="pro-tf-btn" data-tf="1h">1H</button>
-                                <button class="pro-tf-btn" data-tf="4h">4H</button>
-                                <button class="pro-tf-btn" data-tf="1d">1D</button>
-                                <button class="pro-tf-btn" data-tf="1w">1W</button>
-                            </div>
-                        </div>
-
-                        <!-- Main Chart Area -->
-                        <div class="pro-chart-wrapper">
-                            <div class="pro-chart-container">
-                                <canvas id="tradingCanvas"></canvas>
-                                <div class="chart-objects-menu" id="objectsMenu">
-                                    <button class="chart-object-btn" onclick="addObject('trendline')">📈 Trend Line</button>
-                                    <button class="chart-object-btn" onclick="addObject('horizontal')">➖ Horizontal</button>
-                                    <button class="chart-object-btn" onclick="addObject('fibonacci')">🌀 Fibonacci</button>
-                                    <button class="chart-object-btn" onclick="addObject('support')">🎯 S/R Level</button>
+                        <!-- Scrollable Content -->
+                        <div class="trading-scroll-content">
+                            <!-- Top Toolbar -->
+                            <div class="pro-toolbar">
+                                <button class="pro-toolbar-btn" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></button>
+                                <div class="pro-symbol-center" onclick="openSymbolSearch()">
+                                    <span class="pro-symbol-pair" id="chartSymbol">EURUSD</span>
+                                    <span class="pro-symbol-desc" id="symbolDesc">Euro / US Dollar</span>
                                 </div>
+                                <button class="pro-toolbar-btn" onclick="toggleObjectsMenu(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></button>
                             </div>
-                        </div>
 
-                        <!-- Price Ticker -->
-                        <div class="pro-price-ticker">
-                            <div class="pro-ticker-sell" onclick="executeTrade('sell')">
-                                <div class="pro-ticker-label">SELL</div>
-                                <div class="pro-ticker-price" id="sellPrice">1.08448</div>
-                                <div class="pro-ticker-spread">Bid</div>
-                            </div>
-                            <div class="pro-ticker-spread-mid">
-                                <div class="pro-spread-value" id="tradeSpread">0.2</div>
-                                <div class="pro-spread-label">spread</div>
-                            </div>
-                            <div class="pro-ticker-buy" onclick="executeTrade('buy')">
-                                <div class="pro-ticker-label">BUY</div>
-                                <div class="pro-ticker-price" id="buyPrice">1.08452</div>
-                                <div class="pro-ticker-spread">Ask</div>
-                            </div>
-                        </div>
-
-                        <!-- Order Panel -->
-                        <div class="pro-order-panel">
-                            <!-- Volume Row -->
-                            <div class="pro-order-row">
-                                <label class="pro-order-label">Volume</label>
-                                <div class="pro-volume-control">
-                                    <button class="pro-vol-minus" onclick="adjustVolume(-0.01)">−</button>
-                                    <input type="number" class="pro-vol-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()">
-                                    <button class="pro-vol-plus" onclick="adjustVolume(0.01)">+</button>
-                                </div>
-                                <div class="pro-vol-presets">
-                                    <button class="pro-vol-pill" onclick="setQuickLot(0.01)">0.01</button>
-                                    <button class="pro-vol-pill" onclick="setQuickLot(0.10)">0.1</button>
-                                    <button class="pro-vol-pill" onclick="setQuickLot(1.00)">1.0</button>
+                            <!-- Timeframe Bar -->
+                            <div class="pro-timeframe-scroll">
+                                <div class="pro-timeframe-bar">
+                                    <button class="pro-tf-btn" data-tf="1m">1m</button>
+                                    <button class="pro-tf-btn" data-tf="5m">5m</button>
+                                    <button class="pro-tf-btn active" data-tf="15m">15m</button>
+                                    <button class="pro-tf-btn" data-tf="30m">30m</button>
+                                    <button class="pro-tf-btn" data-tf="1h">1H</button>
+                                    <button class="pro-tf-btn" data-tf="4h">4H</button>
+                                    <button class="pro-tf-btn" data-tf="1d">1D</button>
+                                    <button class="pro-tf-btn" data-tf="1w">1W</button>
                                 </div>
                             </div>
 
-                            <!-- SL/TP Row -->
-                            <div class="pro-order-row sltp-row">
-                                <div class="pro-sltp-group">
-                                    <label class="pro-order-label">Stop Loss</label>
-                                    <div class="pro-sltp-input">
-                                        <input type="number" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
-                                        <span class="pro-pips-tag" id="slPips">0 pips</span>
-                                    </div>
-                                </div>
-                                <div class="pro-sltp-group">
-                                    <label class="pro-order-label">Take Profit</label>
-                                    <div class="pro-sltp-input">
-                                        <input type="number" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
-                                        <span class="pro-pips-tag" id="tpPips">0 pips</span>
+                            <!-- Main Chart Area -->
+                            <div class="pro-chart-wrapper">
+                                <div class="pro-chart-container">
+                                    <canvas id="tradingCanvas"></canvas>
+                                    <div class="chart-objects-menu" id="objectsMenu">
+                                        <button class="chart-object-btn" onclick="addObject('trendline')">📈 Trend Line</button>
+                                        <button class="chart-object-btn" onclick="addObject('horizontal')">➖ Horizontal</button>
+                                        <button class="chart-object-btn" onclick="addObject('fibonacci')">🌀 Fibonacci</button>
+                                        <button class="chart-object-btn" onclick="addObject('support')">🎯 S/R Level</button>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Risk Summary -->
-                            <div class="pro-risk-bar">
-                                <div class="pro-risk-item">
-                                    <span class="pro-risk-label">Rischio</span>
-                                    <span class="pro-risk-value loss" id="potentialLoss">-€25.00</span>
+                            <!-- Price Ticker -->
+                            <div class="pro-price-ticker">
+                                <div class="pro-ticker-sell" onclick="executeTrade('sell')">
+                                    <div class="pro-ticker-label">SELL</div>
+                                    <div class="pro-ticker-price" id="sellPrice">1.08448</div>
+                                    <div class="pro-ticker-spread">Bid</div>
                                 </div>
-                                <div class="pro-risk-divider">|</div>
-                                <div class="pro-risk-item">
-                                    <span class="pro-risk-label">R/R</span>
-                                    <span class="pro-risk-value" id="riskReward">1:2.5</span>
+                                <div class="pro-ticker-spread-mid">
+                                    <div class="pro-spread-value" id="tradeSpread">0.2</div>
+                                    <div class="pro-spread-label">spread</div>
                                 </div>
-                                <div class="pro-risk-divider">|</div>
-                                <div class="pro-risk-item">
-                                    <span class="pro-risk-label">Profitto</span>
-                                    <span class="pro-risk-value profit" id="potentialProfit">+€62.50</span>
+                                <div class="pro-ticker-buy" onclick="executeTrade('buy')">
+                                    <div class="pro-ticker-label">BUY</div>
+                                    <div class="pro-ticker-price" id="buyPrice">1.08452</div>
+                                    <div class="pro-ticker-spread">Ask</div>
+                                </div>
+                            </div>
+
+                            <!-- Order Panel -->
+                            <div class="pro-order-panel">
+                                <!-- Volume Row -->
+                                <div class="pro-order-row">
+                                    <label class="pro-order-label">Volume</label>
+                                    <div class="pro-volume-control">
+                                        <button class="pro-vol-minus" onclick="adjustVolume(-0.01)">−</button>
+                                        <input type="number" class="pro-vol-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()">
+                                        <button class="pro-vol-plus" onclick="adjustVolume(0.01)">+</button>
+                                    </div>
+                                    <div class="pro-vol-presets">
+                                        <button class="pro-vol-pill" onclick="setQuickLot(0.01)">0.01</button>
+                                        <button class="pro-vol-pill" onclick="setQuickLot(0.10)">0.1</button>
+                                        <button class="pro-vol-pill" onclick="setQuickLot(1.00)">1.0</button>
+                                    </div>
+                                </div>
+
+                                <!-- SL/TP Row -->
+                                <div class="pro-order-row sltp-row">
+                                    <div class="pro-sltp-group">
+                                        <label class="pro-order-label">Stop Loss</label>
+                                        <div class="pro-sltp-input">
+                                            <input type="number" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
+                                            <span class="pro-pips-tag" id="slPips">0 pips</span>
+                                        </div>
+                                    </div>
+                                    <div class="pro-sltp-group">
+                                        <label class="pro-order-label">Take Profit</label>
+                                        <div class="pro-sltp-input">
+                                            <input type="number" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
+                                            <span class="pro-pips-tag" id="tpPips">0 pips</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Risk Summary -->
+                                <div class="pro-risk-bar">
+                                    <div class="pro-risk-item">
+                                        <span class="pro-risk-label">Rischio</span>
+                                        <span class="pro-risk-value loss" id="potentialLoss">-€25.00</span>
+                                    </div>
+                                    <div class="pro-risk-divider">|</div>
+                                    <div class="pro-risk-item">
+                                        <span class="pro-risk-label">R/R</span>
+                                        <span class="pro-risk-value" id="riskReward">1:2.5</span>
+                                    </div>
+                                    <div class="pro-risk-divider">|</div>
+                                    <div class="pro-risk-item">
+                                        <span class="pro-risk-label">Profitto</span>
+                                        <span class="pro-risk-value profit" id="potentialProfit">+€62.50</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="pro-action-panel">
+                                <button class="pro-btn-sell" onclick="executeTrade('sell')">
+                                    <div class="pro-btn-main">
+                                        <span class="pro-btn-action">SELL</span>
+                                        <span class="pro-btn-price" id="sellBtnPrice">1.08448</span>
+                                    </div>
+                                    <div class="pro-btn-shorts">Short Position</div>
+                                </button>
+                                <button class="pro-btn-buy" onclick="executeTrade('buy')">
+                                    <div class="pro-btn-main">
+                                        <span class="pro-btn-action">BUY</span>
+                                        <span class="pro-btn-price" id="buyBtnPrice">1.08452</span>
+                                    </div>
+                                    <div class="pro-btn-shorts">Long Position</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MT5 Style Trade Tab - Positions & Orders -->
+                <div class="tab-panel" id="tabTrade">
+                    <div class="mt5-trade-layout">
+                        <!-- Header -->
+                        <div class="mt5-trade-header">
+                            <div class="mt5-header-title">Trade</div>
+                            <div class="mt5-balance-summary">
+                                <div class="mt5-balance-item">
+                                    <span class="mt5-balance-label">Balance</span>
+                                    <span class="mt5-balance-value" id="mt5Balance">€10,000.00</span>
+                                </div>
+                                <div class="mt5-balance-item">
+                                    <span class="mt5-balance-label">Equity</span>
+                                    <span class="mt5-balance-value" id="mt5Equity">€10,000.00</span>
+                                </div>
+                                <div class="mt5-balance-item">
+                                    <span class="mt5-balance-label">Margin</span>
+                                    <span class="mt5-balance-value" id="mt5Margin">€0.00</span>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Action Buttons -->
-                        <div class="pro-action-panel">
-                            <button class="pro-btn-sell" onclick="executeTrade('sell')">
-                                <div class="pro-btn-main">
-                                    <span class="pro-btn-action">SELL</span>
-                                    <span class="pro-btn-price" id="sellBtnPrice">1.08448</span>
-                                </div>
-                                <div class="pro-btn-shorts">Short Position</div>
-                            </button>
-                            <button class="pro-btn-buy" onclick="executeTrade('buy')">
-                                <div class="pro-btn-main">
-                                    <span class="pro-btn-action">BUY</span>
-                                    <span class="pro-btn-price" id="buyBtnPrice">1.08452</span>
-                                </div>
-                                <div class="pro-btn-shorts">Long Position</div>
-                            </button>
+                        
+                        <!-- Tabs -->
+                        <div class="mt5-tabs">
+                            <button class="mt5-tab active" onclick="switchTradeTab('positions')" id="tabPositions">Positions <span class="mt5-tab-count" id="positionsCount">0</span></button>
+                            <button class="mt5-tab" onclick="switchTradeTab('orders')" id="tabOrders">Orders <span class="mt5-tab-count" id="ordersCount">0</span></button>
+                            <button class="mt5-tab" onclick="switchTradeTab('history')" id="tabHistory">History</button>
                         </div>
-
-                        <!-- Positions Drawer -->
-                        <div class="pro-positions-drawer">
-                            <div class="pro-drawer-header" onclick="togglePositionsDrawer()">
-                                <div class="pro-drawer-title">
-                                    <span>Posizioni</span>
-                                    <span class="pro-pos-badge" id="openTradesCount">0</span>
-                                </div>
-                                <svg class="pro-drawer-chevron" id="positionsChevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
-                            </div>
-                            <div class="pro-drawer-content" id="positionsDrawer">
-                                <div class="pro-positions-list" id="openTradesList">
-                                    <div class="pro-pos-empty">
+                        
+                        <!-- Content -->
+                        <div class="mt5-trade-content">
+                            <!-- Positions Tab -->
+                            <div class="mt5-panel active" id="panelPositions">
+                                <div class="mt5-positions-list" id="mt5PositionsList">
+                                    <div class="mt5-empty-state">
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 7h8m0 0v8m0-8-8 8-4-4-6 6"/></svg>
-                                        <span>Nessuna posizione aperta</span>
+                                        <p>No positions</p>
                                     </div>
                                 </div>
-                                <button class="pro-close-all" onclick="closeAllPositions()" id="closeAllBtn" style="display:none">Chiudi Tutte</button>
+                            </div>
+                            
+                            <!-- Orders Tab -->
+                            <div class="mt5-panel" id="panelOrders">
+                                <div class="mt5-orders-list" id="mt5OrdersList">
+                                    <div class="mt5-empty-state">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                        <p>No pending orders</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- History Tab -->
+                            <div class="mt5-panel" id="panelHistory">
+                                <div class="mt5-history-list" id="mt5HistoryList">
+                                    <div class="mt5-empty-state">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6l4 4"/><circle cx="12" cy="12" r="10"/></svg>
+                                        <p>No history yet</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-
-                        <div style="height:20px"></div>
                     </div>
                 </div>
 
@@ -969,8 +1093,8 @@
 
             <div class="bottom-nav">
                 <div class="nav-item active" data-tab="wallet" onclick="switchTab('wallet')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h14v-4"/><path d="M4 8V6a2 2 0 0 1 2-2h14"/></svg><span class="nav-label">Wallet</span></div>
-                <div class="nav-item" data-tab="stats" onclick="switchTab('stats')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg><span class="nav-label">Stats</span></div>
-                <div class="nav-item" data-tab="trading" onclick="switchTab('trading')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="nav-label">Trade</span></div>
+                <div class="nav-item" data-tab="trade" onclick="switchTab('trade')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg><span class="nav-label">Trade</span></div>
+                <div class="nav-item" data-tab="trading" onclick="switchTab('trading')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><span class="nav-label">Chart</span></div>
                 <div class="nav-item" data-tab="quotes" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg><span class="nav-label">Markets</span></div>
                 <div class="nav-item" data-tab="settings" onclick="switchTab('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span class="nav-label">Settings</span></div>
             </div>
@@ -2059,9 +2183,119 @@ function switchTab(t){
     document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');
     if(t==='trading'){setTimeout(()=>{initChart();updateTradePanel();},50);}
+    if(t==='trade'){renderMT5Positions();renderMT5Orders();renderMT5History();}
     if(t==='stats')updateStats();
     if(t==='quotes')renderQuotes();
 }
+
+function switchTradeTab(tab){
+    document.querySelectorAll('.mt5-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.mt5-panel').forEach(p=>p.classList.remove('active'));
+    document.getElementById('tab'+tab.charAt(0).toUpperCase()+tab.slice(1)).classList.add('active');
+    document.getElementById('panel'+tab.charAt(0).toUpperCase()+tab.slice(1)).classList.add('active');
+}
+
+function renderMT5Positions(){
+    const acc=getCurrentAccount();
+    const openTrades=acc.trades.filter(t=>t.status==='open');
+    document.getElementById('positionsCount').textContent=openTrades.length;
+    const container=document.getElementById('mt5PositionsList');
+    if(!container)return;
+    if(!openTrades.length){
+        container.innerHTML=`<div class="mt5-empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 7h8m0 0v8m0-8-8 8-4-4-6 6"/></svg><p>No positions</p></div>`;
+        return;
+    }
+    container.innerHTML=openTrades.map(t=>{
+        const symData=Object.values(symbols).flat().find(s=>s.s===t.symbol)||{};
+        const price=state.prices[t.symbol]||{b:symData.b,a:symData.a};
+        const mult=t.type==='buy'?1:-1;
+        const currentPrice=t.type==='buy'?price.b:price.a;
+        const pnl=((currentPrice-t.entry)*100000*t.lots*mult);
+        const pnlPct=acc.balance>0?(pnl/acc.balance)*100:0;
+        const icons={'EURUSD':'🇪🇺🇺🇸','GBPUSD':'🇬🇧🇺🇸','USDJPY':'🇺🇸🇯🇵','USDCHF':'🇺🇸🇨🇭','AUDUSD':'🇦🇺🇺🇸','USDCAD':'🇺🇸🇨🇦','NZDUSD':'🇳🇿🇺🇸','EURGBP':'🇪🇺🇬🇧','BTCUSD':'₿','ETHUSD':'Ξ','XRPUSD':'✕','SOLUSD':'◎','XAUUSD':'🪙','XAGUSD':'🥈','USOIL':'🛢️','UKOIL':'🛢️','US30':'📈','NAS100':'📈','SPX500':'📈','GER40':'📈'};
+        return`<div class="mt5-pos-card">
+            <div class="mt5-pos-header">
+                <div class="mt5-pos-symbol">
+                    <div class="mt5-pos-icon">${icons[t.symbol]||'📊'}</div>
+                    <div>
+                        <div class="mt5-pos-pair">${t.symbol}</div>
+                        <span class="mt5-pos-type ${t.type}">${t.type}</span>
+                    </div>
+                </div>
+                <button class="mt5-pos-close-btn" onclick="closeTrade(${t.id})">✕</button>
+            </div>
+            <div class="mt5-pos-details">
+                <div class="mt5-pos-detail"><span class="mt5-pos-label">Volume</span><span class="mt5-pos-value">${t.lots.toFixed(2)} lots</span></div>
+                <div class="mt5-pos-detail"><span class="mt5-pos-label">Open Price</span><span class="mt5-pos-value">${formatPrice(t.entry,symData.v)}</span></div>
+                <div class="mt5-pos-detail"><span class="mt5-pos-label">Current</span><span class="mt5-pos-value">${formatPrice(currentPrice,symData.v)}</span></div>
+                <div class="mt5-pos-detail"><span class="mt5-pos-label">SL / TP</span><span class="mt5-pos-value">${t.sl?t.sl.toFixed(5):'--'} / ${t.tp?t.tp.toFixed(5):'--'}</span></div>
+            </div>
+            <div class="mt5-pos-footer">
+                <span style="font-size:11px;color:#8b8b8f">${t.type==='buy'?'Long':'Short'} ${t.lots.toFixed(2)}</span>
+                <div class="mt5-pos-pnl">
+                    <div class="mt5-pos-pnl-value ${pnl>=0?'profit':'loss'}">${pnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(pnl))}</div>
+                    <div class="mt5-pos-pnl-pct">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</div>
+                </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function renderMT5Orders(){
+    const acc=getCurrentAccount();
+    const pendingOrders=acc.trades.filter(t=>t.status==='pending');
+    document.getElementById('ordersCount').textContent=pendingOrders.length;
+    const container=document.getElementById('mt5OrdersList');
+    if(!container)return;
+    if(!pendingOrders.length){
+        container.innerHTML=`<div class="mt5-empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><p>No pending orders</p></div>`;
+        return;
+    }
+    container.innerHTML=pendingOrders.map(o=>{
+        const symData=Object.values(symbols).flat().find(s=>s.s===o.symbol)||{};
+        const orderType=o.orderType||'Limit';
+        return`<div class="mt5-order-card">
+            <div class="mt5-order-type ${o.type}">${o.type==='buy'?'B':'S'}</div>
+            <div class="mt5-order-info">
+                <div class="mt5-order-pair">${o.symbol} <span style="font-size:11px;color:#8b8b8f">${orderType}</span></div>
+                <div class="mt5-order-detail">${o.lots.toFixed(2)} lots @ target ${o.targetPrice||'--'}</div>
+            </div>
+            <div class="mt5-order-price">${o.targetPrice?formatPrice(o.targetPrice,symData.v):'--'}</div>
+            <button class="mt5-order-cancel" onclick="cancelOrder(${o.id})">✕</button>
+        </div>`;
+    }).join('');
+}
+
+function renderMT5History(){
+    const acc=getCurrentAccount();
+    const closedTrades=acc.trades.filter(t=>t.status==='closed').slice(0,20);
+    const container=document.getElementById('mt5HistoryList');
+    if(!container)return;
+    if(!closedTrades.length){
+        container.innerHTML=`<div class="mt5-empty-state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v6l4 4"/><circle cx="12" cy="12" r="10"/></svg><p>No history yet</p></div>`;
+        return;
+    }
+    container.innerHTML=closedTrades.map(t=>{
+        const symData=Object.values(symbols).flat().find(s=>s.s===t.symbol)||{};
+        const pnl=t.pnl||0;
+        const date=new Date(t.closeTime||t.openTime).toLocaleDateString('it-IT',{day:'2-digit',month:'short'});
+        return`<div class="mt5-history-card">
+            <div class="mt5-history-header">
+                <div class="mt5-history-left">
+                    <span class="mt5-history-pair">${t.symbol}</span>
+                    <span class="mt5-history-type ${t.type}">${t.type}</span>
+                </div>
+                <span class="mt5-history-date">${date}</span>
+            </div>
+            <div class="mt5-history-body">
+                <span class="mt5-history-detail">${t.lots.toFixed(2)} lots @ ${formatPrice(t.entry,symData.v)} → ${formatPrice(t.close||t.entry,symData.v)}</span>
+                <span class="mt5-history-pnl ${pnl>=0?'profit':'loss'}">${pnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(pnl))}</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+function cancelOrder(id){const acc=getCurrentAccount();const idx=acc.trades.findIndex(t=>t.id===id&&t.status==='pending');if(idx>-1){acc.trades.splice(idx,1);saveData();renderMT5Orders();showToast('Order cancelled');}}
 
 function switchSettingsPanel(id){
     document.querySelectorAll('.settings-tab').forEach(t=>t.classList.remove('active'));
