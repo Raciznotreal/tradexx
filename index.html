@@ -22,8 +22,8 @@
         .loading-bar{width:240px;height:4px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden}
         .loading-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),#fff);border-radius:4px;transition:width .3s ease}
         
-        #broker-screen{position:fixed;inset:0;background:var(--bg);z-index:9999;display:none;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto}
-        #broker-screen.active{display:flex}
+        #brokerScreen{position:fixed;top:0;left:0;right:0;bottom:0;height:100vh;height:100dvh;background:var(--bg);z-index:9999;display:none;flex-direction:column;padding:var(--safe-top) 20px var(--safe-bottom);overflow-y:auto;-webkit-overflow-scrolling:touch}
+        #brokerScreen.active{display:flex}
         .broker-header{text-align:center;margin-bottom:32px}
         .broker-header h1{font-size:32px;font-weight:700;margin-bottom:10px}
         .broker-header p{font-size:15px;color:var(--text-secondary)}
@@ -31,7 +31,7 @@
         .broker-card{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;cursor:pointer;transition:all .3s ease}
         .broker-card:active{transform:scale(0.96)}
         .broker-card.selected{border-color:var(--accent);background:rgba(var(--accent-rgb),0.15);box-shadow:0 0 30px rgba(var(--accent-rgb),0.3)}
-        .broker-logo{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px}
+        .broker-logo{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.3)}
         .broker-card span{font-size:13px;font-weight:600;text-align:center}
         .broker-reg{font-size:10px;color:var(--text-secondary);text-align:center}
         
@@ -49,8 +49,8 @@
         .btn-primary:disabled{opacity:.4;cursor:not-allowed}
         .btn-secondary{width:100%;padding:16px;background:rgba(255,255,255,0.1);border:var(--glass-border);border-radius:16px;color:var(--text);font-size:16px;font-weight:600;cursor:pointer;margin-top:12px}
         
-        #main-app{height:100vh;display:none;flex-direction:column}
-        #main-app.active{display:flex}
+        #mainApp{height:100vh;display:none;flex-direction:column}
+        #mainApp.active{display:flex}
         .tab-content{flex:1;overflow-y:auto;overflow-x:hidden;padding:var(--safe-top) 16px 0;-webkit-overflow-scrolling:touch}
         
         .page-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-top:8px}
@@ -113,7 +113,20 @@
         .stat-change.positive{color:var(--positive)}
         .stat-change.negative{color:var(--negative)}
         
-        .chart-container{height:55vh;background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:24px;margin-bottom:16px;position:relative;overflow:hidden}
+        .trading-layout{display:flex;flex-direction:column;height:100%;overflow:hidden}
+        .chart-section{flex:1;display:flex;flex-direction:column;min-height:200px;overflow:hidden}
+        .chart-container{flex:1;background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;position:relative;overflow:hidden;min-height:150px}
+        .resize-handle{height:20px;display:flex;align-items:center;justify-content:center;cursor:ns-resize;transition:all .2s ease;flex-shrink:0}
+        .resize-handle:active{background:rgba(255,255,255,0.05)}
+        .resize-line{width:40px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;transition:all .2s ease}
+        .resize-handle:hover .resize-line{width:60px;background:rgba(255,255,255,0.4)}
+        .trade-section{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px 20px 0 0;display:flex;flex-direction:column;overflow:hidden;transition:height .1s ease}
+        .trade-panel-fixed{padding:16px;border-bottom:var(--glass-border);flex-shrink:0}
+        .positions-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:var(--glass-border);background:rgba(0,0,0,0.2);flex-shrink:0}
+        .positions-header h3{font-size:14px;font-weight:700;margin:0}
+        .positions-count{font-size:12px;color:var(--text-secondary);background:rgba(255,255,255,0.1);padding:2px 10px;border-radius:10px;min-width:24px;text-align:center}
+        .positions-list{flex:1;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch}
+        .positions-empty{text-align:center;padding:30px 20px;color:var(--text-secondary);font-size:14px}
         #tradingCanvas{width:100%;height:100%;touch-action:none}
         .chart-overlay{position:absolute;top:16px;left:16px;right:16px;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}
         .symbol-info{display:flex;flex-direction:column;gap:4px}
@@ -184,10 +197,14 @@
         .theme-option.selected{border-color:var(--accent);box-shadow:0 0 20px rgba(var(--accent-rgb),0.3)}
         .theme-preview{width:100%;height:60px;border-radius:12px;margin-bottom:12px}
         .theme-name{font-size:13px;font-weight:600;text-align:center}
-        .avatar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
-        .avatar-option{width:100%;aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:all .2s ease;border:2px solid transparent}
-        .avatar-option.selected{border-color:var(--accent);box-shadow:0 0 20px rgba(var(--accent-rgb),0.4)}
-        .avatar-upload{padding:20px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2);border-radius:16px;text-align:center;cursor:pointer}
+        .avatar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:16px}
+        .avatar-option{width:100%;aspect-ratio:1;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;transition:all .2s ease;border:2px solid transparent;background:linear-gradient(135deg,rgba(255,255,255,0.1),rgba(255,255,255,0.05))}
+        .avatar-option:active{transform:scale(0.92)}
+        .avatar-option.selected{border-color:var(--accent);box-shadow:0 0 20px rgba(var(--accent-rgb),0.4);background:rgba(var(--accent-rgb),0.2)}
+        .avatar-upload{padding:20px;background:rgba(255,255,255,0.05);border:2px dashed rgba(255,255,255,0.2);border-radius:16px;text-align:center;cursor:pointer;transition:all .2s ease;margin-top:12px}
+        .avatar-upload:hover,.avatar-upload:active{background:rgba(255,255,255,0.1);border-color:var(--accent)}
+        .profile-preview-large{transition:all .3s ease}
+        .profile-preview-large img{width:100%;height:100%;object-fit:cover}
         .account-card{background:var(--surface-2);border:var(--glass-border);border-radius:20px;padding:20px;margin-bottom:12px;cursor:pointer;transition:all .2s ease}
         .account-card.active{border-color:var(--accent);background:rgba(var(--accent-rgb),0.1)}
         .account-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
@@ -257,6 +274,7 @@
         .risk-high{background:var(--negative)}
         
         @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes fadeInUp{from{opacity:0;transform:translate(-50%,20px)}to{opacity:1;transform:translate(-50%,0)}}
         .animate-in{animation:fadeIn .5s ease forwards}
         
         .session-bar{display:flex;gap:8px;margin-bottom:20px;overflow-x:auto}
@@ -308,6 +326,11 @@
                     <div class="currency-option" data-l="500"><span>1:500</span></div>
                 </div>
             </div>
+            <div class="setup-progress" style="display:flex;gap:8px;justify-content:center;margin-bottom:16px">
+                <span class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:var(--accent);transition:all .3s" id="prog1"></span>
+                <span class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .3s" id="prog2"></span>
+                <span class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .3s" id="prog3"></span>
+            </div>
             <button class="btn-primary" id="startBtn" disabled>Apri Conto Demo</button>
         </div>
 
@@ -357,43 +380,59 @@
                 </div>
 
                 <div class="tab-panel" id="tabTrading">
-                    <div class="page-header"><div class="profile-section"><h2>Trading Terminal</h2></div><div class="header-icons"><div class="header-icon" onclick="openSymbolSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div>
-                    <div class="session-bar" id="sessionBar"></div>
-                    <div class="chart-container">
-                        <canvas id="tradingCanvas"></canvas>
-                        <div class="chart-overlay">
-                            <div class="symbol-info"><div class="symbol-display" id="chartSymbol">EURUSD</div><div class="symbol-desc" id="symbolDesc">Euro / US Dollar</div></div>
-                            <div class="price-info"><div class="price-display" id="chartPrice">1.08450</div><div class="price-change positive" id="priceChange">+0.15%</div></div>
+                    <div class="trading-layout">
+                        <div class="chart-section">
+                            <div class="page-header" style="margin-bottom:12px;padding-top:0"><div class="profile-section"><h2>Trading Terminal</h2></div><div class="header-icons"><div class="header-icon" onclick="openSymbolSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div>
+                            <div class="session-bar" id="sessionBar"></div>
+                            <div class="chart-container" id="mainChartContainer">
+                                <canvas id="tradingCanvas"></canvas>
+                                <div class="chart-overlay">
+                                    <div class="symbol-info"><div class="symbol-display" id="chartSymbol">EURUSD</div><div class="symbol-desc" id="symbolDesc">Euro / US Dollar</div></div>
+                                    <div class="price-info"><div class="price-display" id="chartPrice">1.08450</div><div class="price-change positive" id="priceChange">+0.15%</div></div>
+                                </div>
+                                <div class="timeframe-bar"><button class="tf-btn" data-tf="1m">1M</button><button class="tf-btn" data-tf="5m">5M</button><button class="tf-btn active" data-tf="15m">15M</button><button class="tf-btn" data-tf="1h">1H</button><button class="tf-btn" data-tf="4h">4H</button><button class="tf-btn" data-tf="1d">1D</button></div>
+                                <div class="chart-actions">
+                                    <div class="chart-action-btn" onclick="toggleObjectsMenu(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
+                                    <div class="chart-action-btn" onclick="resetChart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+                                </div>
+                                <div class="chart-objects-menu" id="objectsMenu">
+                                    <button class="chart-object-btn" onclick="addObject('trendline')">Linea di Tendenza</button>
+                                    <button class="chart-object-btn" onclick="addObject('horizontal')">Linea Orizzontale</button>
+                                    <button class="chart-object-btn" onclick="addObject('rectangle')">Rettangolo</button>
+                                    <button class="chart-object-btn" onclick="addObject('fibonacci')">Fibonacci</button>
+                                    <button class="chart-object-btn" onclick="addObject('support')">Supporto/Resistenza</button>
+                                </div>
+                            </div>
                         </div>
-                        <div class="timeframe-bar"><button class="tf-btn" data-tf="1m">1M</button><button class="tf-btn" data-tf="5m">5M</button><button class="tf-btn active" data-tf="15m">15M</button><button class="tf-btn" data-tf="1h">1H</button><button class="tf-btn" data-tf="4h">4H</button><button class="tf-btn" data-tf="1d">1D</button></div>
-                        <div class="chart-actions">
-                            <div class="chart-action-btn" onclick="toggleObjectsMenu(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
-                            <div class="chart-action-btn" onclick="resetChart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+                        <div class="resize-handle" id="resizeHandle">
+                            <div class="resize-line"></div>
                         </div>
-                        <div class="chart-objects-menu" id="objectsMenu">
-                            <button class="chart-object-btn" onclick="addObject('trendline')">Linea di Tendenza</button>
-                            <button class="chart-object-btn" onclick="addObject('horizontal')">Linea Orizzontale</button>
-                            <button class="chart-object-btn" onclick="addObject('rectangle')">Rettangolo</button>
-                            <button class="chart-object-btn" onclick="addObject('fibonacci')">Fibonacci</button>
-                            <button class="chart-object-btn" onclick="addObject('support')">Supporto/Resistenza</button>
-                        </div>
-                    </div>
-                    <div class="trade-panel">
-                        <div class="trade-info">
-                            <div class="trade-info-item"><div class="trade-info-label">Spread</div><div class="trade-info-value" id="tradeSpread">0.2 pips</div></div>
-                            <div class="trade-info-item"><div class="trade-info-label">Swp/Lotto</div><div class="trade-info-value" id="tradeSwap">-$2.50</div></div>
-                            <div class="trade-info-item"><div class="trade-info-label">Margine</div><div class="trade-info-value" id="tradeMargin">€100</div></div>
-                        </div>
-                        <div class="trade-inputs">
-                            <div class="trade-input-group"><label>Volume</label><input type="number" class="trade-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()"></div>
-                            <div class="trade-input-group"><label>Stop Loss</label><input type="number" class="trade-input" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()"></div>
-                            <div class="trade-input-group"><label>Take Profit</label><input type="number" class="trade-input" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()"></div>
-                        </div>
-                        <div class="risk-meter"><div class="risk-fill risk-low" id="riskBar" style="width:15%"></div></div>
-                        <div class="trade-details"><div class="trade-detail"><span>Rischio/Rendimento</span><span id="riskReward">1:2.5</span></div><div class="trade-detail"><span>Potenziale Perdita</span><span id="potentialLoss">€25.00</span></div></div>
-                        <div class="trade-buttons">
-                            <button class="btn-trade btn-buy" onclick="executeTrade('buy')"><div>BUY</div><div style="font-size:13px;opacity:.8" id="buyPrice">1.08452</div></button>
-                            <button class="btn-trade btn-sell" onclick="executeTrade('sell')"><div>SELL</div><div style="font-size:13px;opacity:.8" id="sellPrice">1.08448</div></button>
+                        <div class="trade-section" id="tradeSection">
+                            <div class="trade-panel-fixed">
+                                <div class="trade-info">
+                                    <div class="trade-info-item"><div class="trade-info-label">Spread</div><div class="trade-info-value" id="tradeSpread">0.2 pips</div></div>
+                                    <div class="trade-info-item"><div class="trade-info-label">Swp/Lotto</div><div class="trade-info-value" id="tradeSwap">-$2.50</div></div>
+                                    <div class="trade-info-item"><div class="trade-info-label">Margine</div><div class="trade-info-value" id="tradeMargin">€100</div></div>
+                                </div>
+                                <div class="trade-inputs">
+                                    <div class="trade-input-group"><label>Volume</label><input type="number" class="trade-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()"></div>
+                                    <div class="trade-input-group"><label>Stop Loss</label><input type="number" class="trade-input" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()"></div>
+                                    <div class="trade-input-group"><label>Take Profit</label><input type="number" class="trade-input" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()"></div>
+                                </div>
+                                <div class="risk-meter"><div class="risk-fill risk-low" id="riskBar" style="width:15%"></div></div>
+                                <div class="trade-details"><div class="trade-detail"><span>Rischio/Rendimento</span><span id="riskReward">1:2.5</span></div><div class="trade-detail"><span>Potenziale Perdita</span><span id="potentialLoss">€25.00</span></div></div>
+                                <div class="trade-buttons">
+                                    <button class="btn-trade btn-buy" onclick="executeTrade('buy')"><div>BUY</div><div style="font-size:13px;opacity:.8" id="buyPrice">1.08452</div></button>
+                                    <button class="btn-trade btn-sell" onclick="executeTrade('sell')"><div>SELL</div><div style="font-size:13px;opacity:.8" id="sellPrice">1.08448</div></button>
+                                </div>
+                            </div>
+                            <div class="positions-header">
+                                <h3>Posizioni Aperte</h3>
+                                <span class="positions-count" id="openTradesCount">0</span>
+                            </div>
+                            <div class="positions-list" id="openTradesList">
+                                <div class="positions-empty">Nessuna posizione aperta</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -419,15 +458,24 @@
                         </div>
                     </div>
                     <div class="settings-panel" id="panelProfile">
-                        <div class="settings-section">
-                            <div class="settings-section-title">Avatar</div>
-                            <div class="avatar-grid" id="avatarGrid"></div>
-                            <div class="avatar-upload" onclick="uploadAvatar()"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin:0 auto 8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg><div>Carica foto profilo</div></div>
+                        <div class="settings-section" style="text-align:center;padding:32px 20px">
+                            <div class="profile-preview-large" id="profilePreviewLarge" style="width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#6366f1);display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:700;margin:0 auto 20px;cursor:pointer;overflow:hidden;border:3px solid rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(var(--accent-rgb),0.3)">T</div>
+                            <div style="font-size:18px;font-weight:700;margin-bottom:4px" id="profilePreviewName">Trader Pro</div>
+                            <div style="font-size:13px;color:var(--text-secondary)" id="profileSince">Trader dal Gen 2024</div>
                         </div>
                         <div class="settings-section">
-                            <div class="settings-section-title">Profilo</div>
-                            <div class="input-group"><label>Username</label><input type="text" id="usernameInput" value="Trader Pro" onchange="updateUsername(this.value)"></div>
-                            <div class="input-group"><label>Email</label><input type="email" value="demo@tradeflow.com" readonly style="opacity:.6"></div>
+                            <div class="settings-section-title">Scegli Avatar</div>
+                            <div class="avatar-grid" id="avatarGrid"></div>
+                            <div class="avatar-upload" onclick="uploadAvatar()">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                                <div style="font-size:13px;font-weight:600">Carica foto profilo</div>
+                                <div style="font-size:11px;color:var(--text-secondary);margin-top:4px">JPG, PNG fino a 2MB</div>
+                            </div>
+                        </div>
+                        <div class="settings-section">
+                            <div class="settings-section-title">Dati Personali</div>
+                            <div class="input-group"><label>Username</label><input type="text" id="usernameInput" value="${state.user.username}" onchange="updateUsername(this.value)" style="text-align:center;font-size:18px;font-weight:700"></div>
+                            <div class="input-group"><label>Email</label><input type="email" value="demo@tradeflow.com" readonly style="opacity:.5;text-align:center"></div>
                         </div>
                     </div>
                     <div class="settings-panel" id="panelTrading">
@@ -490,7 +538,7 @@ const themes=[
     {id:'green',name:'Cyber Green',accent:'#00E676',bg:'#001a0a'}
 ];
 
-const avatars=['T','🦁','🦅','🐂','🐻','🦈','🐍','🦉','⚡','🔥','💎','🚀'];
+const avatars=['T','👤','🦁','🦅','🐂','🐻','🦈','🐍','🦉','⚡','🔥','💎','🚀','👑','🎯','📈','🌟','🎰','💼','🏆'];
 
 const quoteCategories=[
     {id:'forex',name:'Forex'},{id:'crypto',name:'Crypto'},{id:'commodities',name:'Commodities'},{id:'indices',name:'Indici'},{id:'stocks',name:'Azioni'}
@@ -575,11 +623,24 @@ function init(){
     startPriceUpdates();
 }
 
+const brokerLogos={
+    icmarkets:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="url(#icg)"/><defs><linearGradient id="icg" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#00C853"/><stop offset="100%" stop-color="#00E676"/></linearGradient></defs><text x="50" y="55" text-anchor="middle" fill="white" font-size="42" font-weight="800" font-family="system-ui">IC</text></svg>`,
+    pepperstone:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#1a1a2e"/><circle cx="50" cy="35" r="18" fill="#FF6D00"/><path d="M30 55 L50 85 L70 55" stroke="#FF6D00" stroke-width="6" fill="none"/></svg>`,
+    xm:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="url(#xmg)"/><defs><linearGradient id="xmg" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#D32F2F"/><stop offset="100%" stop-color="#B71C1C"/></linearGradient></defs><text x="50" y="62" text-anchor="middle" fill="white" font-size="48" font-weight="900" font-family="system-ui">XM</text></svg>`,
+    etoro:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#00BCD4"/><circle cx="50" cy="45" r="22" fill="white"/><path d="M35 40 Q50 25 65 40 Q65 55 50 60 Q35 55 35 40" fill="#00BCD4"/><text x="50" y="85" text-anchor="middle" fill="white" font-size="14" font-weight="700">eToro</text></svg>`,
+    binance:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#F0B90B"/><path d="M35 50 L25 40 L35 30 L45 40 L35 50 Z M50 35 L40 25 L50 15 L60 25 L50 35 Z M65 50 L55 40 L65 30 L75 40 L65 50 Z M50 65 L40 55 L50 45 L60 55 L50 65 Z M50 85 L40 75 L50 65 L60 75 L50 85 Z" fill="white"/></svg>`,
+    bybit:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#00D9FF"/><path d="M30 30 L30 70 L45 70 L45 50 L55 50 L55 70 L70 70 L70 30 L55 30 L55 45 L45 45 L45 30 Z" fill="white"/></svg>`,
+    interactive:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#D32F2F"/><text x="50" y="45" text-anchor="middle" fill="white" font-size="24" font-weight="800">IB</text><text x="50" y="68" text-anchor="middle" fill="white" font-size="10" font-weight="600">KR</text></svg>`,
+    oanda:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#1976D2"/><circle cx="50" cy="40" r="20" fill="white" opacity="0.9"/><text x="50" y="75" text-anchor="middle" fill="white" font-size="16" font-weight="800">OANDA</text></svg>`,
+    forexcom:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#1976D2"/><text x="50" y="42" text-anchor="middle" fill="white" font-size="20" font-weight="800">Forex</text><text x="50" y="62" text-anchor="middle" fill="white" font-size="20" font-weight="800">.com</text></svg>`,
+    plus500:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#424242"/><text x="50" y="48" text-anchor="middle" fill="white" font-size="36" font-weight="900">+</text><text x="50" y="72" text-anchor="middle" fill="white" font-size="14" font-weight="700">500</text></svg>`
+};
+
 function renderBrokers(){
     const grid=document.getElementById('brokerGrid');
     grid.innerHTML=brokers.map(b=>`
-        <div class="broker-card" data-broker="${b.id}" onclick="selectBroker('${b.id}')">
-            <div class="broker-logo" style="background:linear-gradient(135deg,${b.colors[0]},${b.colors[1]})">${b.name.slice(0,2).toUpperCase()}</div>
+        <div class="broker-card" data-broker="${b.id}" ontouchstart="this.style.transform='scale(0.96)'" ontouchend="this.style.transform=''" onclick="selectBroker('${b.id}')">
+            <div class="broker-logo">${brokerLogos[b.id]}</div>
             <span>${b.name}</span>
             <span class="broker-reg">${b.reg}</span>
         </div>
@@ -588,9 +649,18 @@ function renderBrokers(){
 
 function selectBroker(id){
     document.querySelectorAll('.broker-card').forEach(c=>c.classList.remove('selected'));
-    document.querySelector(`[data-broker="${id}"]`).classList.add('selected');
+    const selected=document.querySelector(`[data-broker="${id}"]`);
+    if(selected)selected.classList.add('selected');
     state.tempBroker=id;
-    document.getElementById('startBtn').disabled=false;
+    checkStartEnabled();
+}
+
+function checkStartEnabled(){
+    const hasBroker=!!state.tempBroker;
+    const hasCurrency=document.querySelector('.currency-option.selected');
+    const hasCapital=document.getElementById('capitalInput')?.value>0;
+    const hasLeverage=!!state.tempLeverage;
+    document.getElementById('startBtn').disabled=!(hasBroker&&hasCurrency&&hasCapital&&hasLeverage);
 }
 
 function renderThemes(){
@@ -605,9 +675,18 @@ function renderThemes(){
 
 function renderAvatars(){
     const grid=document.getElementById('avatarGrid');
-    grid.innerHTML=avatars.map((a,i)=>`
-        <div class="avatar-option ${state.user.avatar===a?'selected':''}" style="background:${stringToGradient(a)}" onclick="setAvatar('${a}')">${a}</div>
-    `).join('');
+    if(!grid)return;
+    grid.innerHTML=avatars.map(a=>{
+        const isImg=a.startsWith('data:');
+        const bg=isImg?'transparent':stringToGradient(a);
+        const content=isImg?`<img src="${a}" style="width:100%;height:100%;object-fit:cover;border-radius:16px">`:a;
+        return`<div class="avatar-option ${state.user.avatar===a?'selected':''}" style="background:${bg};overflow:hidden" onclick="setAvatar('${a.replace(/'/g,"\\'")}')">${content}</div>`;
+    }).join('');
+    const preview=document.getElementById('profilePreviewLarge');
+    if(preview){
+        const isImg=state.user.avatar.startsWith('data:');
+        preview.innerHTML=isImg?`<img src="${state.user.avatar}">`:state.user.avatar;
+    }
 }
 
 function renderSettingsTabs(){
@@ -624,14 +703,21 @@ function renderQuotesTabs(){
 }
 
 function setupListeners(){
+    state.tempLeverage=100;
     document.querySelectorAll('.currency-option').forEach(o=>{
         o.onclick=()=>{
             const parent=o.parentElement;
             parent.querySelectorAll('.currency-option').forEach(x=>x.classList.remove('selected'));
             o.classList.add('selected');
             if(parent.id==='leverageGrid')state.tempLeverage=parseInt(o.dataset.l);
+            checkStartEnabled();
+            updateProgressDots();
         };
     });
+    document.getElementById('capitalInput').oninput=()=>{
+        checkStartEnabled();
+        updateProgressDots();
+    };
     document.getElementById('startBtn').onclick=createAccount;
     document.querySelectorAll('.tf-btn').forEach(b=>{
         b.onclick=()=>{
@@ -641,23 +727,66 @@ function setupListeners(){
             drawChart();
         };
     });
+    initResizeHandle();
+}
+
+function initResizeHandle(){
+    const handle=document.getElementById('resizeHandle');
+    const tradeSection=document.getElementById('tradeSection');
+    const chartSection=document.querySelector('.chart-section');
+    if(!handle||!tradeSection)return;
+    let isResizing=false,startY=0,startHeight=0;
+    const minHeight=200,maxHeight=window.innerHeight*0.6;
+    handle.addEventListener('mousedown',e=>{isResizing=true;startY=e.clientY;startHeight=tradeSection.offsetHeight;handle.style.background='rgba(255,255,255,0.1)';});
+    handle.addEventListener('touchstart',e=>{isResizing=true;startY=e.touches[0].clientY;startHeight=tradeSection.offsetHeight;handle.style.background='rgba(255,255,255,0.1)';},{passive:false});
+    const onMove=e=>{
+        if(!isResizing)return;
+        const y=e.type==='touchmove'?e.touches[0].clientY:e.clientY;
+        const delta=startY-y;
+        const newHeight=Math.max(minHeight,Math.min(maxHeight,startHeight+delta));
+        tradeSection.style.height=newHeight+'px';
+        tradeSection.style.flex='none';
+    };
+    const onEnd=()=>{isResizing=false;handle.style.background='';};
+    window.addEventListener('mousemove',onMove);
+    window.addEventListener('mouseup',onEnd);
+    window.addEventListener('touchmove',onMove,{passive:false});
+    window.addEventListener('touchend',onEnd);
+}
+
+function updateProgressDots(){
+    const p1=document.getElementById('prog1'),p2=document.getElementById('prog2'),p3=document.getElementById('prog3');
+    const hasBroker=!!state.tempBroker;
+    const hasCurrency=document.querySelector('.currency-option.selected');
+    const hasCapital=document.getElementById('capitalInput')?.value>0;
+    const hasLeverage=!!state.tempLeverage;
+    const accent=getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    p1.style.background=hasBroker?accent:'rgba(255,255,255,0.2)';
+    p2.style.background=(hasCurrency&&hasCapital)?accent:'rgba(255,255,255,0.2)';
+    p3.style.background=hasLeverage?accent:'rgba(255,255,255,0.2)';
 }
 
 function createAccount(){
+    const selectedCurrency=document.querySelector('.currency-option.selected span');
+    const capitalInput=document.getElementById('capitalInput');
+    if(!selectedCurrency||!capitalInput||!capitalInput.value||!state.tempBroker){
+        showToast('Completa tutti i campi per continuare');
+        return;
+    }
     const acc={
         id:Date.now(),
         name:'Account Demo '+(state.accounts.length+1),
         broker:state.tempBroker||'icmarkets',
         type:'demo',
-        currency:document.querySelector('.currency-option.selected span').textContent,
-        balance:parseFloat(document.getElementById('capitalInput').value),
-        equity:parseFloat(document.getElementById('capitalInput').value),
+        currency:selectedCurrency.textContent,
+        balance:parseFloat(capitalInput.value),
+        equity:parseFloat(capitalInput.value),
         margin:0,
-        freeMargin:parseFloat(document.getElementById('capitalInput').value),
+        freeMargin:parseFloat(capitalInput.value),
         leverage:state.tempLeverage||100,
         trades:[],
         assets:[
-            {id:'EUR',amt:parseFloat(document.getElementById('capitalInput').value)*0.6,val:1},
+            {id:'EUR',amt:parseFloat(capitalInput.value)*0.6,val:1},
             {id:'BTC',amt:0.03,val:85000},{id:'ETH',amt:0.3,val:3250},{id:'XAU',amt:0.5,val:2845}
         ],
         active:true,
@@ -667,8 +796,17 @@ function createAccount(){
     state.currentAccount=acc.id;
     document.getElementById('brokerScreen').classList.remove('active');
     document.getElementById('mainApp').style.display='flex';
+    showToast('Conto demo creato con successo!');
     updateUI();
     saveState();
+}
+
+function showToast(msg){
+    const t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.9);color:white;padding:14px 28px;border-radius:12px;font-size:14px;font-weight:600;z-index:99999;backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1);animation:fadeInUp .3s ease';
+    t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>{t.style.opacity='0';t.style.transition='opacity .3s';setTimeout(()=>t.remove(),300)},2500);
 }
 
 function startLoading(){
@@ -692,16 +830,27 @@ function startLoading(){
 
 function updateUI(){
     const acc=getCurrentAccount();
+    const avatar=state.user.avatar;
+    const isImg=avatar.startsWith('data:');
     document.getElementById('usernameDisplay').textContent=state.user.username;
     document.getElementById('brokerDisplay').textContent=brokers.find(b=>b.id===acc.broker)?.name||'Broker';
-    document.getElementById('profileAvatar').textContent=state.user.avatar;
-    if(state.user.avatar.startsWith('data:'))document.getElementById('profileAvatar').innerHTML=`<img src="${state.user.avatar}">`;
+    const headerAvatar=document.getElementById('profileAvatar');
+    if(isImg)headerAvatar.innerHTML=`<img src="${avatar}">`;else headerAvatar.textContent=avatar;
+    const previewAvatar=document.getElementById('profilePreviewLarge');
+    const previewName=document.getElementById('profilePreviewName');
+    const previewSince=document.getElementById('profileSince');
+    const usernameInput=document.getElementById('usernameInput');
+    if(previewAvatar){if(isImg)previewAvatar.innerHTML=`<img src="${avatar}">`;else previewAvatar.textContent=avatar;}
+    if(previewName)previewName.textContent=state.user.username;
+    if(previewSince){const d=new Date(acc.created||Date.now());previewSince.textContent='Trader dal '+d.toLocaleDateString('it-IT',{month:'short',year:'numeric'});}
+    if(usernameInput)usernameInput.value=state.user.username;
     const sym=acc.currency==='EUR'?'€':acc.currency==='USD'?'$':acc.currency==='GBP'?'£':'¥';
     document.getElementById('totalBalance').textContent=sym+formatNumber(acc.balance);
     document.getElementById('dailyPnl').innerHTML=calculateDailyPnL(acc);
     renderAssets();
     renderQuotes();
     renderAccounts();
+    renderAvatars();
     updateStats();
     updateTradePanel();
     setTheme(state.user.theme,false);
@@ -835,6 +984,60 @@ function updateTradePanel(){
     const lots=parseFloat(document.getElementById('tradeLots').value)||0.1;
     const margin=lots*100000/acc.leverage;
     document.getElementById('tradeMargin').textContent=sym(acc)+formatNumber(margin);
+    updateTradeCalc();
+    renderOpenTrades();
+}
+
+function updateTradeCalc(){
+    const acc=getCurrentAccount();
+    const symData=symbols[state.currentCategory]?.find(s=>s.s===state.currentSymbol)||symbols.forex[0];
+    const price=state.prices[state.currentSymbol]||{b:symData.b,a:symData.a};
+    const lots=parseFloat(document.getElementById('tradeLots').value)||0.1;
+    const sl=parseFloat(document.getElementById('tradeSL').value)||0;
+    const tp=parseFloat(document.getElementById('tradeTP').value)||0;
+    const midPrice=(price.a+price.b)/2;
+    const pipValue=symData.v===100?0.01:symData.v===1?1:0.0001;
+    let riskAmount=0,rewardAmount=0,riskRatio=0;
+    if(sl>0&&sl!==midPrice){
+        const slPips=Math.abs(midPrice-sl)/pipValue;
+        riskAmount=slPips*pipValue*100000*lots;
+    }
+    if(tp>0&&tp!==midPrice){
+        const tpPips=Math.abs(tp-midPrice)/pipValue;
+        rewardAmount=tpPips*pipValue*100000*lots;
+    }
+    if(riskAmount>0&&rewardAmount>0)riskRatio=rewardAmount/riskAmount;
+    document.getElementById('riskReward').textContent=riskRatio>0?'1:'+riskRatio.toFixed(1):'N/A';
+    document.getElementById('potentialLoss').textContent=sym(acc)+formatNumber(riskAmount);
+    const riskPct=acc.balance>0?(riskAmount/acc.balance)*100:0;
+    const riskBar=document.getElementById('riskBar');
+    riskBar.style.width=Math.min(riskPct*5,100)+'%';
+    riskBar.className='risk-fill '+(riskPct<2?'risk-low':riskPct<5?'risk-medium':'risk-high');
+}
+
+function renderOpenTrades(){
+    const acc=getCurrentAccount();
+    const openTrades=acc.trades.filter(t=>t.status==='open');
+    const countEl=document.getElementById('openTradesCount');
+    if(countEl)countEl.textContent=openTrades.length;
+    const container=document.getElementById('openTradesList');
+    if(!container)return;
+    if(!openTrades.length){container.innerHTML='<div class="positions-empty">Nessuna posizione aperta</div>';return;}
+    container.innerHTML=openTrades.map(t=>{
+        const symData=Object.values(symbols).flat().find(s=>s.s===t.symbol)||{};
+        const price=state.prices[t.symbol]||{b:symData.b,a:symData.a};
+        const mult=t.type==='buy'?1:-1;
+        const currentPrice=t.type==='buy'?price.b:price.a;
+        const pnl=((currentPrice-t.entry)*100000*t.lots*mult);
+        const pnlPct=acc.balance>0?(pnl/acc.balance)*100:0;
+        const slText=t.sl?`SL:${formatPrice(t.sl,symData.v)}`:'';
+        const tpText=t.tp?`TP:${formatPrice(t.tp,symData.v)}`:'';
+        return`<div class="trade-position" style="background:rgba(255,255,255,0.05);border:var(--glass-border);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;transition:all .3s ease">
+            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${t.type==='buy'?'var(--positive)':'var(--negative)'}" class="position-bar"></div>
+            <div style="padding-left:10px"><div style="font-weight:700;font-size:15px;display:flex;align-items:center;gap:6px">${t.symbol} <span style="color:${t.type==='buy'?'var(--positive)':'var(--negative)'};font-size:10px;text-transform:uppercase;font-weight:800;padding:2px 6px;border-radius:4px;background:${t.type==='buy'?'rgba(0,200,83,0.2)':'rgba(255,61,61,0.2)'};">${t.type}</span></div><div style="font-size:11px;color:var(--text-secondary);margin-top:3px">${t.lots} lotti @ ${formatPrice(t.entry,symData.v)}${slText||tpText?' <span style="color:var(--text-secondary)">|</span> <span style="color:var(--negative)">'+slText+'</span> <span style="color:var(--positive)">'+tpText+'</span>':''}</div></div>
+            <div style="text-align:right"><div style="font-weight:800;font-size:16px;color:${pnl>=0?'var(--positive)':'var(--negative)'}" class="position-pnl">${pnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(pnl))}</div><div style="display:flex;align-items:center;gap:6px;margin-top:3px;justify-content:flex-end"><span style="font-size:11px;color:var(--text-secondary)">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</span><button onclick="closeTrade(${t.id})" style="background:rgba(255,255,255,0.1);border:none;border-radius:5px;padding:3px 8px;color:var(--text);font-size:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">Chiudi</button></div></div>
+        </div>`;
+    }).join('');
 }
 
 function executeTrade(type){
@@ -855,7 +1058,29 @@ function executeTrade(type){
     showToast(`${type.toUpperCase()} ${lots} lotti ${state.currentSymbol} @ ${formatPrice(entry,symData.v)}`);
     updateUI();
     saveState();
-    simulateTrade(trade);
+    renderOpenTrades();
+}
+
+function closeTrade(tradeId){
+    const acc=getCurrentAccount();
+    const trade=acc.trades.find(t=>t.id===tradeId&&t.status==='open');
+    if(!trade)return;
+    const symData=Object.values(symbols).flat().find(s=>s.s===trade.symbol)||{};
+    const price=state.prices[trade.symbol]||{b:symData.b,a:symData.a};
+    const exit=trade.type==='buy'?price.b:price.a;
+    const mult=trade.type==='buy'?1:-1;
+    trade.pnl=((exit-trade.entry)*100000*trade.lots*mult);
+    trade.status='closed';
+    trade.closeTime=Date.now();
+    trade.exit=exit;
+    acc.balance+=trade.pnl;
+    acc.equity=acc.balance;
+    acc.margin-=trade.margin;
+    acc.freeMargin=acc.equity-acc.margin;
+    showToast(`Trade chiuso: ${trade.pnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(trade.pnl))}`);
+    updateUI();
+    saveState();
+    renderOpenTrades();
 }
 
 function simulateTrade(trade){
@@ -899,11 +1124,12 @@ function startPriceUpdates(){
                 document.getElementById('buyPrice').textContent=formatPrice(p.a,symData.v);
                 document.getElementById('sellPrice').textContent=formatPrice(p.b,symData.v);
             }
+            renderOpenTrades();
         }
     };
     priceInterval=setInterval(update,2000);
     marketInterval=setInterval(updateSessions,60000);
-    chartInterval=setInterval(()=>{if(document.getElementById('tabTrading').classList.contains('active'))drawChart();},5000);
+    chartInterval=setInterval(()=>{if(document.getElementById('tabTrading').classList.contains('active')){drawChart();renderOpenTrades();}},5000);
 }
 
 function updateSessions(){
@@ -944,34 +1170,70 @@ function initChart(){
 function drawChart(){
     const cvs=document.getElementById('tradingCanvas');
     const ctx=cvs.getContext('2d');
+    const dpr=window.devicePixelRatio||1;
+    if(cvs.width!==cvs.offsetWidth*dpr||cvs.height!==cvs.offsetHeight*dpr){
+        cvs.width=cvs.offsetWidth*dpr;
+        cvs.height=cvs.offsetHeight*dpr;
+    }
     const w=cvs.width,h=cvs.height;
     ctx.clearRect(0,0,w,h);
     const symData=symbols[state.currentCategory]?.find(s=>s.s===state.currentSymbol)||symbols.forex[0];
-    const base=symData.b;
+    const currentPrice=state.prices[state.currentSymbol]||{b:symData.b,a:symData.a};
+    const midPrice=(currentPrice.a+currentPrice.b)/2;
     const candles=[];
-    let price=base;
-    for(let i=0;i<60;i++){
+    let price=midPrice;
+    const volatility=symData.v===1?50:symData.v===100?0.5:0.0005;
+    const count=Math.floor(60*state.chart.scale);
+    for(let i=0;i<count;i++){
         const o=price;
-        const c=o*(1+(Math.random()-0.5)*0.002);
-        const hi=Math.max(o,c)+Math.random()*Math.abs(c-o)*0.5;
-        const lo=Math.min(o,c)-Math.random()*Math.abs(c-o)*0.5;
+        const c=o*(1+(Math.random()-0.5)*volatility);
+        const hi=Math.max(o,c)+Math.random()*Math.abs(c-o)*0.3;
+        const lo=Math.min(o,c)-Math.random()*Math.abs(c-o)*0.3;
         candles.unshift({o,c,hi,lo});
         price=c;
     }
-    const min=Math.min(...candles.map(c=>c.lo))*0.999;
-    const max=Math.max(...candles.map(c=>c.hi))*1.001;
-    const cw=(w/candles.length)*0.7*state.chart.scale;
+    const min=Math.min(...candles.map(c=>c.lo))*0.998;
+    const max=Math.max(...candles.map(c=>c.hi))*1.002;
+    const range=max-min;
+    const padding=40;
+    const chartH=h-padding*2;
+    const cw=(w/candles.length)*0.6;
+    ctx.strokeStyle='rgba(255,255,255,0.05)';
+    ctx.lineWidth=1;
+    for(let i=0;i<=5;i++){
+        const y=padding+(chartH/5)*i;
+        ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+        const priceLabel=max-(range/5)*i;
+        ctx.fillStyle='rgba(255,255,255,0.3)';
+        ctx.font='11px system-ui';
+        ctx.textAlign='left';
+        ctx.fillText(formatPrice(priceLabel,symData.v),8,y-4);
+    }
+    const lastCandle=candles[candles.length-1];
+    const currentY=h-padding-((midPrice-min)/range)*chartH;
+    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    ctx.lineWidth=1;
+    ctx.setLineDash([5,5]);
+    ctx.beginPath();ctx.moveTo(0,currentY);ctx.lineTo(w,currentY);ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent');
+    ctx.font='bold 12px system-ui';
+    ctx.textAlign='right';
+    ctx.fillText(formatPrice(midPrice,symData.v),w-8,currentY-6);
     candles.forEach((c,i)=>{
-        const x=i*(w/candles.length)+state.chart.offsetX+(w/candles.length-cw)/2;
+        const x=i*(w/candles.length)+state.chart.offsetX;
         if(x<-cw||x>w)return;
-        const yo=h-20-((c.o-min)/(max-min))*(h-40);
-        const yc=h-20-((c.c-min)/(max-min))*(h-40);
-        const yh=h-20-((c.hi-min)/(max-min))*(h-40);
-        const yl=h-20-((c.lo-min)/(max-min))*(h-40);
-        ctx.strokeStyle=c.c>c.o?'#00C853':'#FF3D3D';
-        ctx.fillStyle=c.c>c.o?'#00C853':'#FF3D3D';
+        const yo=h-padding-((c.o-min)/range)*chartH;
+        const yc=h-padding-((c.c-min)/range)*chartH;
+        const yh=h-padding-((c.hi-min)/range)*chartH;
+        const yl=h-padding-((c.lo-min)/range)*chartH;
+        const isGreen=c.c>c.o;
+        const color=isGreen?getComputedStyle(document.documentElement).getPropertyValue('--positive'):getComputedStyle(document.documentElement).getPropertyValue('--negative');
+        ctx.strokeStyle=color;
+        ctx.fillStyle=color;
+        ctx.lineWidth=1;
         ctx.beginPath();ctx.moveTo(x+cw/2,yh);ctx.lineTo(x+cw/2,yl);ctx.stroke();
-        ctx.fillRect(x,Math.min(yo,yc),cw,Math.abs(yc-yo)||2);
+        ctx.fillRect(x,Math.min(yo,yc),cw,Math.max(Math.abs(yc-yo),1));
     });
 }
 
@@ -1020,13 +1282,32 @@ function setTheme(id,save=true){
 
 function setCustomColor(c){state.user.accent=c;setTheme('custom',true);}
 
-function setAvatar(a){state.user.avatar=a;document.getElementById('profileAvatar').textContent=a;renderAvatars();saveState();updateUI();}
+function setAvatar(a){
+    state.user.avatar=a;
+    const avatarEl=document.getElementById('profileAvatar');
+    const previewEl=document.getElementById('profilePreviewLarge');
+    const nameEl=document.getElementById('profilePreviewName');
+    if(avatarEl){
+        if(a.startsWith('data:'))avatarEl.innerHTML=`<img src="${a}">`;
+        else avatarEl.textContent=a;
+    }
+    if(previewEl){
+        if(a.startsWith('data:'))previewEl.innerHTML=`<img src="${a}">`;
+        else previewEl.textContent=a;
+    }
+    if(nameEl)nameEl.textContent=state.user.username;
+    renderAvatars();
+    saveState();
+    showToast('Avatar aggiornato');
+}
 
 function uploadAvatar(){
     const inp=document.createElement('input');
     inp.type='file';
     inp.accept='image/*';
     inp.onchange=e=>{
+        if(!e.target.files[0])return;
+        if(e.target.files[0].size>2*1024*1024){showToast('File troppo grande (max 2MB)');return;}
         const r=new FileReader();
         r.onload=x=>{state.user.avatar=x.target.result;setAvatar(x.target.result);};
         r.readAsDataURL(e.target.files[0]);
@@ -1034,7 +1315,14 @@ function uploadAvatar(){
     inp.click();
 }
 
-function updateUsername(u){state.user.username=u;saveState();updateUI();}
+function updateUsername(u){
+    state.user.username=u;
+    const previewName=document.getElementById('profilePreviewName');
+    if(previewName)previewName.textContent=u;
+    saveState();
+    updateUI();
+    showToast('Username aggiornato');
+}
 
 function toggleChrome(){state.user.chrome=!state.user.chrome;document.getElementById('chromeToggle').classList.toggle('active',state.user.chrome);document.body.classList.toggle('chrome-mode',state.user.chrome);saveState();}
 
