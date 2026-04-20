@@ -88,7 +88,8 @@
         .asset-list{display:flex;flex-direction:column;gap:12px;padding-bottom:120px}
         .asset-card{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;padding:18px;display:flex;align-items:center;gap:16px;cursor:pointer;transition:all .3s ease}
         .asset-card:active{transform:scale(0.98)}
-        .asset-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700}
+        .asset-icon{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;overflow:hidden}
+        .asset-icon svg{width:28px;height:28px}
         .asset-icon.btc{background:linear-gradient(135deg,#F7931A,#FFB347)}
         .asset-icon.eth{background:linear-gradient(135deg,#627EEA,#8BA4F9)}
         .asset-icon.eur{background:linear-gradient(135deg,#003399,#0055CC)}
@@ -113,19 +114,16 @@
         .stat-change.positive{color:var(--positive)}
         .stat-change.negative{color:var(--negative)}
         
-        .trading-layout{display:flex;flex-direction:column;height:100%;overflow:hidden}
-        .chart-section{flex:1;display:flex;flex-direction:column;min-height:200px;overflow:hidden}
-        .chart-container{flex:1;background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;position:relative;overflow:hidden;min-height:150px}
-        .resize-handle{height:20px;display:flex;align-items:center;justify-content:center;cursor:ns-resize;transition:all .2s ease;flex-shrink:0}
-        .resize-handle:active{background:rgba(255,255,255,0.05)}
-        .resize-line{width:40px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;transition:all .2s ease}
-        .resize-handle:hover .resize-line{width:60px;background:rgba(255,255,255,0.4)}
-        .trade-section{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px 20px 0 0;display:flex;flex-direction:column;overflow:hidden;transition:height .1s ease}
-        .trade-panel-fixed{padding:16px;border-bottom:var(--glass-border);flex-shrink:0}
-        .positions-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:var(--glass-border);background:rgba(0,0,0,0.2);flex-shrink:0}
+        .trading-layout{display:flex;flex-direction:column;min-height:100%;padding-bottom:120px}
+        .chart-section{display:flex;flex-direction:column;height:55vh;min-height:300px;margin-bottom:16px}
+        .chart-container{flex:1;background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;position:relative;overflow:hidden}
+        .resize-handle{display:none}
+        .trade-section{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;display:flex;flex-direction:column}
+        .trade-panel-fixed{padding:16px;border-bottom:var(--glass-border)}
+        .positions-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:var(--glass-border);background:rgba(0,0,0,0.2)}
         .positions-header h3{font-size:14px;font-weight:700;margin:0}
         .positions-count{font-size:12px;color:var(--text-secondary);background:rgba(255,255,255,0.1);padding:2px 10px;border-radius:10px;min-width:24px;text-align:center}
-        .positions-list{flex:1;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch}
+        .positions-list{max-height:300px;overflow-y:auto;padding:12px;-webkit-overflow-scrolling:touch}
         .positions-empty{text-align:center;padding:30px 20px;color:var(--text-secondary);font-size:14px}
         #tradingCanvas{width:100%;height:100%;touch-action:none}
         .chart-overlay{position:absolute;top:16px;left:16px;right:16px;display:flex;align-items:flex-start;justify-content:space-between;pointer-events:none}
@@ -167,7 +165,20 @@
         .quotes-list{display:flex;flex-direction:column;gap:10px;padding-bottom:120px}
         .quote-row{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:18px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all .3s ease}
         .quote-row:active{transform:scale(0.98);background:rgba(var(--accent-rgb),0.1)}
-        .quote-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700}
+        .quote-icon{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;overflow:hidden}
+        .quote-icon svg{width:100%;height:100%}
+        .trade-order-book{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.1);border-radius:12px;overflow:hidden;margin-bottom:16px}
+        .order-book-side{padding:12px;background:var(--surface-2)}
+        .order-book-header{display:flex;justify-content:space-between;font-size:11px;color:var(--text-secondary);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px}
+        .order-row{display:flex;justify-content:space-between;font-size:12px;margin:3px 0;font-variant-numeric:tabular-nums}
+        .order-row.bid{color:var(--positive)}
+        .order-row.ask{color:var(--negative)}
+        .trade-tabs{display:flex;gap:8px;margin-bottom:16px}
+        .trade-tab{flex:1;padding:12px;background:var(--surface-2);border:var(--glass-border);border-radius:12px;font-size:13px;font-weight:600;text-align:center;cursor:pointer;transition:all .2s ease}
+        .trade-tab.active{background:var(--accent);color:#000;border-color:var(--accent)}
+        .quick-trade-btns{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+        .quick-lot{padding:10px;background:var(--surface-2);border:var(--glass-border);border-radius:10px;font-size:14px;font-weight:700;text-align:center;cursor:pointer;transition:all .2s ease}
+        .quick-lot:active{background:var(--accent);color:#000}
         .quote-info{flex:1}
         .quote-symbol{font-size:17px;font-weight:700;margin-bottom:3px}
         .quote-name{font-size:13px;color:var(--text-secondary)}
@@ -284,6 +295,130 @@
         .session-name{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
         .session-time{font-size:13px;font-weight:700}
         .session-status{font-size:10px;color:var(--text-secondary);margin-top:4px}
+        
+        /* Plus500 Style Trading Layout */
+        .trading-layout-plus500{display:flex;flex-direction:column;min-height:100%;padding:var(--safe-top) 16px 0}
+        
+        /* Header Symbol */
+        .plus500-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding:0 4px}
+        .plus500-symbol-section{display:flex;align-items:center;gap:12px;cursor:pointer;flex:1}
+        .plus500-symbol-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--surface);border:var(--glass-border)}
+        .plus500-symbol-info{display:flex;flex-direction:column;gap:2px}
+        .plus500-symbol-name{font-size:20px;font-weight:800}
+        .plus500-symbol-full{font-size:13px;color:var(--text-secondary)}
+        .plus500-chevron{width:20px;height:20px;opacity:0.5;margin-left:8px}
+        .plus500-header-actions{display:flex;gap:8px}
+        .plus500-fav-btn{width:40px;height:40px;border-radius:50%;background:var(--surface);border:var(--glass-border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
+        .plus500-fav-btn svg{width:20px;height:20px}
+        .plus500-fav-btn.active svg{fill:var(--accent);stroke:var(--accent)}
+        
+        /* Price Section */
+        .plus500-price-section{text-align:center;margin-bottom:16px;padding:12px;background:var(--surface);border-radius:20px;border:var(--glass-border)}
+        .plus500-price-main{font-size:42px;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+        .plus500-price-change{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:6px;font-size:14px;font-weight:600}
+        .plus500-change-arrow{font-size:12px}
+        .plus500-change-percent{color:var(--positive)}
+        .plus500-change-percent.negative{color:var(--negative)}
+        .plus500-change-amount{color:var(--text-secondary);font-weight:500}
+        
+        /* Timeframe Bar */
+        .plus500-timeframe-bar{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
+        .plus500-tf-btn{flex:1;min-width:50px;padding:10px 14px;background:var(--surface);border:var(--glass-border);border-radius:12px;font-size:13px;font-weight:600;color:var(--text-secondary);cursor:pointer;transition:all .2s ease}
+        .plus500-tf-btn.active{background:var(--accent);color:#000;border-color:var(--accent)}
+        .plus500-tf-btn:active{transform:scale(0.96)}
+        
+        /* Chart Container */
+        .plus500-chart-container{height:280px;background:var(--surface);border-radius:20px;border:var(--glass-border);position:relative;overflow:hidden;margin-bottom:16px}
+        .plus500-chart-tools{position:absolute;top:12px;right:12px;display:flex;gap:8px}
+        .plus500-tool-btn{width:36px;height:36px;background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);border:var(--glass-border);border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
+        .plus500-tool-btn svg{width:18px;height:18px}
+        .plus500-tool-btn:active{background:rgba(var(--accent-rgb),0.3)}
+        
+        /* Sentiment Bar */
+        .plus500-sentiment{margin-bottom:16px;padding:12px;background:var(--surface);border-radius:16px;border:var(--glass-border)}
+        .plus500-sentiment-bar{height:8px;border-radius:4px;display:flex;overflow:hidden;margin-bottom:8px}
+        .plus500-sentiment-buy{background:linear-gradient(90deg,#00C853,#00E676)}
+        .plus500-sentiment-sell{background:linear-gradient(90deg,#FF5252,#FF3D3D)}
+        .plus500-sentiment-labels{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--text-secondary)}
+        .plus500-dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px}
+        .plus500-dot.buy{background:var(--positive)}
+        .plus500-dot.sell{background:var(--negative)}
+        
+        /* Info Bar */
+        .plus500-info-bar{display:flex;justify-content:space-around;margin-bottom:16px;padding:12px;background:var(--surface);border-radius:16px;border:var(--glass-border)}
+        .plus500-info-item{display:flex;flex-direction:column;align-items:center;gap:4px}
+        .plus500-info-label{font-size:11px;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px}
+        .plus500-info-value{font-size:14px;font-weight:700}
+        
+        /* Volume Section */
+        .plus500-volume-section{margin-bottom:16px;padding:16px;background:var(--surface);border-radius:20px;border:var(--glass-border)}
+        .plus500-volume-label{font-size:13px;color:var(--text-secondary);margin-bottom:10px}
+        .plus500-volume-controls{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+        .plus500-vol-btn{width:44px;height:44px;border-radius:12px;background:var(--surface-2);border:var(--glass-border);font-size:20px;font-weight:700;color:var(--text);cursor:pointer;transition:all .2s ease;display:flex;align-items:center;justify-content:center}
+        .plus500-vol-btn:active{background:var(--accent);color:#000}
+        .plus500-volume-input{flex:1;height:44px;background:var(--surface-2);border:var(--glass-border);border-radius:12px;color:var(--text);font-size:18px;font-weight:700;text-align:center;outline:none}
+        .plus500-volume-presets{display:flex;gap:8px}
+        .plus500-vol-preset{flex:1;padding:10px;background:var(--surface-2);border:var(--glass-border);border-radius:10px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .2s ease}
+        .plus500-vol-preset:active{background:var(--accent);color:#000}
+        
+        /* SL/TP Section */
+        .plus500-sltp-section{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+        .plus500-sl-group,.plus500-tp-group{padding:14px;background:var(--surface);border-radius:16px;border:var(--glass-border)}
+        .plus500-sl-group label,.plus500-tp-group label{font-size:12px;color:var(--text-secondary);margin-bottom:8px;display:block}
+        .plus500-sl-input-wrap,.plus500-tp-input-wrap{position:relative}
+        .plus500-sl-input,.plus500-tp-input{width:100%;height:40px;background:var(--surface-2);border:var(--glass-border);border-radius:10px;color:var(--text);font-size:15px;font-weight:600;text-align:center;outline:none;padding:0 10px}
+        .plus500-sl-currency,.plus500-tp-currency{position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:11px;color:var(--text-secondary);background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px}
+        
+        /* Risk Section */
+        .plus500-risk-section{margin-bottom:16px;padding:14px;background:var(--surface);border-radius:16px;border:var(--glass-border)}
+        .plus500-risk-item{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:var(--glass-border)}
+        .plus500-risk-item:last-child{border-bottom:none}
+        .plus500-risk-item span:first-child{font-size:13px;color:var(--text-secondary)}
+        .plus500-risk-value{font-size:14px;font-weight:700}
+        .plus500-risk-value.positive{color:var(--positive)}
+        .plus500-risk-value.negative{color:var(--negative)}
+        
+        /* Trade Buttons */
+        .plus500-trade-buttons{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px;position:sticky;bottom:calc(20px + var(--safe-bottom));z-index:100}
+        .plus500-btn-sell,.plus500-btn-buy{padding:18px 14px;border:none;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;transition:all .15s ease;position:relative;overflow:hidden}
+        .plus500-btn-sell{background:linear-gradient(180deg,#FF3D3D 0%,#D32F2F 100%);box-shadow:0 4px 20px rgba(255,61,61,0.4)}
+        .plus500-btn-buy{background:linear-gradient(180deg,#00E676 0%,#00C853 100%);box-shadow:0 4px 20px rgba(0,200,83,0.4)}
+        .plus500-btn-sell:active,.plus500-btn-buy:active{transform:scale(0.97)}
+        .plus500-btn-price{font-size:20px;font-weight:800;font-variant-numeric:tabular-nums}
+        .plus500-btn-sell .plus500-btn-price{color:#fff}
+        .plus500-btn-buy .plus500-btn-price{color:#000}
+        .plus500-btn-label{font-size:16px;font-weight:800;letter-spacing:1px}
+        .plus500-btn-sell .plus500-btn-label{color:#fff}
+        .plus500-btn-buy .plus500-btn-label{color:#000}
+        .plus500-btn-sub{font-size:10px;opacity:0.8}
+        .plus500-btn-sell .plus500-btn-sub{color:rgba(255,255,255,0.8)}
+        .plus500-btn-buy .plus500-btn-sub{color:rgba(0,0,0,0.6)}
+        
+        /* Positions Section */
+        .plus500-positions-section{margin-bottom:20px;padding:16px;background:var(--surface);border-radius:20px;border:var(--glass-border)}
+        .plus500-positions-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+        .plus500-positions-header h3{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;margin:0}
+        .plus500-pos-count{font-size:12px;color:var(--text-secondary);background:rgba(255,255,255,0.1);padding:2px 8px;border-radius:10px;min-width:24px;text-align:center}
+        .plus500-close-all{font-size:12px;color:var(--negative);background:rgba(255,61,61,0.1);border:1px solid rgba(255,61,61,0.3);padding:6px 12px;border-radius:10px;cursor:pointer;transition:all .2s ease}
+        .plus500-close-all:active{background:rgba(255,61,61,0.2)}
+        .plus500-positions-list{max-height:200px;overflow-y:auto}
+        .plus500-positions-empty{text-align:center;padding:30px 20px;color:var(--text-secondary)}
+        .plus500-positions-empty svg{width:40px;height:40px;margin-bottom:12px;opacity:0.5}
+        .plus500-positions-empty p{font-size:14px;font-weight:600;margin-bottom:4px}
+        .plus500-positions-empty span{font-size:12px;opacity:0.7}
+        
+        /* Position Card */
+        .plus500-pos-card{display:flex;align-items:center;gap:12px;padding:14px;background:var(--surface-2);border-radius:14px;margin-bottom:8px;border:var(--glass-border)}
+        .plus500-pos-card:last-child{margin-bottom:0}
+        .plus500-pos-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--surface)}
+        .plus500-pos-info{flex:1}
+        .plus500-pos-symbol{font-size:15px;font-weight:700;margin-bottom:2px}
+        .plus500-pos-details{font-size:12px;color:var(--text-secondary)}
+        .plus500-pos-pnl{text-align:right}
+        .plus500-pos-pnl-value{font-size:16px;font-weight:800}
+        .plus500-pos-pnl-value.positive{color:var(--positive)}
+        .plus500-pos-pnl-value.negative{color:var(--negative)}
+        .plus500-pos-close{width:32px;height:32px;border-radius:8px;background:rgba(255,61,61,0.15);border:none;color:var(--negative);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
     </style>
 </head>
 <body>
@@ -380,60 +515,165 @@
                 </div>
 
                 <div class="tab-panel" id="tabTrading">
-                    <div class="trading-layout">
-                        <div class="chart-section">
-                            <div class="page-header" style="margin-bottom:12px;padding-top:0"><div class="profile-section"><h2>Trading Terminal</h2></div><div class="header-icons"><div class="header-icon" onclick="openSymbolSearch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div></div></div>
-                            <div class="session-bar" id="sessionBar"></div>
-                            <div class="chart-container" id="mainChartContainer">
-                                <canvas id="tradingCanvas"></canvas>
-                                <div class="chart-overlay">
-                                    <div class="symbol-info"><div class="symbol-display" id="chartSymbol">EURUSD</div><div class="symbol-desc" id="symbolDesc">Euro / US Dollar</div></div>
-                                    <div class="price-info"><div class="price-display" id="chartPrice">1.08450</div><div class="price-change positive" id="priceChange">+0.15%</div></div>
+                    <div class="trading-layout-plus500">
+                        <!-- Header Symbol -->
+                        <div class="plus500-header">
+                            <div class="plus500-symbol-section" onclick="openSymbolSearch()">
+                                <div class="plus500-symbol-icon" id="symbolIcon">🇪🇺🇺🇸</div>
+                                <div class="plus500-symbol-info">
+                                    <div class="plus500-symbol-name" id="chartSymbol">EURUSD</div>
+                                    <div class="plus500-symbol-full" id="symbolDesc">Euro / US Dollar</div>
                                 </div>
-                                <div class="timeframe-bar"><button class="tf-btn" data-tf="1m">1M</button><button class="tf-btn" data-tf="5m">5M</button><button class="tf-btn active" data-tf="15m">15M</button><button class="tf-btn" data-tf="1h">1H</button><button class="tf-btn" data-tf="4h">4H</button><button class="tf-btn" data-tf="1d">1D</button></div>
-                                <div class="chart-actions">
-                                    <div class="chart-action-btn" onclick="toggleObjectsMenu(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v8M8 12h8"/></svg></div>
-                                    <div class="chart-action-btn" onclick="resetChart()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
+                                <svg class="plus500-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+                            </div>
+                            <div class="plus500-header-actions">
+                                <div class="plus500-fav-btn" onclick="toggleFavorite()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16L11.525 2.295Z"/></svg></div>
+                            </div>
+                        </div>
+
+                        <!-- Main Price Display -->
+                        <div class="plus500-price-section">
+                            <div class="plus500-price-main" id="chartPrice">1.08450</div>
+                            <div class="plus500-price-change" id="priceChange">
+                                <span class="plus500-change-arrow">▲</span>
+                                <span class="plus500-change-percent">+0.15%</span>
+                                <span class="plus500-change-amount">+0.00162</span>
+                            </div>
+                        </div>
+
+                        <!-- Timeframe Selector -->
+                        <div class="plus500-timeframe-bar">
+                            <button class="plus500-tf-btn" data-tf="1m">1m</button>
+                            <button class="plus500-tf-btn" data-tf="5m">5m</button>
+                            <button class="plus500-tf-btn active" data-tf="15m">15m</button>
+                            <button class="plus500-tf-btn" data-tf="1h">1h</button>
+                            <button class="plus500-tf-btn" data-tf="4h">4h</button>
+                            <button class="plus500-tf-btn" data-tf="1d">1d</button>
+                        </div>
+
+                        <!-- Chart Area -->
+                        <div class="plus500-chart-container">
+                            <canvas id="tradingCanvas"></canvas>
+                            <div class="plus500-chart-tools">
+                                <button class="plus500-tool-btn" onclick="toggleObjectsMenu(event)" title="Strumenti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></button>
+                                <button class="plus500-tool-btn" onclick="resetChart()" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></button>
+                            </div>
+                            <div class="chart-objects-menu" id="objectsMenu">
+                                <button class="chart-object-btn" onclick="addObject('trendline')">📈 Linea di Tendenza</button>
+                                <button class="chart-object-btn" onclick="addObject('horizontal')">➖ Linea Orizzontale</button>
+                                <button class="chart-object-btn" onclick="addObject('fibonacci')">🌀 Fibonacci</button>
+                                <button class="chart-object-btn" onclick="addObject('support')">🎯 Supporto/Resistenza</button>
+                            </div>
+                        </div>
+
+                        <!-- Market Sentiment Bar -->
+                        <div class="plus500-sentiment">
+                            <div class="plus500-sentiment-bar">
+                                <div class="plus500-sentiment-buy" id="sentimentBuy" style="width:62%"></div>
+                                <div class="plus500-sentiment-sell" id="sentimentSell" style="width:38%"></div>
+                            </div>
+                            <div class="plus500-sentiment-labels">
+                                <span><span class="plus500-dot buy"></span>Buy 62%</span>
+                                <span>Sell 38%<span class="plus500-dot sell"></span></span>
+                            </div>
+                        </div>
+
+                        <!-- Trading Info Bar -->
+                        <div class="plus500-info-bar">
+                            <div class="plus500-info-item">
+                                <span class="plus500-info-label">Spread</span>
+                                <span class="plus500-info-value" id="tradeSpread">0.2 pips</span>
+                            </div>
+                            <div class="plus500-info-item">
+                                <span class="plus500-info-label">Swap</span>
+                                <span class="plus500-info-value" id="tradeSwap">-$2.50</span>
+                            </div>
+                            <div class="plus500-info-item">
+                                <span class="plus500-info-label">Margine</span>
+                                <span class="plus500-info-value" id="tradeMargin">€100.00</span>
+                            </div>
+                        </div>
+
+                        <!-- Volume Selector -->
+                        <div class="plus500-volume-section">
+                            <div class="plus500-volume-label">Volume (Lotti)</div>
+                            <div class="plus500-volume-controls">
+                                <button class="plus500-vol-btn" onclick="adjustVolume(-0.01)">−</button>
+                                <input type="number" class="plus500-volume-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()">
+                                <button class="plus500-vol-btn" onclick="adjustVolume(0.01)">+</button>
+                            </div>
+                            <div class="plus500-volume-presets">
+                                <button class="plus500-vol-preset" onclick="setQuickLot(0.01)">0.01</button>
+                                <button class="plus500-vol-preset" onclick="setQuickLot(0.10)">0.10</button>
+                                <button class="plus500-vol-preset" onclick="setQuickLot(0.50)">0.50</button>
+                                <button class="plus500-vol-preset" onclick="setQuickLot(1.00)">1.00</button>
+                            </div>
+                        </div>
+
+                        <!-- SL/TP Inputs -->
+                        <div class="plus500-sltp-section">
+                            <div class="plus500-sl-group">
+                                <label>Stop Loss</label>
+                                <div class="plus500-sl-input-wrap">
+                                    <input type="number" class="plus500-sl-input" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
+                                    <span class="plus500-sl-currency" id="slPips">0 pips</span>
                                 </div>
-                                <div class="chart-objects-menu" id="objectsMenu">
-                                    <button class="chart-object-btn" onclick="addObject('trendline')">Linea di Tendenza</button>
-                                    <button class="chart-object-btn" onclick="addObject('horizontal')">Linea Orizzontale</button>
-                                    <button class="chart-object-btn" onclick="addObject('rectangle')">Rettangolo</button>
-                                    <button class="chart-object-btn" onclick="addObject('fibonacci')">Fibonacci</button>
-                                    <button class="chart-object-btn" onclick="addObject('support')">Supporto/Resistenza</button>
+                            </div>
+                            <div class="plus500-tp-group">
+                                <label>Take Profit</label>
+                                <div class="plus500-tp-input-wrap">
+                                    <input type="number" class="plus500-tp-input" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
+                                    <span class="plus500-tp-currency" id="tpPips">0 pips</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="resize-handle" id="resizeHandle">
-                            <div class="resize-line"></div>
-                        </div>
-                        <div class="trade-section" id="tradeSection">
-                            <div class="trade-panel-fixed">
-                                <div class="trade-info">
-                                    <div class="trade-info-item"><div class="trade-info-label">Spread</div><div class="trade-info-value" id="tradeSpread">0.2 pips</div></div>
-                                    <div class="trade-info-item"><div class="trade-info-label">Swp/Lotto</div><div class="trade-info-value" id="tradeSwap">-$2.50</div></div>
-                                    <div class="trade-info-item"><div class="trade-info-label">Margine</div><div class="trade-info-value" id="tradeMargin">€100</div></div>
-                                </div>
-                                <div class="trade-inputs">
-                                    <div class="trade-input-group"><label>Volume</label><input type="number" class="trade-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()"></div>
-                                    <div class="trade-input-group"><label>Stop Loss</label><input type="number" class="trade-input" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()"></div>
-                                    <div class="trade-input-group"><label>Take Profit</label><input type="number" class="trade-input" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()"></div>
-                                </div>
-                                <div class="risk-meter"><div class="risk-fill risk-low" id="riskBar" style="width:15%"></div></div>
-                                <div class="trade-details"><div class="trade-detail"><span>Rischio/Rendimento</span><span id="riskReward">1:2.5</span></div><div class="trade-detail"><span>Potenziale Perdita</span><span id="potentialLoss">€25.00</span></div></div>
-                                <div class="trade-buttons">
-                                    <button class="btn-trade btn-buy" onclick="executeTrade('buy')"><div>BUY</div><div style="font-size:13px;opacity:.8" id="buyPrice">1.08452</div></button>
-                                    <button class="btn-trade btn-sell" onclick="executeTrade('sell')"><div>SELL</div><div style="font-size:13px;opacity:.8" id="sellPrice">1.08448</div></button>
-                                </div>
+
+                        <!-- Risk Info -->
+                        <div class="plus500-risk-section">
+                            <div class="plus500-risk-item">
+                                <span>Rischio/Rendimento</span>
+                                <span class="plus500-risk-value" id="riskReward">1:2.5</span>
                             </div>
-                            <div class="positions-header">
-                                <h3>Posizioni Aperte</h3>
-                                <span class="positions-count" id="openTradesCount">0</span>
+                            <div class="plus500-risk-item">
+                                <span>Potenziale Perdita</span>
+                                <span class="plus500-risk-value negative" id="potentialLoss">-€25.00</span>
                             </div>
-                            <div class="positions-list" id="openTradesList">
-                                <div class="positions-empty">Nessuna posizione aperta</div>
+                            <div class="plus500-risk-item">
+                                <span>Potenziale Profitto</span>
+                                <span class="plus500-risk-value positive" id="potentialProfit">+€62.50</span>
                             </div>
                         </div>
+
+                        <!-- Buy/Sell Buttons -->
+                        <div class="plus500-trade-buttons">
+                            <button class="plus500-btn-sell" onclick="executeTrade('sell')">
+                                <div class="plus500-btn-price" id="sellPrice">1.08448</div>
+                                <div class="plus500-btn-label">SELL</div>
+                                <div class="plus500-btn-sub">Vendi al Bid</div>
+                            </button>
+                            <button class="plus500-btn-buy" onclick="executeTrade('buy')">
+                                <div class="plus500-btn-price" id="buyPrice">1.08452</div>
+                                <div class="plus500-btn-label">BUY</div>
+                                <div class="plus500-btn-sub">Compra al Ask</div>
+                            </button>
+                        </div>
+
+                        <!-- Positions List -->
+                        <div class="plus500-positions-section">
+                            <div class="plus500-positions-header">
+                                <h3>Posizioni Aperte <span class="plus500-pos-count" id="openTradesCount">0</span></h3>
+                                <button class="plus500-close-all" onclick="closeAllPositions()" id="closeAllBtn" style="display:none">Chiudi Tutte</button>
+                            </div>
+                            <div class="plus500-positions-list" id="openTradesList">
+                                <div class="plus500-positions-empty">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 7h8m0 0v8m0-8-8 8-4-4-6 6"/></svg>
+                                    <p>Nessuna posizione aperta</p>
+                                    <span>Apri un trade per iniziare</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="height:100px"></div>
                     </div>
                 </div>
 
@@ -623,6 +863,46 @@ function init(){
     startPriceUpdates();
 }
 
+const assetIcons={
+    EUR:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#003399"/><text x="20" y="26" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="system-ui">€</text></svg>`,
+    USD:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#85BB65"/><text x="20" y="26" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="system-ui">$</text></svg>`,
+    GBP:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#C8102E"/><text x="20" y="26" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="system-ui">£</text></svg>`,
+    JPY:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#BC002D"/><text x="20" y="26" text-anchor="middle" fill="white" font-size="16" font-weight="800" font-family="system-ui">¥</text></svg>`,
+    BTC:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#F7931A"/><path d="M22 12v3h2v2h-3.5c-0.5 0-1 0.5-1 1v8c0 0.5 0.5 1 1 1h3.5v2h-2v3h-2v-3h-2v3h-2v-3.5c-1.5-0.3-2.5-1.5-2.5-3 0-1.5 1-2.7 2.5-3v-0.5c-1.3-0.3-2.2-1.4-2.2-2.7 0-1.5 1.2-2.8 2.7-3v-3h2v3h2v-3h2z" fill="white"/></svg>`,
+    ETH:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#627EEA"/><path d="M20 8l-8 14 8-4 8 4-8-14zm0 18l-8 4 8 4 8-4-8-4z" fill="white" opacity="0.9"/></svg>`,
+    XAU:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#FFD700"/><text x="20" y="25" text-anchor="middle" fill="#333" font-size="14" font-weight="800">Au</text></svg>`,
+    XAG:`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="#C0C0C0"/><text x="20" y="25" text-anchor="middle" fill="#333" font-size="14" font-weight="800">Ag</text></svg>`
+};
+
+const symbolIcons={
+    EURUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#eu)"/><defs><linearGradient id="eu" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#003399"/><stop offset="100%" stop-color="#0055CC"/></linearGradient></defs><circle cx="16" cy="22" r="10" fill="#003399" stroke="white" stroke-width="1.5"/><circle cx="28" cy="22" r="10" fill="#85BB65" stroke="white" stroke-width="1.5"/><text x="22" y="26" text-anchor="middle" fill="white" font-size="10" font-weight="800">$/€</text></svg>`,
+    GBPUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#gu)"/><defs><linearGradient id="gu" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#C8102E"/><stop offset="100%" stop-color="#85BB65"/></linearGradient></defs><circle cx="16" cy="22" r="10" fill="#C8102E" stroke="white" stroke-width="1.5"/><circle cx="28" cy="22" r="10" fill="#85BB65" stroke="white" stroke-width="1.5"/><text x="22" y="26" text-anchor="middle" fill="white" font-size="10" font-weight="800">$/£</text></svg>`,
+    USDJPY:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#uj)"/><defs><linearGradient id="uj" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#85BB65"/><stop offset="100%" stop-color="#BC002D"/></linearGradient></defs><circle cx="16" cy="22" r="10" fill="#85BB65" stroke="white" stroke-width="1.5"/><circle cx="28" cy="22" r="10" fill="#BC002D" stroke="white" stroke-width="1.5"/><text x="22" y="26" text-anchor="middle" fill="white" font-size="10" font-weight="800">¥/$</text></svg>`,
+    USDCHF:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#uc)"/><defs><linearGradient id="uc" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#85BB65"/><stop offset="100%" stop-color="#DA291C"/></linearGradient></defs><circle cx="16" cy="22" r="10" fill="#85BB65" stroke="white" stroke-width="1.5"/><circle cx="28" cy="22" r="10" fill="#DA291C" stroke="white" stroke-width="1.5"/><text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-weight="800">Fr/$</text></svg>`,
+    AUDUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#auu)"/><defs><linearGradient id="auu" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#00843D"/><stop offset="100%" stop-color="#85BB65"/></linearGradient></defs><circle cx="16" cy="22" r="10" fill="#00843D" stroke="white" stroke-width="1.5"/><circle cx="28" cy="22" r="10" fill="#85BB65" stroke="white" stroke-width="1.5"/><text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-weight="800">A$/$</text></svg>`,
+    USDCAD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#ucad)"/><defs><linearGradient id="ucad" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#85BB65"/><stop offset="100%" stop-color="#FF0000"/></linearGradient></defs><circle cx="16" cy="22" r="10" fill="#85BB65" stroke="white" stroke-width="1.5"/><circle cx="28" cy="22" r="10" fill="#FF0000" stroke="white" stroke-width="1.5"/><text x="22" y="26" text-anchor="middle" fill="white" font-size="9" font-weight="800">C$/$</text></svg>`,
+    BTCUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#bu)"/><defs><linearGradient id="bu" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#F7931A"/><stop offset="100%" stop-color="#85BB65"/></linearGradient></defs><circle cx="22" cy="22" r="14" fill="#F7931A"/><text x="22" y="27" text-anchor="middle" fill="white" font-size="16" font-weight="800">₿</text></svg>`,
+    ETHUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#eu2)"/><defs><linearGradient id="eu2" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#627EEA"/><stop offset="100%" stop-color="#85BB65"/></linearGradient></defs><circle cx="22" cy="22" r="14" fill="#627EEA"/><path d="M22 14l-6 10 6-3 6 3-6-10zm0 12l-6 3 6 3 6-3-6-3z" fill="white" opacity="0.9"/></svg>`,
+    XRPUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#23292F"/><circle cx="22" cy="22" r="14" fill="#23292F" stroke="white" stroke-width="2"/><path d="M22 12 L28 18 L22 24 L16 18 Z M22 24 L28 30 L22 36 L16 30 Z" fill="white"/></svg>`,
+    SOLUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#sol)"/><defs><linearGradient id="sol" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#9945FF"/><stop offset="50%" stop-color="#14F195"/></linearGradient></defs><circle cx="22" cy="22" r="14" fill="#9945FF"/><text x="22" y="27" text-anchor="middle" fill="white" font-size="14" font-weight="800">SOL</text></svg>`,
+    XAUUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#au)"/><defs><linearGradient id="au" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#85BB65"/></linearGradient></defs><circle cx="22" cy="22" r="14" fill="#FFD700"/><text x="22" y="27" text-anchor="middle" fill="#333" font-size="14" font-weight="800">Au</text></svg>`,
+    XAGUSD:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#ag)"/><defs><linearGradient id="ag" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="#C0C0C0"/><stop offset="100%" stop-color="#85BB65"/></linearGradient></defs><circle cx="22" cy="22" r="14" fill="#C0C0C0"/><text x="22" y="27" text-anchor="middle" fill="#333" font-size="14" font-weight="800">Ag</text></svg>`,
+    US30:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#1a237e"/><path d="M10 32 L16 20 L22 26 L28 14 L34 32" stroke="#4caf50" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="12" text-anchor="middle" fill="white" font-size="8" font-weight="700">DOW</text></svg>`,
+    NAS100:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#0d47a1"/><path d="M10 28 L16 18 L22 24 L28 12 L34 28" stroke="#00e676" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="38" text-anchor="middle" fill="white" font-size="8" font-weight="700">NAS</text></svg>`,
+    SPX500:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#1565c0"/><path d="M10 30 L16 22 L22 26 L28 16 L34 30" stroke="#ff9800" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="12" text-anchor="middle" fill="white" font-size="8" font-weight="700">S&P</text></svg>`,
+    GER40:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#000"/><path d="M10 30 L16 20 L22 26 L28 14 L34 30" stroke="#ffcc00" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><text x="22" y="40" text-anchor="middle" fill="white" font-size="8" font-weight="700">DAX</text></svg>`,
+    AAPL:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#333"/><path d="M22 8c-2 0-4 1.5-4 4 0 2.5 2 5 4 8 2-3 4-5.5 4-8 0-2.5-2-4-4-4z" fill="white"/><path d="M22 22c-6 0-10 4-10 10 0 4 3 8 10 8 7 0 10-4 10-8 0-6-4-10-10-10z" fill="white" opacity="0.8"/></svg>`,
+    TSLA:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#cc0000"/><path d="M12 18 L22 12 L32 18 L32 28 L22 34 L12 28 Z" fill="white"/><text x="22" y="26" text-anchor="middle" fill="#cc0000" font-size="10" font-weight="800">T</text></svg>`,
+    NVDA:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#76b900"/><path d="M14 16 L30 16 L28 28 L16 28 Z" fill="white"/><text x="22" y="25" text-anchor="middle" fill="#76b900" font-size="8" font-weight="800">AI</text></svg>`,
+    MSFT:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#00a4ef"/><rect x="12" y="12" width="8" height="8" fill="white"/><rect x="24" y="12" width="8" height="8" fill="white"/><rect x="12" y="24" width="8" height="8" fill="white"/><rect x="24" y="24" width="8" height="8" fill="white"/></svg>`,
+    AMZN:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#ff9900"/><path d="M12 22 Q22 16 32 22 Q22 28 12 22" fill="white"/><path d="M12 26 Q22 32 32 26" stroke="white" stroke-width="2" fill="none"/></svg>`,
+    GOOGL:`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#4285f4"/><text x="22" y="28" text-anchor="middle" fill="white" font-size="20" font-weight="800">G</text></svg>`
+};
+
+const getSymbolIcon=(s)=>symbolIcons[s]||symbolIcons[s.slice(0,3)]||`<svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="url(#gen)"><defs><linearGradient id="gen" x1="0" y1="0" x2="44" y2="44"><stop offset="0%" stop-color="var(--accent)"/><stop offset="100%" stop-color="#6366f1"/></linearGradient></defs></rect><text x="22" y="28" text-anchor="middle" fill="white" font-size="14" font-weight="800">${s.slice(0,2)}</text></svg>`;
+
+const getAssetIcon=(id)=>assetIcons[id]||`<svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="20" fill="var(--surface)"/><text x="20" y="26" text-anchor="middle" fill="white" font-size="14" font-weight="800">${id.slice(0,2)}</text></svg>`;
+
 const brokerLogos={
     icmarkets:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="url(#icg)"/><defs><linearGradient id="icg" x1="0" y1="0" x2="100" y2="100"><stop offset="0%" stop-color="#00C853"/><stop offset="100%" stop-color="#00E676"/></linearGradient></defs><text x="50" y="55" text-anchor="middle" fill="white" font-size="42" font-weight="800" font-family="system-ui">IC</text></svg>`,
     pepperstone:`<svg viewBox="0 0 100 100" fill="none"><rect width="100" height="100" rx="20" fill="#1a1a2e"/><circle cx="50" cy="35" r="18" fill="#FF6D00"/><path d="M30 55 L50 85 L70 55" stroke="#FF6D00" stroke-width="6" fill="none"/></svg>`,
@@ -727,7 +1007,15 @@ function setupListeners(){
             drawChart();
         };
     });
-    initResizeHandle();
+    // Plus500 timeframe buttons
+    document.querySelectorAll('.plus500-tf-btn').forEach(b=>{
+        b.onclick=()=>{
+            document.querySelectorAll('.plus500-tf-btn').forEach(x=>x.classList.remove('active'));
+            b.classList.add('active');
+            state.chart.tf=b.dataset.tf;
+            drawChart();
+        };
+    });
 }
 
 function initResizeHandle(){
@@ -877,7 +1165,7 @@ function renderAssets(){
         const chg=(Math.random()*4-2);
         return`
         <div class="asset-card animate-in" style="animation-delay:${i*0.05}s">
-            <div class="asset-icon" style="background:${getAssetGradient(asset.id)}">${asset.id[0]}</div>
+            <div class="asset-icon">${getAssetIcon(asset.id)}</div>
             <div class="asset-info">
                 <div class="asset-name">${asset.id}</div>
                 <div class="asset-amount">${formatNumber(asset.amt)} ${pct>0?'('+pct.toFixed(1)+'%)':''}</div>
@@ -898,7 +1186,7 @@ function renderQuotes(){
         const chg=((price.a-q.a)/q.a)*100;
         return`
         <div class="quote-row animate-in" style="animation-delay:${i*0.03}s" onclick="selectSymbol('${q.s}')">
-            <div class="quote-icon" style="background:${stringToGradient(q.s)}">${q.s.slice(0,2)}</div>
+            <div class="quote-icon">${getSymbolIcon(q.s)}</div>
             <div class="quote-info"><div class="quote-symbol">${q.s}</div><div class="quote-name">${q.n}</div></div>
             <div class="quote-prices">
                 <div class="quote-price">${formatPrice(price.a,q.v)}</div>
@@ -984,8 +1272,79 @@ function updateTradePanel(){
     const lots=parseFloat(document.getElementById('tradeLots').value)||0.1;
     const margin=lots*100000/acc.leverage;
     document.getElementById('tradeMargin').textContent=sym(acc)+formatNumber(margin);
+    
+    // Update price change display
+    const changeEl=document.getElementById('priceChange');
+    if(changeEl){
+        const change=(Math.random()*0.4-0.2);
+        const isPositive=change>=0;
+        changeEl.innerHTML=`<span class="plus500-change-arrow">${isPositive?'▲':'▼'}</span><span class="plus500-change-percent ${isPositive?'':'negative'}">${isPositive?'+':''}${change.toFixed(2)}%</span><span class="plus500-change-amount">${isPositive?'+':''}${(change*price.a/100).toFixed(5)}</span>`;
+    }
+    
+    updateSymbolIcon();
+    updateOrderBook(price,symData.v);
     updateTradeCalc();
     renderOpenTrades();
+}
+
+function updateOrderBook(price,dec){
+    const bidEl=document.getElementById('bidOrders');
+    const askEl=document.getElementById('askOrders');
+    if(!bidEl||!askEl)return;
+    const bidRows=[];const askRows=[];
+    for(let i=0;i<5;i++){
+        const size=(Math.random()*10+0.1).toFixed(2);
+        bidRows.push(`<div class="order-row bid"><span>${size}</span><span>${formatPrice(price.b-(i*dec*0.1),dec)}</span></div>`);
+        askRows.push(`<div class="order-row ask"><span>${formatPrice(price.a+(i*dec*0.1),dec)}</span><span>${size}</span></div>`);
+    }
+    bidEl.innerHTML=bidRows.join('');
+    askEl.innerHTML=askRows.join('');
+}
+
+function setQuickLot(v){document.getElementById('tradeLots').value=v;updateTradeCalc();}
+
+function adjustVolume(delta){
+    const input=document.getElementById('tradeLots');
+    let val=parseFloat(input.value)||0.1;
+    val=Math.max(0.01,Math.round((val+delta)*100)/100);
+    input.value=val.toFixed(2);
+    updateTradeCalc();
+}
+
+function toggleFavorite(){
+    const btn=document.querySelector('.plus500-fav-btn');
+    btn.classList.toggle('active');
+    const isActive=btn.classList.contains('active');
+    showToast(isActive?`Aggiunto ${state.currentSymbol} ai preferiti`:`Rimosso ${state.currentSymbol} dai preferiti`);
+}
+
+function closeAllPositions(){
+    const acc=getCurrentAccount();
+    const openTrades=acc.trades.filter(t=>t.status==='open');
+    if(openTrades.length===0)return;
+    if(!confirm(`Chiudere tutte le ${openTrades.length} posizioni aperte?`))return;
+    openTrades.forEach(t=>closeTrade(t.id));
+    showToast(`Chiuse ${openTrades.length} posizioni`);
+}
+
+function updateSymbolIcon(){
+    const iconEl=document.getElementById('symbolIcon');
+    if(!iconEl)return;
+    const symbol=state.currentSymbol;
+    const icons={
+        'EURUSD':'🇪🇺🇺🇸','GBPUSD':'🇬🇧🇺🇸','USDJPY':'🇺🇸🇯🇵','USDCHF':'🇺🇸🇨🇭',
+        'AUDUSD':'🇦🇺🇺🇸','USDCAD':'🇺🇸🇨🇦','NZDUSD':'🇳🇿🇺🇸','EURGBP':'🇪🇺🇬🇧',
+        'BTCUSD':'₿🇺🇸','ETHUSD':'Ξ🇺🇸','XRPUSD':'✕🇺🇸','SOLUSD':'◎🇺🇸',
+        'XAUUSD':'🪙🇺🇸','XAGUSD':'🥈🇺🇸','USOIL':'🛢️','UKOIL':'🛢️',
+        'US30':'📈🇺🇸','NAS100':'📈🇺🇸','SPX500':'📈🇺🇸','GER40':'📈🇩🇪'
+    };
+    iconEl.textContent=icons[symbol]||'📊';
+}
+
+function switchTradeTab(t){
+    document.querySelectorAll('.trade-tab').forEach(x=>x.classList.remove('active'));
+    event.target.classList.add('active');
+    if(t==='pending')showToast('Ordini pendenti - Prossimamente');
 }
 
 function updateTradeCalc(){
@@ -997,22 +1356,38 @@ function updateTradeCalc(){
     const tp=parseFloat(document.getElementById('tradeTP').value)||0;
     const midPrice=(price.a+price.b)/2;
     const pipValue=symData.v===100?0.01:symData.v===1?1:0.0001;
-    let riskAmount=0,rewardAmount=0,riskRatio=0;
+    let riskAmount=0,rewardAmount=0,riskRatio=0,slPips=0,tpPips=0;
     if(sl>0&&sl!==midPrice){
-        const slPips=Math.abs(midPrice-sl)/pipValue;
+        slPips=Math.abs(midPrice-sl)/pipValue;
         riskAmount=slPips*pipValue*100000*lots;
     }
     if(tp>0&&tp!==midPrice){
-        const tpPips=Math.abs(tp-midPrice)/pipValue;
+        tpPips=Math.abs(tp-midPrice)/pipValue;
         rewardAmount=tpPips*pipValue*100000*lots;
     }
     if(riskAmount>0&&rewardAmount>0)riskRatio=rewardAmount/riskAmount;
-    document.getElementById('riskReward').textContent=riskRatio>0?'1:'+riskRatio.toFixed(1):'N/A';
-    document.getElementById('potentialLoss').textContent=sym(acc)+formatNumber(riskAmount);
+    
+    const rrEl=document.getElementById('riskReward');
+    if(rrEl)rrEl.textContent=riskRatio>0?'1:'+riskRatio.toFixed(1):'--';
+    
+    const lossEl=document.getElementById('potentialLoss');
+    if(lossEl)lossEl.textContent=riskAmount>0?'-'+sym(acc)+formatNumber(riskAmount):'--';
+    
+    const profitEl=document.getElementById('potentialProfit');
+    if(profitEl)profitEl.textContent=rewardAmount>0?'+'+sym(acc)+formatNumber(rewardAmount):'--';
+    
+    const slPipsEl=document.getElementById('slPips');
+    if(slPipsEl)slPipsEl.textContent=slPips>0?Math.round(slPips)+' pips':'0 pips';
+    
+    const tpPipsEl=document.getElementById('tpPips');
+    if(tpPipsEl)tpPipsEl.textContent=tpPips>0?Math.round(tpPips)+' pips':'0 pips';
+    
     const riskPct=acc.balance>0?(riskAmount/acc.balance)*100:0;
     const riskBar=document.getElementById('riskBar');
-    riskBar.style.width=Math.min(riskPct*5,100)+'%';
-    riskBar.className='risk-fill '+(riskPct<2?'risk-low':riskPct<5?'risk-medium':'risk-high');
+    if(riskBar){
+        riskBar.style.width=Math.min(riskPct*5,100)+'%';
+        riskBar.className='risk-fill '+(riskPct<2?'risk-low':riskPct<5?'risk-medium':'risk-high');
+    }
 }
 
 function renderOpenTrades(){
@@ -1020,9 +1395,18 @@ function renderOpenTrades(){
     const openTrades=acc.trades.filter(t=>t.status==='open');
     const countEl=document.getElementById('openTradesCount');
     if(countEl)countEl.textContent=openTrades.length;
+    const closeAllBtn=document.getElementById('closeAllBtn');
+    if(closeAllBtn)closeAllBtn.style.display=openTrades.length>1?'block':'none';
     const container=document.getElementById('openTradesList');
     if(!container)return;
-    if(!openTrades.length){container.innerHTML='<div class="positions-empty">Nessuna posizione aperta</div>';return;}
+    if(!openTrades.length){
+        container.innerHTML=`<div class="plus500-positions-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 7h8m0 0v8m0-8-8 8-4-4-6 6"/></svg>
+            <p>Nessuna posizione aperta</p>
+            <span>Apri un trade per iniziare</span>
+        </div>`;
+        return;
+    }
     container.innerHTML=openTrades.map(t=>{
         const symData=Object.values(symbols).flat().find(s=>s.s===t.symbol)||{};
         const price=state.prices[t.symbol]||{b:symData.b,a:symData.a};
@@ -1030,12 +1414,18 @@ function renderOpenTrades(){
         const currentPrice=t.type==='buy'?price.b:price.a;
         const pnl=((currentPrice-t.entry)*100000*t.lots*mult);
         const pnlPct=acc.balance>0?(pnl/acc.balance)*100:0;
-        const slText=t.sl?`SL:${formatPrice(t.sl,symData.v)}`:'';
-        const tpText=t.tp?`TP:${formatPrice(t.tp,symData.v)}`:'';
-        return`<div class="trade-position" style="background:rgba(255,255,255,0.05);border:var(--glass-border);border-radius:12px;padding:14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;transition:all .3s ease">
-            <div style="position:absolute;top:0;left:0;width:3px;height:100%;background:${t.type==='buy'?'var(--positive)':'var(--negative)'}" class="position-bar"></div>
-            <div style="padding-left:10px"><div style="font-weight:700;font-size:15px;display:flex;align-items:center;gap:6px">${t.symbol} <span style="color:${t.type==='buy'?'var(--positive)':'var(--negative)'};font-size:10px;text-transform:uppercase;font-weight:800;padding:2px 6px;border-radius:4px;background:${t.type==='buy'?'rgba(0,200,83,0.2)':'rgba(255,61,61,0.2)'};">${t.type}</span></div><div style="font-size:11px;color:var(--text-secondary);margin-top:3px">${t.lots} lotti @ ${formatPrice(t.entry,symData.v)}${slText||tpText?' <span style="color:var(--text-secondary)">|</span> <span style="color:var(--negative)">'+slText+'</span> <span style="color:var(--positive)">'+tpText+'</span>':''}</div></div>
-            <div style="text-align:right"><div style="font-weight:800;font-size:16px;color:${pnl>=0?'var(--positive)':'var(--negative)'}" class="position-pnl">${pnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(pnl))}</div><div style="display:flex;align-items:center;gap:6px;margin-top:3px;justify-content:flex-end"><span style="font-size:11px;color:var(--text-secondary)">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</span><button onclick="closeTrade(${t.id})" style="background:rgba(255,255,255,0.1);border:none;border-radius:5px;padding:3px 8px;color:var(--text);font-size:10px;cursor:pointer;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">Chiudi</button></div></div>
+        const icons={'EURUSD':'🇪🇺🇺🇸','GBPUSD':'🇬🇧🇺🇸','USDJPY':'🇺🇸🇯🇵','USDCHF':'🇺🇸🇨🇭','AUDUSD':'🇦🇺🇺🇸','USDCAD':'🇺🇸🇨🇦','NZDUSD':'🇳🇿🇺🇸','EURGBP':'🇪🇺🇬🇧','BTCUSD':'₿','ETHUSD':'Ξ','XRPUSD':'✕','SOLUSD':'◎','XAUUSD':'🪙','XAGUSD':'🥈','USOIL':'🛢️','UKOIL':'🛢️','US30':'📈','NAS100':'📈','SPX500':'📈','GER40':'📈'};
+        return`<div class="plus500-pos-card">
+            <div class="plus500-pos-icon" style="background:${t.type==='buy'?'rgba(0,200,83,0.15)':'rgba(255,61,61,0.15)'};color:${t.type==='buy'?'var(--positive)':'var(--negative)'}">${icons[t.symbol]||'📊'}</div>
+            <div class="plus500-pos-info">
+                <div class="plus500-pos-symbol">${t.symbol} <span style="color:${t.type==='buy'?'var(--positive)':'var(--negative)'};font-size:11px;text-transform:uppercase">${t.type}</span></div>
+                <div class="plus500-pos-details">${t.lots} lotti @ ${formatPrice(t.entry,symData.v)}</div>
+            </div>
+            <div class="plus500-pos-pnl">
+                <div class="plus500-pos-pnl-value ${pnl>=0?'positive':'negative'}">${pnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(pnl))}</div>
+                <div style="font-size:11px;color:var(--text-secondary)">${pnlPct>=0?'+':''}${pnlPct.toFixed(2)}%</div>
+            </div>
+            <button class="plus500-pos-close" onclick="closeTrade(${t.id})">✕</button>
         </div>`;
     }).join('');
 }
@@ -1123,6 +1513,7 @@ function startPriceUpdates(){
                 document.getElementById('chartPrice').textContent=formatPrice(p.a,symData.v);
                 document.getElementById('buyPrice').textContent=formatPrice(p.a,symData.v);
                 document.getElementById('sellPrice').textContent=formatPrice(p.b,symData.v);
+                updateOrderBook(p,symData.v);
             }
             renderOpenTrades();
         }
@@ -1169,6 +1560,7 @@ function initChart(){
 
 function drawChart(){
     const cvs=document.getElementById('tradingCanvas');
+    if(!cvs||cvs.offsetWidth===0||cvs.offsetHeight===0)return;
     const ctx=cvs.getContext('2d');
     const dpr=window.devicePixelRatio||1;
     if(cvs.width!==cvs.offsetWidth*dpr||cvs.height!==cvs.offsetHeight*dpr){
@@ -1250,7 +1642,7 @@ function switchTab(t){
     document.querySelector(`[data-tab="${t}"]`).classList.add('active');
     document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
     document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');
-    if(t==='trading'){drawChart();updateTradePanel();}
+    if(t==='trading'){setTimeout(()=>{initChart();updateTradePanel();},50);}
     if(t==='stats')updateStats();
     if(t==='quotes')renderQuotes();
 }
