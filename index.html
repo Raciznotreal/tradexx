@@ -566,69 +566,75 @@
         .pro-close-all{width:100%;padding:12px;margin-top:12px;background:rgba(255,61,61,0.1);border:1px solid rgba(255,61,61,0.2);border-radius:10px;color:#FF5252;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s ease}
         .pro-close-all:active{background:rgba(255,61,61,0.2)}
         
-        /* Trading Fullscreen */
-        .trading-fullscreen{display:flex;flex-direction:column;height:100%;background:#0a0a0a;padding-top:var(--safe-top)}
-        .tf-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#141414;border-bottom:1px solid rgba(255,255,255,0.05)}
-        .tf-back{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.05);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
-        .tf-back svg{width:20px;height:20px}
-        .tf-pair{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.03)}
-        .tf-tf-selector{display:flex;gap:4px}
-        .tf-tf-btn{padding:6px 10px;border-radius:6px;background:transparent;border:none;color:#666;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
-        .tf-tf-btn.active{background:#00D9FF;color:#000}
+        /* MT5 Chart Layout - Identical to MetaTrader 5 */
+        .mt5-chart-layout{display:flex;flex-direction:column;height:100%;background:#1a1a1a;padding-top:var(--safe-top);overflow:hidden}
         
-        /* Big Price */
-        .tf-price-big{display:flex;flex-direction:column;align-items:center;padding:20px;background:#0a0a0a}
-        .tf-price-main{font-size:48px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-1px}
-        .tf-price-change{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:14px}
-        .tf-price-change .change-arrow{color:#00C853}
-        .tf-price-change .change-value{color:#00C853;font-weight:600}
-        .tf-price-change.down .change-arrow,.tf-price-change.down .change-value{color:#FF3D3D}
+        /* Header */
+        .mt5c-header{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#242424;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .mt5c-back{width:32px;height:32px;border-radius:8px;background:transparent;border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+        .mt5c-back svg{width:20px;height:20px}
+        .mt5c-title{flex:1}
+        .mt5c-pair{font-size:16px;font-weight:700;color:#fff}
+        .mt5c-change{font-size:12px;color:#00C853;margin-top:2px}
+        .mt5c-change.down{color:#FF3D3D}
+        .mt5c-prices{display:flex;align-items:center;gap:8px}
+        .mt5c-sell-box,.mt5c-buy-box{display:flex;flex-direction:column;align-items:center;padding:6px 10px;border-radius:6px;min-width:70px}
+        .mt5c-sell-box{background:rgba(255,61,61,0.15)}
+        .mt5c-buy-box{background:rgba(0,200,83,0.15)}
+        .mt5c-label{font-size:9px;color:#888;text-transform:uppercase;font-weight:600}
+        .mt5c-price{font-size:14px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+        .mt5c-sell-box .mt5c-price{color:#FF5252}
+        .mt5c-buy-box .mt5c-price{color:#00E676}
+        .mt5c-spread{font-size:10px;color:#666;padding:0 4px}
         
-        /* Fullscreen Chart */
-        .tf-chart-full{flex:1;min-height:300px;background:#0f0f0f;position:relative}
-        .tf-chart-full canvas{width:100%;height:100%}
+        /* Timeframes */
+        .mt5c-timeframes{display:flex;gap:2px;padding:8px 12px;background:#1a1a1a;border-bottom:1px solid rgba(255,255,255,0.05);overflow-x:auto;scrollbar-width:none}
+        .mt5c-timeframes::-webkit-scrollbar{display:none}
+        .mt5c-tf{padding:6px 12px;border-radius:4px;background:transparent;border:none;color:#888;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s}
+        .mt5c-tf.active{background:#00D9FF;color:#000}
+        
+        /* Chart Wrap - Fisso, no touch */
+        .mt5c-chart-wrap{flex:1;position:relative;background:#0f0f0f;overflow:hidden;touch-action:none}
+        .mt5c-chart-wrap canvas{width:100%;height:100%;display:block}
+        .mt5c-price-line{position:absolute;right:0;width:100%;height:1px;background:#00D9FF;pointer-events:none;display:flex;align-items:center;justify-content:flex-end}
+        .mt5c-price-line span{background:#00D9FF;color:#000;padding:2px 8px;font-size:11px;font-weight:700;border-radius:4px 0 0 4px}
+        
+        /* Bottom Panel */
+        .mt5c-bottom{max-height:45%;overflow-y:auto;background:#1a1a1a;border-top:1px solid rgba(255,255,255,0.1);padding:12px;scrollbar-width:none}
+        .mt5c-bottom::-webkit-scrollbar{display:none}
         
         /* Order Types */
-        .tf-order-types{display:flex;gap:8px;padding:12px 16px;background:#141414;border-top:1px solid rgba(255,255,255,0.05)}
-        .tf-type-btn{flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#888;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
-        .tf-type-btn.active{background:#00D9FF;border-color:#00D9FF;color:#000}
+        .mt5c-order-types{display:flex;gap:8px;margin-bottom:12px}
+        .mt5c-type{flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#888;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+        .mt5c-type.active{background:#00D9FF;border-color:#00D9FF;color:#000}
         
-        /* Scrollable Controls */
-        .tf-controls-scroll{flex:1;overflow-y:auto;padding:16px;background:#0a0a0a;scrollbar-width:none}
-        .tf-controls-scroll::-webkit-scrollbar{display:none}
-        .tf-control-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-        .tf-control-row label{font-size:12px;color:#888;text-transform:uppercase;font-weight:600}
-        .tf-vol-control{display:flex;align-items:center;gap:8px}
-        .tf-vol-control button{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
-        .tf-vol-control input{width:70px;height:32px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:16px;font-weight:700;text-align:center}
-        .tf-control-row.sltp{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-        .tf-sltp-input{display:flex;flex-direction:column;gap:6px}
-        .tf-sltp-input label{font-size:10px;color:#666}
-        .tf-sltp-input input{height:40px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:14px;text-align:center}
-        .tf-sltp-input span{font-size:10px;color:#666;text-align:center}
+        /* Volume Row */
+        .mt5c-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .mt5c-row span{font-size:13px;color:#aaa}
+        .mt5c-vol{display:flex;align-items:center;gap:8px}
+        .mt5c-vol button{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center}
+        .mt5c-vol input{width:80px;height:36px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:16px;font-weight:700;text-align:center}
         
-        /* Risk Preview */
-        .tf-risk-preview{display:flex;justify-content:space-around;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:16px}
-        .tf-risk-preview div{display:flex;flex-direction:column;align-items:center;gap:4px}
-        .tf-risk-preview .label{font-size:10px;color:#666;text-transform:uppercase}
-        .tf-risk-preview .value{font-size:14px;font-weight:700;color:#fff}
-        .tf-risk-preview .value.loss{color:#FF3D3D}
-        .tf-risk-preview .value.profit{color:#00C853}
+        /* SLTP */
+        .mt5c-sltp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+        .mt5c-input{display:flex;flex-direction:column;gap:4px}
+        .mt5c-input label{font-size:11px;color:#666;text-transform:uppercase}
+        .mt5c-input input{height:40px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:14px;text-align:center}
+        .mt5c-input small{font-size:10px;color:#666;text-align:center}
         
-        /* Big Action Buttons */
-        .tf-action-big{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
-        .tf-sell-side,.tf-buy-side{display:flex;flex-direction:column;align-items:center;gap:8px}
-        .tf-price-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px}
-        .tf-price-value{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
-        .tf-sell-side .tf-price-value{color:#FF3D3D}
-        .tf-buy-side .tf-price-value{color:#00C853}
-        .tf-spread-center{display:flex;flex-direction:column;align-items:center;gap:2px}
-        .tf-spread-val{font-size:14px;font-weight:700;color:#00D9FF}
-        .tf-spread-text{font-size:9px;color:#666;text-transform:uppercase}
-        .tf-btn-sell,.tf-btn-buy{width:100%;padding:16px;border:none;border-radius:12px;font-size:14px;font-weight:800;letter-spacing:0.5px;cursor:pointer;transition:all .15s ease}
-        .tf-btn-sell{background:#FF3D3D;color:#fff}
-        .tf-btn-buy{background:#00C853;color:#fff}
-        .tf-btn-sell:active,.tf-btn-buy:active{transform:scale(0.97)}
+        /* Risk */
+        .mt5c-risk{display:flex;justify-content:space-around;padding:12px;background:rgba(255,255,255,0.03);border-radius:10px;margin-bottom:12px;font-size:12px;color:#888}
+        .mt5c-risk span{font-weight:700;color:#fff}
+        .mt5c-risk .loss{color:#FF5252}
+        .mt5c-risk .profit{color:#00E676}
+        
+        /* Actions */
+        .mt5c-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .mt5c-sell,.mt5c-buy{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px;border:none;border-radius:12px;font-size:16px;font-weight:800;cursor:pointer;transition:all .15s}
+        .mt5c-sell{background:#FF3D3D;color:#fff}
+        .mt5c-buy{background:#00C853;color:#fff}
+        .mt5c-sell:active,.mt5c-buy:active{transform:scale(0.96)}
+        .mt5c-sell small,.mt5c-buy small{font-size:12px;font-weight:600;opacity:0.9}
         
         /* Trading Scroll */
         .trading-scroll-content{flex:1;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -894,95 +900,100 @@
                 </div>
 
                 <div class="tab-panel" id="tabTrading">
-                    <div class="trading-fullscreen">
-                        <!-- Header -->
-                        <div class="tf-header">
-                            <button class="tf-back" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
-                            <div class="tf-pair" onclick="openSymbolSearch()">
-                                <span id="chartSymbol">EURUSD</span>
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="m6 9 6 6 6-6"/></svg>
+                    <div class="mt5-chart-layout">
+                        <!-- Header con prezzi -->
+                        <div class="mt5c-header">
+                            <button class="mt5c-back" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+                            <div class="mt5c-title">
+                                <div class="mt5c-pair" id="chartSymbol">EURUSD</div>
+                                <div class="mt5c-change" id="priceChangeBig">▲ +0.15%</div>
                             </div>
-                            <div class="tf-tf-selector">
-                                <button class="tf-tf-btn active" data-tf="1m">1m</button>
-                                <button class="tf-tf-btn" data-tf="5m">5m</button>
-                                <button class="tf-tf-btn" data-tf="15m">15m</button>
-                                <button class="tf-tf-btn" data-tf="1h">1H</button>
-                            </div>
-                        </div>
-                        
-                        <!-- Big Price Display -->
-                        <div class="tf-price-big">
-                            <div class="tf-price-main" id="chartPriceBig">1.08450</div>
-                            <div class="tf-price-change" id="priceChangeBig">
-                                <span class="change-arrow">▲</span>
-                                <span class="change-value">+0.15%</span>
+                            <div class="mt5c-prices">
+                                <div class="mt5c-sell-box">
+                                    <span class="mt5c-label">SELL</span>
+                                    <span class="mt5c-price" id="sellPriceBig">1.08448</span>
+                                </div>
+                                <div class="mt5c-spread" id="tradeSpread">0.2</div>
+                                <div class="mt5c-buy-box">
+                                    <span class="mt5c-label">BUY</span>
+                                    <span class="mt5c-price" id="buyPriceBig">1.08452</span>
+                                </div>
                             </div>
                         </div>
                         
-                        <!-- Fullscreen Chart -->
-                        <div class="tf-chart-full">
+                        <!-- Timeframe Tabs -->
+                        <div class="mt5c-timeframes">
+                            <button class="mt5c-tf active" data-tf="1m">1m</button>
+                            <button class="mt5c-tf" data-tf="5m">5m</button>
+                            <button class="mt5c-tf" data-tf="15m">15m</button>
+                            <button class="mt5c-tf" data-tf="30m">30m</button>
+                            <button class="mt5c-tf" data-tf="1h">1H</button>
+                            <button class="mt5c-tf" data-tf="4h">4H</button>
+                            <button class="mt5c-tf" data-tf="1d">1D</button>
+                        </div>
+                        
+                        <!-- Chart Container (fisso, no touch) -->
+                        <div class="mt5c-chart-wrap">
                             <canvas id="tradingCanvas"></canvas>
+                            <!-- Price line indicator -->
+                            <div class="mt5c-price-line" id="chartPriceLine">
+                                <span id="chartPriceLabel">1.08450</span>
+                            </div>
                         </div>
                         
-                        <!-- Order Types -->
-                        <div class="tf-order-types">
-                            <button class="tf-type-btn active" data-type="market">Market</button>
-                            <button class="tf-type-btn" data-type="limit">Limit</button>
-                            <button class="tf-type-btn" data-type="stop">Stop</button>
-                        </div>
-                        
-                        <!-- Scrollable Controls -->
-                        <div class="tf-controls-scroll">
+                        <!-- Bottom Panel - Scrollable -->
+                        <div class="mt5c-bottom">
+                            <!-- Order Type Selector -->
+                            <div class="mt5c-order-types">
+                                <button class="mt5c-type active" data-type="market">Market</button>
+                                <button class="mt5c-type" data-type="limit">Limit</button>
+                                <button class="mt5c-type" data-type="stop">Stop</button>
+                            </div>
+                            
                             <!-- Volume -->
-                            <div class="tf-control-row">
-                                <label>Volume</label>
-                                <div class="tf-vol-control">
+                            <div class="mt5c-row">
+                                <span>Volume</span>
+                                <div class="mt5c-vol">
                                     <button onclick="adjustVolume(-0.01)">−</button>
                                     <input type="number" id="tradeLots" value="0.10" step="0.01" onchange="updateTradeCalc()">
                                     <button onclick="adjustVolume(0.01)">+</button>
                                 </div>
                             </div>
                             
-                            <!-- SL/TP -->
-                            <div class="tf-control-row sltp">
-                                <div class="tf-sltp-input">
-                                    <label>SL</label>
+                            <!-- SL TP -->
+                            <div class="mt5c-sltp">
+                                <div class="mt5c-input">
+                                    <label>Stop Loss</label>
                                     <input type="number" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
-                                    <span id="slPips">0 pips</span>
+                                    <small id="slPips">0 pips</small>
                                 </div>
-                                <div class="tf-sltp-input">
-                                    <label>TP</label>
+                                <div class="mt5c-input">
+                                    <label>Take Profit</label>
                                     <input type="number" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
-                                    <span id="tpPips">0 pips</span>
+                                    <small id="tpPips">0 pips</small>
                                 </div>
                             </div>
                             
-                            <!-- Risk Preview -->
-                            <div class="tf-risk-preview">
-                                <div><span class="label">Risk</span><span class="value loss" id="potentialLoss">-€25.00</span></div>
-                                <div><span class="label">R/R</span><span class="value" id="riskReward">1:2.5</span></div>
-                                <div><span class="label">Reward</span><span class="value profit" id="potentialProfit">+€62.50</span></div>
+                            <!-- Risk Summary -->
+                            <div class="mt5c-risk">
+                                <div>Risk: <span class="loss" id="potentialLoss">-€25.00</span></div>
+                                <div>R/R: <span id="riskReward">1:2.5</span></div>
+                                <div>Reward: <span class="profit" id="potentialProfit">+€62.50</span></div>
                             </div>
                             
-                            <!-- Big Action Buttons -->
-                            <div class="tf-action-big">
-                                <div class="tf-sell-side">
-                                    <div class="tf-price-label">SELL</div>
-                                    <div class="tf-price-value" id="sellPriceBig">1.08448</div>
-                                    <button class="tf-btn-sell" onclick="executeTrade('sell')">SELL NOW</button>
-                                </div>
-                                <div class="tf-spread-center">
-                                    <div class="tf-spread-val" id="tradeSpread">0.2</div>
-                                    <div class="tf-spread-text">spread</div>
-                                </div>
-                                <div class="tf-buy-side">
-                                    <div class="tf-price-label">BUY</div>
-                                    <div class="tf-price-value" id="buyPriceBig">1.08452</div>
-                                    <button class="tf-btn-buy" onclick="executeTrade('buy')">BUY NOW</button>
-                                </div>
+                            <!-- Big Buttons -->
+                            <div class="mt5c-actions">
+                                <button class="mt5c-sell" onclick="executeTrade('sell')">
+                                    <span>SELL</span>
+                                    <small id="sellBtnPrice">1.08448</small>
+                                </button>
+                                <button class="mt5c-buy" onclick="executeTrade('buy')">
+                                    <span>BUY</span>
+                                    <small id="buyBtnPrice">1.08452</small>
+                                </button>
                             </div>
                             
-                            <div style="height:100px"></div>
+                            <div style="height:80px"></div>
                         </div>
                     </div>
                 </div>
@@ -1400,19 +1411,20 @@ function setupListeners(){
             drawChart();
         };
     });
-    // Fullscreen trading timeframe buttons
-    document.querySelectorAll('.tf-tf-btn').forEach(b=>{
+    // MT5 Chart timeframe buttons
+    document.querySelectorAll('.mt5c-tf').forEach(b=>{
         b.onclick=()=>{
-            document.querySelectorAll('.tf-tf-btn').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.mt5c-tf').forEach(x=>x.classList.remove('active'));
             b.classList.add('active');
             state.chart.tf=b.dataset.tf;
+            resetChart();
             drawChart();
         };
     });
-    // Order type buttons
-    document.querySelectorAll('.tf-type-btn').forEach(b=>{
+    // MT5 Order type buttons
+    document.querySelectorAll('.mt5c-type').forEach(b=>{
         b.onclick=()=>{
-            document.querySelectorAll('.tf-type-btn').forEach(x=>x.classList.remove('active'));
+            document.querySelectorAll('.mt5c-type').forEach(x=>x.classList.remove('active'));
             b.classList.add('active');
             state.orderType=b.dataset.type;
         };
@@ -1804,65 +1816,33 @@ function updateTradePanel(){
     // Update symbol info
     const chartSymbol=document.getElementById('chartSymbol');
     if(chartSymbol)chartSymbol.textContent=state.currentSymbol;
-    const symbolDesc=document.getElementById('symbolDesc');
-    if(symbolDesc)symbolDesc.textContent=symData.n;
     
-    // Update big prices (new fullscreen trading)
+    // Update MT5 Chart prices
     const buyPriceBig=document.getElementById('buyPriceBig');
     if(buyPriceBig)buyPriceBig.textContent=formatPrice(price.a,symData.v);
     const sellPriceBig=document.getElementById('sellPriceBig');
     if(sellPriceBig)sellPriceBig.textContent=formatPrice(price.b,symData.v);
-    const chartPriceBig=document.getElementById('chartPriceBig');
-    if(chartPriceBig)chartPriceBig.textContent=formatPrice(price.a,symData.v);
+    const buyBtnPrice=document.getElementById('buyBtnPrice');
+    if(buyBtnPrice)buyBtnPrice.textContent=formatPrice(price.a,symData.v);
+    const sellBtnPrice=document.getElementById('sellBtnPrice');
+    if(sellBtnPrice)sellBtnPrice.textContent=formatPrice(price.b,symData.v);
     
     // Update spread
     const tradeSpread=document.getElementById('tradeSpread');
     if(tradeSpread)tradeSpread.textContent=((price.a-price.b)/symData.v).toFixed(state.currentCategory==='forex'?1:2);
     
-    // Update price change animation
+    // Update price change
     const priceChangeBig=document.getElementById('priceChangeBig');
     if(priceChangeBig){
         const change=(Math.random()*0.3-0.15);
         const isUp=change>=0;
-        priceChangeBig.className='tf-price-change '+(isUp?'':'down');
-        priceChangeBig.innerHTML=`<span class="change-arrow">${isUp?'▲':'▼'}</span><span class="change-value">${isUp?'+':''}${change.toFixed(2)}%</span>`;
+        priceChangeBig.className='mt5c-change '+(isUp?'':'down');
+        priceChangeBig.textContent=(isUp?'▲ ':'▼ ')+(isUp?'+':'')+change.toFixed(2)+'%';
     }
     
-    updateSymbolIcon();
     updateTradeCalc();
-    renderOpenTrades();
     
-    // Force chart redraw
-    drawChart();
-}
-
-// Real-time price updater
-function startPriceUpdates(){
-    setInterval(()=>{
-        // Update all symbol prices with small random movements
-        Object.keys(symbols).forEach(cat=>{
-            symbols[cat].forEach(sym=>{
-                if(!state.prices[sym.s])state.prices[sym.s]={b:sym.b,a:sym.a};
-                const move=(Math.random()-0.5)*sym.v*0.001;
-                state.prices[sym.s].b+=move;
-                state.prices[sym.s].a+=move;
-            });
-        });
-        
-        // Update current symbol prices in trading
-        updateTradePanel();
-        
-        // Update wallet prices if visible
-        if(document.getElementById('tabWallet').classList.contains('active')){
-            updateWalletPrices();
-        }
-        
-        // Update quotes if visible
-        if(document.getElementById('tabQuotes').classList.contains('active')){
-            renderQuotes();
-        }
-        
-    },1000);
+    // Chart redrawn by animation loop
 }
 
 function updateWalletPrices(){
@@ -2065,6 +2045,8 @@ function closeTrade(tradeId){
     updateUI();
     saveState();
     renderOpenTrades();
+    renderMT5Positions();
+    renderMT5History();
 }
 
 function simulateTrade(trade){
@@ -2090,6 +2072,9 @@ function simulateTrade(trade){
 }
 
 function startPriceUpdates(){
+    // Start chart animation loop
+    startChartAnimation();
+    
     const update=()=>{
         Object.keys(symbols).forEach(cat=>{
             symbols[cat].forEach(s=>{
@@ -2100,21 +2085,50 @@ function startPriceUpdates(){
                 state.prices[s.s].b=state.prices[s.s].a-(s.a-s.b);
             });
         });
+        
+        // Update Trading Chart panel
         if(document.getElementById('tabTrading').classList.contains('active')){
-            const symData=symbols[state.currentCategory]?.find(s=>s.s===state.currentSymbol);
-            if(symData){
-                const p=state.prices[state.currentSymbol];
-                document.getElementById('chartPrice').textContent=formatPrice(p.a,symData.v);
-                document.getElementById('buyPrice').textContent=formatPrice(p.a,symData.v);
-                document.getElementById('sellPrice').textContent=formatPrice(p.b,symData.v);
-                updateOrderBook(p,symData.v);
-            }
-            renderOpenTrades();
+            updateTradePanel();
+        }
+        
+        // Update Trade tab (positions) - P&L live
+        if(document.getElementById('tabTrade').classList.contains('active')){
+            renderMT5Positions();
+        }
+        
+        // Update Wallet - prices live
+        if(document.getElementById('tabWallet').classList.contains('active')){
+            updateWalletPrices();
+            updateWalletBalance();
+        }
+        
+        // Update Quotes - prices live
+        if(document.getElementById('tabQuotes').classList.contains('active')){
+            renderQuotes();
         }
     };
-    priceInterval=setInterval(update,2000);
+    priceInterval=setInterval(update,1000); // Every 1 second
     marketInterval=setInterval(updateSessions,60000);
-    chartInterval=setInterval(()=>{if(document.getElementById('tabTrading').classList.contains('active')){drawChart();renderOpenTrades();}},5000);
+}
+
+function updateWalletBalance(){
+    const acc=getCurrentAccount();
+    const totalBalance=document.getElementById('totalBalance');
+    if(totalBalance){
+        // Calculate unrealized P&L
+        let unrealizedPnl=0;
+        acc.trades.filter(t=>t.status==='open').forEach(t=>{
+            const symData=Object.values(symbols).flat().find(s=>s.s===t.symbol);
+            const price=state.prices[t.symbol];
+            if(symData&&price){
+                const currentPrice=t.type==='buy'?price.b:price.a;
+                const mult=t.type==='buy'?1:-1;
+                unrealizedPnl+=((currentPrice-t.entry)*100000*t.lots*mult);
+            }
+        });
+        const total=acc.balance+unrealizedPnl;
+        totalBalance.textContent=sym(acc)+formatNumber(total);
+    }
 }
 
 function updateSessions(){
@@ -2138,10 +2152,8 @@ function initChart(){
     const cvs=document.getElementById('tradingCanvas');
     if(!cvs)return;
     drawChart();
+    startChartAnimation();
 }
-
-// Chart data storage
-let chartData={candles:[],currentPrice:0};
 
 function generateCandles(symbol,count=60){
     const symData=symbols[state.currentCategory]?.find(s=>s.s===symbol)||symbols.forex[0];
@@ -2168,103 +2180,197 @@ function generateCandles(symbol,count=60){
     return{candles,currentPrice:midPrice};
 }
 
+// MT5 Style Chart - Auto-scrolling, no pan/zoom
+let chartData={candles:[],currentPrice:0,symbol:null,candleOffset:0};
+let chartAnimFrame=null;
+
 function drawChart(){
     const cvs=document.getElementById('tradingCanvas');
     if(!cvs||cvs.offsetWidth===0||cvs.offsetHeight===0)return;
     const ctx=cvs.getContext('2d');
     const dpr=window.devicePixelRatio||1;
-    const displayW=cvs.offsetWidth;
-    const displayH=cvs.offsetHeight;
-    if(cvs.width!==displayW*dpr||cvs.height!==displayH*dpr){
-        cvs.width=displayW*dpr;
-        cvs.height=displayH*dpr;
+    const W=cvs.offsetWidth;
+    const H=cvs.offsetHeight;
+    
+    if(cvs.width!==W*dpr||cvs.height!==H*dpr){
+        cvs.width=W*dpr;
+        cvs.height=H*dpr;
         ctx.scale(dpr,dpr);
     }
-    ctx.clearRect(0,0,displayW,displayH);
     
     const symData=symbols[state.currentCategory]?.find(s=>s.s===state.currentSymbol)||symbols.forex[0];
+    const price=state.prices[state.currentSymbol]||{b:symData.b,a:symData.a};
+    const midPrice=(price.a+price.b)/2;
     
-    // Generate candles if empty or symbol changed
+    // Generate candles on symbol change
     if(!chartData.candles.length||chartData.symbol!==state.currentSymbol){
-        chartData=generateCandles(state.currentSymbol,50);
+        chartData=generateCandles(state.currentSymbol,80);
         chartData.symbol=state.currentSymbol;
+        chartData.candleOffset=0;
     }
     
     // Update last candle with current price
-    const price=state.prices[state.currentSymbol]||{b:symData.b,a:symData.a};
-    const midPrice=(price.a+price.b)/2;
     const last=chartData.candles[chartData.candles.length-1];
     last.c=midPrice;
-    last.hi=Math.max(last.hi,last.o,last.c)+Math.abs(midPrice-last.c)*0.1;
-    last.lo=Math.min(last.lo,last.o,last.c)-Math.abs(midPrice-last.c)*0.1;
+    last.hi=Math.max(last.hi,midPrice);
+    last.lo=Math.min(last.lo,midPrice);
+    chartData.currentPrice=midPrice;
+    
+    // Clear
+    ctx.fillStyle='#0f0f0f';
+    ctx.fillRect(0,0,W,H);
     
     const candles=chartData.candles;
-    const min=Math.min(...candles.map(c=>c.lo))*0.9995;
-    const max=Math.max(...candles.map(c=>c.hi))*1.0005;
+    const min=Math.min(...candles.slice(-60).map(c=>c.lo))*0.9998;
+    const max=Math.max(...candles.slice(-60).map(c=>c.hi))*1.0002;
     const range=max-min;
-    const padding=50;
-    const chartH=displayH-padding*2;
-    const candleW=(displayW-20)/candles.length;
-    const bodyW=candleW*0.7;
+    const padding=40;
+    const chartH=H-padding*2;
+    const visibleCandles=Math.floor(W/12);
+    const candleW=10;
+    const offset=candles.length>visibleCandles?candles.length-visibleCandles:0;
     
-    // Grid lines
-    ctx.strokeStyle='rgba(255,255,255,0.08)';
+    // Grid orizzontale
+    ctx.strokeStyle='rgba(255,255,255,0.06)';
     ctx.lineWidth=1;
-    for(let i=0;i<=4;i++){
-        const y=padding+(chartH/4)*i;
+    for(let i=0;i<=5;i++){
+        const y=padding+(chartH/5)*i;
         ctx.beginPath();
-        ctx.moveTo(10,y);
-        ctx.lineTo(displayW-10,y);
+        ctx.moveTo(0,y);
+        ctx.lineTo(W,y);
         ctx.stroke();
-        const priceLabel=max-(range/4)*i;
-        ctx.fillStyle='rgba(255,255,255,0.5)';
-        ctx.font='11px system-ui';
-        ctx.textAlign='right';
-        ctx.fillText(formatPrice(priceLabel,symData.v),displayW-12,y+4);
     }
     
-    // Current price line
-    const currentY=padding+((max-midPrice)/range)*chartH;
-    ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent');
-    ctx.lineWidth=1.5;
-    ctx.setLineDash([4,4]);
-    ctx.beginPath();
-    ctx.moveTo(10,currentY);
-    ctx.lineTo(displayW-10,currentY);
-    ctx.stroke();
-    ctx.setLineDash([]);
+    // Grid verticale
+    const startIdx=Math.max(0,candles.length-visibleCandles);
+    for(let i=startIdx;i<candles.length;i+=10){
+        const x=W-((candles.length-i)*candleW)-5;
+        if(x>0){
+            ctx.beginPath();
+            ctx.moveTo(x,0);
+            ctx.lineTo(x,H);
+            ctx.stroke();
+        }
+    }
     
-    // Price label box
-    const labelW=70;
-    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent');
-    ctx.fillRect(displayW-labelW-5,currentY-10,labelW,20);
-    ctx.fillStyle='#000';
-    ctx.font='bold 11px system-ui';
-    ctx.textAlign='center';
-    ctx.fillText(formatPrice(midPrice,symData.v),displayW-labelW/2-5,currentY+4);
+    // Candele visibili (da destra a sinistra)
+    const endIdx=candles.length;
+    const startDraw=Math.max(0,endIdx-visibleCandles);
     
-    // Candles
-    candles.forEach((c,i)=>{
-        const x=10+i*candleW+candleW/2;
+    for(let i=startDraw;i<endIdx;i++){
+        const c=candles[i];
+        const x=W-((endIdx-i)*candleW)-8;
+        if(x<-20)continue;
+        
         const yOpen=padding+((max-c.o)/range)*chartH;
         const yClose=padding+((max-c.c)/range)*chartH;
         const yHigh=padding+((max-c.hi)/range)*chartH;
         const yLow=padding+((max-c.lo)/range)*chartH;
         const isGreen=c.c>=c.o;
-        const color=isGreen?'#00C853':'#FF3D3D';
+        const color=isGreen?'#00E676':'#FF5252';
         
+        // Wick
         ctx.strokeStyle=color;
-        ctx.lineWidth=1.5;
+        ctx.lineWidth=1;
         ctx.beginPath();
         ctx.moveTo(x,yHigh);
         ctx.lineTo(x,yLow);
         ctx.stroke();
         
+        // Body
         ctx.fillStyle=color;
         const bodyTop=Math.min(yOpen,yClose);
-        const bodyHeight=Math.max(Math.abs(yClose-yOpen),2);
-        ctx.fillRect(x-bodyW/2,bodyTop,bodyW,bodyHeight);
+        const bodyHeight=Math.max(Math.abs(yClose-yOpen),1);
+        ctx.fillRect(x-3,bodyTop,6,bodyHeight);
+    }
+    
+    // Prezzo corrente - linea orizzontale
+    const currentY=padding+((max-midPrice)/range)*chartH;
+    ctx.strokeStyle='#00D9FF';
+    ctx.lineWidth=1;
+    ctx.setLineDash([3,3]);
+    ctx.beginPath();
+    ctx.moveTo(0,currentY);
+    ctx.lineTo(W-60,currentY);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    
+    // Label prezzo sul lato destro
+    const priceLabel=document.getElementById('chartPriceLabel');
+    const priceLine=document.getElementById('chartPriceLine');
+    if(priceLabel&&priceLine){
+        priceLabel.textContent=formatPrice(midPrice,symData.v);
+        priceLine.style.top=currentY+'px';
+    }
+    
+    // Disegna posizioni aperte sul chart
+    drawPositionsOnChart(ctx,W,H,padding,chartH,min,max,range,symData);
+}
+
+function drawPositionsOnChart(ctx,W,H,padding,chartH,min,max,range,symData){
+    const acc=getCurrentAccount();
+    const openTrades=acc.trades.filter(t=>t.status==='open'&&t.symbol===state.currentSymbol);
+    
+    openTrades.forEach(t=>{
+        const y=padding+((max-t.entry)/range)*chartH;
+        const isBuy=t.type==='buy';
+        const color=isBuy?'#00E676':'#FF5252';
+        
+        // Linea entry
+        ctx.strokeStyle=color;
+        ctx.lineWidth=1;
+        ctx.setLineDash([5,5]);
+        ctx.beginPath();
+        ctx.moveTo(0,y);
+        ctx.lineTo(W,y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        
+        // Label
+        ctx.fillStyle=color;
+        ctx.font='bold 10px system-ui';
+        ctx.textAlign='left';
+        ctx.fillText((isBuy?'B':'S')+' '+formatPrice(t.entry,symData.v),5,y-3);
+        
+        // SL/TP lines
+        if(t.sl){
+            const slY=padding+((max-t.sl)/range)*chartH;
+            ctx.strokeStyle='#FF5252';
+            ctx.lineWidth=1;
+            ctx.beginPath();
+            ctx.moveTo(0,slY);
+            ctx.lineTo(W,slY);
+            ctx.stroke();
+            ctx.fillStyle='#FF5252';
+            ctx.font='10px system-ui';
+            ctx.fillText('SL',5,slY-3);
+        }
+        if(t.tp){
+            const tpY=padding+((max-t.tp)/range)*chartH;
+            ctx.strokeStyle='#00E676';
+            ctx.lineWidth=1;
+            ctx.beginPath();
+            ctx.moveTo(0,tpY);
+            ctx.lineTo(W,tpY);
+            ctx.stroke();
+            ctx.fillStyle='#00E676';
+            ctx.font='10px system-ui';
+            ctx.fillText('TP',5,tpY-3);
+        }
     });
+}
+
+// Animate chart - auto scroll
+function startChartAnimation(){
+    if(chartAnimFrame)cancelAnimationFrame(chartAnimFrame);
+    
+    function animate(){
+        if(document.getElementById('tabTrading')?.classList.contains('active')){
+            drawChart();
+        }
+        chartAnimFrame=requestAnimationFrame(animate);
+    }
+    animate();
 }
 
 function resetChart(){chartData={candles:[],currentPrice:0,symbol:null};drawChart();}
