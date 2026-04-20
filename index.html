@@ -216,13 +216,16 @@
         .avatar-upload:hover,.avatar-upload:active{background:rgba(255,255,255,0.1);border-color:var(--accent)}
         .profile-preview-large{transition:all .3s ease}
         .profile-preview-large img{width:100%;height:100%;object-fit:cover}
-        .account-card{background:var(--surface-2);border:var(--glass-border);border-radius:20px;padding:20px;margin-bottom:12px;cursor:pointer;transition:all .2s ease}
+        .account-card{background:var(--surface-2);border:var(--glass-border);border-radius:20px;padding:20px;margin-bottom:12px;transition:all .2s ease;position:relative}
         .account-card.active{border-color:var(--accent);background:rgba(var(--accent-rgb),0.1)}
-        .account-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+        .account-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;cursor:pointer}
         .account-type{font-size:12px;padding:4px 10px;border-radius:8px;background:rgba(0,200,83,0.2);color:var(--positive);font-weight:600}
         .account-type.live{background:rgba(255,61,61,0.2);color:var(--negative)}
+        .account-name{color:var(--text)}
+        .account-delete-btn{position:absolute;bottom:16px;right:16px;width:32px;height:32px;border-radius:8px;background:rgba(255,61,61,0.1);border:1px solid rgba(255,61,61,0.3);color:var(--negative);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s ease}
+        .account-delete-btn:hover,.account-delete-btn:active{background:rgba(255,61,61,0.2)}
         .account-balance{font-size:24px;font-weight:800}
-        .account-broker{font-size:13px;color:var(--text-secondary)}
+        .account-broker{font-size:13px;color:var(--text-secondary);margin-bottom:4px}
         .add-account-btn{width:100%;padding:18px;background:transparent;border:2px dashed rgba(255,255,255,0.2);border-radius:16px;color:var(--text);font-size:16px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px}
         
         .analytics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px}
@@ -419,6 +422,30 @@
         .plus500-pos-pnl-value.positive{color:var(--positive)}
         .plus500-pos-pnl-value.negative{color:var(--negative)}
         .plus500-pos-close{width:32px;height:32px;border-radius:8px;background:rgba(255,61,61,0.15);border:none;color:var(--negative);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px}
+        
+        /* Behavior Analysis */
+        .behavior-section{background:var(--surface);backdrop-filter:blur(30px);border:var(--glass-border);border-radius:20px;padding:20px;margin-bottom:24px}
+        .behavior-pattern{text-align:center;margin-bottom:20px;padding:16px;background:var(--surface-2);border-radius:16px;border:var(--glass-border)}
+        .pattern-title{font-size:14px;font-weight:700;color:var(--text-secondary);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+        .pattern-sequence{font-size:28px;letter-spacing:4px;margin-bottom:8px;font-family:system-ui}
+        .pattern-win{color:var(--positive)}
+        .pattern-loss{color:var(--negative)}
+        .pattern-desc{font-size:12px;color:var(--text-secondary)}
+        .behavior-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px}
+        .behavior-item{background:var(--surface-2);border-radius:14px;padding:14px;border:var(--glass-border)}
+        .behavior-label{font-size:11px;color:var(--text-secondary);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+        .behavior-value{font-size:24px;font-weight:800;margin-bottom:6px}
+        .behavior-bar{height:4px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+        .behavior-fill{height:100%;background:var(--positive);border-radius:2px;transition:width .5s ease}
+        .behavior-fill.loss{background:var(--negative)}
+        .behavior-sub{font-size:10px;color:var(--text-secondary);margin-top:4px}
+        .behavior-insights{background:var(--surface-2);border-radius:14px;padding:16px;border:var(--glass-border)}
+        .behavior-insight-item{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:var(--glass-border)}
+        .behavior-insight-item:last-child{border-bottom:none}
+        .behavior-insight-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px}
+        .behavior-insight-text{flex:1}
+        .behavior-insight-title{font-size:13px;font-weight:600}
+        .behavior-insight-desc{font-size:11px;color:var(--text-secondary)}
     </style>
 </head>
 <body>
@@ -466,7 +493,7 @@
                 <span class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .3s" id="prog2"></span>
                 <span class="prog-dot" style="width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.2);transition:all .3s" id="prog3"></span>
             </div>
-            <button class="btn-primary" id="startBtn" disabled>Apri Conto Demo</button>
+            <button class="btn-primary" id="startBtn" disabled>Apri Conto</button>
         </div>
 
         <div id="mainApp">
@@ -508,6 +535,39 @@
                     </div>
                     <div class="section-title"><span>Equity Curve</span></div>
                     <div class="chart-mini" id="equityChart"><svg class="equity-curve" id="equitySvg"></svg></div>
+                    
+                    <div class="section-title"><span>Analisi Comportamentale</span></div>
+                    <div class="behavior-section" id="behaviorSection">
+                        <div class="behavior-pattern" id="behaviorPattern">
+                            <div class="pattern-title">Pattern Trading</div>
+                            <div class="pattern-sequence" id="patternSequence">➖ ➖ ➖ ➖ ➖</div>
+                            <div class="pattern-desc" id="patternDesc">Effettua alcuni trade per vedere il tuo pattern</div>
+                        </div>
+                        <div class="behavior-grid">
+                            <div class="behavior-item">
+                                <div class="behavior-label">Vincite Consecutive</div>
+                                <div class="behavior-value" id="winStreak">0</div>
+                                <div class="behavior-bar"><div class="behavior-fill" id="winStreakBar" style="width:0%"></div></div>
+                            </div>
+                            <div class="behavior-item">
+                                <div class="behavior-label">Perdite Consecutive</div>
+                                <div class="behavior-value" id="lossStreak">0</div>
+                                <div class="behavior-bar"><div class="behavior-fill loss" id="lossStreakBar" style="width:0%"></div></div>
+                            </div>
+                            <div class="behavior-item">
+                                <div class="behavior-label">Disciplina</div>
+                                <div class="behavior-value" id="discipline">--</div>
+                                <div class="behavior-sub" id="disciplineSub">Rapporto pianificati/totali</div>
+                            </div>
+                            <div class="behavior-item">
+                                <div class="behavior-label">Timing</div>
+                                <div class="behavior-value" id="timingScore">--</div>
+                                <div class="behavior-sub" id="timingSub">Precisione entrata</div>
+                            </div>
+                        </div>
+                        <div class="behavior-insights" id="behaviorInsights"></div>
+                    </div>
+                    
                     <div class="section-title"><span>Allocazione Asset</span></div>
                     <div class="performance-list" id="allocationList"></div>
                     <div class="section-title" style="margin-top:24px"><span>Statistiche Dettagliate</span></div>
@@ -715,7 +775,7 @@
                         <div class="settings-section">
                             <div class="settings-section-title">Dati Personali</div>
                             <div class="input-group"><label>Username</label><input type="text" id="usernameInput" value="${state.user.username}" onchange="updateUsername(this.value)" style="text-align:center;font-size:18px;font-weight:700"></div>
-                            <div class="input-group"><label>Email</label><input type="email" value="demo@tradeflow.com" readonly style="opacity:.5;text-align:center"></div>
+                            <div class="input-group"><label>Email</label><input type="email" value="trader@tradeflow.pro" readonly style="opacity:.5;text-align:center"></div>
                         </div>
                     </div>
                     <div class="settings-panel" id="panelTrading">
@@ -734,7 +794,7 @@
                     </div>
                     <div class="settings-panel" id="panelAccounts">
                         <div class="settings-section"><div class="settings-section-title">I tuoi Account</div><div id="accountsList"></div></div>
-                        <button class="add-account-btn" onclick="createNewAccount()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Nuovo Account Demo</button>
+                        <button class="add-account-btn" onclick="createNewAccount()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Nuovo Account</button>
                         <div class="settings-section" style="margin-top:24px"><button class="btn-modal danger" onclick="resetAllData()">Resetta Tutti i Dati</button></div>
                     </div>
                     <div style="height:120px"></div>
@@ -836,7 +896,7 @@ const sessions=[
 
 let state={
     accounts:[
-        {id:1,name:'Account Demo',broker:'icmarkets',type:'demo',currency:'EUR',balance:10000,equity:10000,margin:0,freeMargin:10000,leverage:100,trades:[],assets:[{id:'EUR',amt:5000,val:1},{id:'BTC',amt:0.05,val:85000},{id:'ETH',amt:0.5,val:3250},{id:'XAU',amt:1,val:2845}],active:true,created:Date.now()}
+        {id:1,name:'Account Principale',broker:'icmarkets',type:'standard',currency:'EUR',balance:10000,equity:10000,margin:0,freeMargin:10000,leverage:100,trades:[],assets:[{id:'EUR',amt:5000,val:1},{id:'BTC',amt:0.05,val:85000},{id:'ETH',amt:0.5,val:3250},{id:'XAU',amt:1,val:2845}],active:true,created:Date.now()}
     ],
     currentAccount:1,
     user:{username:'Trader Pro',avatar:'T',theme:'cyan',accent:'#00D9FF',chrome:false,lang:'it'},
@@ -1084,7 +1144,7 @@ function createAccount(){
     state.currentAccount=acc.id;
     document.getElementById('brokerScreen').classList.remove('active');
     document.getElementById('mainApp').style.display='flex';
-    showToast('Conto demo creato con successo!');
+    showToast('Conto creato con successo!');
     updateUI();
     saveState();
 }
@@ -1223,6 +1283,7 @@ function updateStats(){
     document.getElementById('sharpeRatio').textContent=sharpe.toFixed(2);
     renderEquityCurve(acc);
     renderAllocation(acc);
+    renderBehaviorAnalysis(acc);
 }
 
 function calculateSharpe(returns){
@@ -1257,6 +1318,91 @@ function renderAllocation(acc){
             <div class="performance-value">${pct.toFixed(1)}%</div>
         </div>`;
     }).join('');
+}
+
+function renderBehaviorAnalysis(acc){
+    const closed=acc.trades.filter(t=>t.status==='closed');
+    if(closed.length===0){
+        document.getElementById('patternSequence').innerHTML='➖ ➖ ➖ ➖ ➖';
+        document.getElementById('patternDesc').textContent='Effettua alcuni trade per vedere il tuo pattern';
+        return;
+    }
+    
+    // Calculate streaks
+    let maxWinStreak=0,maxLossStreak=0,currentWinStreak=0,currentLossStreak=0;
+    closed.forEach(t=>{
+        if(t.pnl>0){
+            currentWinStreak++;
+            currentLossStreak=0;
+            maxWinStreak=Math.max(maxWinStreak,currentWinStreak);
+        }else{
+            currentLossStreak++;
+            currentWinStreak=0;
+            maxLossStreak=Math.max(maxLossStreak,currentLossStreak);
+        }
+    });
+    
+    document.getElementById('winStreak').textContent=maxWinStreak;
+    document.getElementById('winStreakBar').style.width=Math.min(maxWinStreak*20,100)+'%';
+    document.getElementById('lossStreak').textContent=maxLossStreak;
+    document.getElementById('lossStreakBar').style.width=Math.min(maxLossStreak*20,100)+'%';
+    
+    // Pattern sequence (last 5 trades)
+    const last5=closed.slice(-5);
+    const patternHtml=last5.map(t=>{
+        if(t.pnl>0)return'<span class="pattern-win">▲</span>';
+        return'<span class="pattern-loss">▼</span>';
+    }).join(' ');
+    document.getElementById('patternSequence').innerHTML=patternHtml||'➖ ➖ ➖ ➖ ➖';
+    
+    // Calculate discipline score (trades with SL/TP)
+    const plannedTrades=closed.filter(t=>t.sl>0||t.tp>0).length;
+    const discipline=closed.length>0?Math.round((plannedTrades/closed.length)*100):0;
+    let disciplineLabel='Bassa';
+    if(discipline>80)disciplineLabel='Eccellente';
+    else if(discipline>60)disciplineLabel='Buona';
+    else if(discipline>40)disciplineLabel='Media';
+    document.getElementById('discipline').textContent=disciplineLabel;
+    document.getElementById('disciplineSub').textContent=`${plannedTrades}/${closed.length} trade pianificati`;
+    
+    // Calculate timing score (average distance from high/low)
+    const avgPnl=closed.reduce((s,t)=>s+t.pnl,0)/closed.length;
+    let timingScore='Neutrale';
+    if(avgPnl>50)timingScore='Ottimo';
+    else if(avgPnl>20)timingScore='Buono';
+    else if(avgPnl<-20)timingScore='Migliorabile';
+    else if(avgPnl<-50)timingScore='Pessimo';
+    document.getElementById('timingScore').textContent=timingScore;
+    document.getElementById('timingSub').textContent=`P&L medio: ${avgPnl>=0?'+':''}${sym(acc)}${formatNumber(Math.abs(avgPnl))}`;
+    
+    // Generate insights
+    const insights=[];
+    if(maxWinStreak>=3)insights.push({icon:'🔥',title:'Hot Streak!',desc:`Hai vinto ${maxWinStreak} trade consecutivi`,color:'var(--positive)'});
+    if(maxLossStreak>=3)insights.push({icon:'⚠️',title:'Attenzione',desc:`Hai perso ${maxLossStreak} trade consecutivi - fai una pausa`,color:'var(--negative)'});
+    if(discipline<50)insights.push({icon:'📝',title:'Manca Disciplina',desc:'Usa sempre Stop Loss e Take Profit',color:'#FFB800'});
+    if(avgPnl>100)insights.push({icon:'🎯',title:'Timing Perfetto',desc:'Entri ottimamente nel mercato',color:'var(--positive)'});
+    if(closed.length>=5&&maxLossStreak===0)insights.push({icon:'💎',title:'Trader Disciplinato',desc:'Nessuna serie di perdite significativa',color:'var(--accent)'});
+    if(insights.length===0)insights.push({icon:'📊',title:'Continua Così',desc:'Accumula più dati per analisi dettagliata',color:'var(--text-secondary)'});
+    
+    document.getElementById('behaviorInsights').innerHTML=insights.map(i=>`
+        <div class="behavior-insight-item">
+            <div class="behavior-insight-icon" style="background:${i.color}20;color:${i.color}">${i.icon}</div>
+            <div class="behavior-insight-text">
+                <div class="behavior-insight-title">${i.title}</div>
+                <div class="behavior-insight-desc">${i.desc}</div>
+            </div>
+        </div>
+    `).join('');
+    
+    // Pattern description
+    const wins=closed.filter(t=>t.pnl>0).length;
+    const losses=closed.length-wins;
+    let patternDesc=`${wins} vincite, ${losses} perdite. `;
+    if(wins>losses*2)patternDesc+='Dominante al rialzo 📈';
+    else if(losses>wins*2)patternDesc+='Fase difficile, attenzione 📉';
+    else if(maxWinStreak>maxLossStreak)patternDesc+='Recuperi veloci dopo perdite 💪';
+    else patternDesc+='Trading bilanciato ⚖️';
+    document.getElementById('patternDesc').textContent=patternDesc;
 }
 
 function updateTradePanel(){
@@ -1542,20 +1688,36 @@ function updateSessions(){
 
 function initChart(){
     const cvs=document.getElementById('tradingCanvas');
-    const dpr=window.devicePixelRatio||1;
-    cvs.width=cvs.offsetWidth*dpr;
-    cvs.height=cvs.offsetHeight*dpr;
-    const ctx=cvs.getContext('2d');
-    let drag=false,lastX=0;
-    cvs.onmousedown=e=>{drag=true;lastX=e.clientX;};
-    cvs.onmousemove=e=>{if(drag){state.chart.offsetX+=e.clientX-lastX;lastX=e.clientX;drawChart();}};
-    cvs.onmouseup=()=>drag=false;
-    cvs.onmouseleave=()=>drag=false;
-    cvs.ontouchstart=e=>{if(e.touches.length===1){drag=true;lastX=e.touches[0].clientX;}};
-    cvs.ontouchmove=e=>{if(drag&&e.touches.length===1){state.chart.offsetX+=e.touches[0].clientX-lastX;lastX=e.touches[0].clientX;drawChart();}};
-    cvs.ontouchend=()=>drag=false;
-    cvs.onwheel=e=>{e.preventDefault();state.chart.scale*=e.deltaY>0?0.9:1.1;state.chart.scale=Math.max(0.5,Math.min(3,state.chart.scale));drawChart();};
+    if(!cvs)return;
     drawChart();
+}
+
+// Chart data storage
+let chartData={candles:[],currentPrice:0};
+
+function generateCandles(symbol,count=60){
+    const symData=symbols[state.currentCategory]?.find(s=>s.s===symbol)||symbols.forex[0];
+    const price=state.prices[symbol]||{b:symData.b,a:symData.a};
+    const midPrice=(price.a+price.b)/2;
+    const volatility=symData.v===1?0.002:symData.v===100?0.002:0.0002;
+    const candles=[];
+    let p=midPrice*(1-(count*volatility*0.1));
+    for(let i=0;i<count;i++){
+        const trend=Math.sin(i/10)*0.3+Math.sin(i/5)*0.2;
+        const noise=(Math.random()-0.5)*volatility;
+        const o=p;
+        const c=o*(1+trend*volatility+noise);
+        const body=Math.abs(c-o);
+        const wick=body*(0.3+Math.random()*0.5);
+        const hi=Math.max(o,c)+wick;
+        const lo=Math.min(o,c)-wick;
+        candles.push({o,c,hi,lo,i});
+        p=c;
+    }
+    candles[candles.length-1].c=midPrice;
+    candles[candles.length-1].hi=Math.max(candles[candles.length-1].hi,midPrice*1.0001);
+    candles[candles.length-1].lo=Math.min(candles[candles.length-1].lo,midPrice*0.9999);
+    return{candles,currentPrice:midPrice};
 }
 
 function drawChart(){
@@ -1563,73 +1725,101 @@ function drawChart(){
     if(!cvs||cvs.offsetWidth===0||cvs.offsetHeight===0)return;
     const ctx=cvs.getContext('2d');
     const dpr=window.devicePixelRatio||1;
-    if(cvs.width!==cvs.offsetWidth*dpr||cvs.height!==cvs.offsetHeight*dpr){
-        cvs.width=cvs.offsetWidth*dpr;
-        cvs.height=cvs.offsetHeight*dpr;
+    const displayW=cvs.offsetWidth;
+    const displayH=cvs.offsetHeight;
+    if(cvs.width!==displayW*dpr||cvs.height!==displayH*dpr){
+        cvs.width=displayW*dpr;
+        cvs.height=displayH*dpr;
+        ctx.scale(dpr,dpr);
     }
-    const w=cvs.width,h=cvs.height;
-    ctx.clearRect(0,0,w,h);
+    ctx.clearRect(0,0,displayW,displayH);
+    
     const symData=symbols[state.currentCategory]?.find(s=>s.s===state.currentSymbol)||symbols.forex[0];
-    const currentPrice=state.prices[state.currentSymbol]||{b:symData.b,a:symData.a};
-    const midPrice=(currentPrice.a+currentPrice.b)/2;
-    const candles=[];
-    let price=midPrice;
-    const volatility=symData.v===1?50:symData.v===100?0.5:0.0005;
-    const count=Math.floor(60*state.chart.scale);
-    for(let i=0;i<count;i++){
-        const o=price;
-        const c=o*(1+(Math.random()-0.5)*volatility);
-        const hi=Math.max(o,c)+Math.random()*Math.abs(c-o)*0.3;
-        const lo=Math.min(o,c)-Math.random()*Math.abs(c-o)*0.3;
-        candles.unshift({o,c,hi,lo});
-        price=c;
+    
+    // Generate candles if empty or symbol changed
+    if(!chartData.candles.length||chartData.symbol!==state.currentSymbol){
+        chartData=generateCandles(state.currentSymbol,50);
+        chartData.symbol=state.currentSymbol;
     }
-    const min=Math.min(...candles.map(c=>c.lo))*0.998;
-    const max=Math.max(...candles.map(c=>c.hi))*1.002;
+    
+    // Update last candle with current price
+    const price=state.prices[state.currentSymbol]||{b:symData.b,a:symData.a};
+    const midPrice=(price.a+price.b)/2;
+    const last=chartData.candles[chartData.candles.length-1];
+    last.c=midPrice;
+    last.hi=Math.max(last.hi,last.o,last.c)+Math.abs(midPrice-last.c)*0.1;
+    last.lo=Math.min(last.lo,last.o,last.c)-Math.abs(midPrice-last.c)*0.1;
+    
+    const candles=chartData.candles;
+    const min=Math.min(...candles.map(c=>c.lo))*0.9995;
+    const max=Math.max(...candles.map(c=>c.hi))*1.0005;
     const range=max-min;
-    const padding=40;
-    const chartH=h-padding*2;
-    const cw=(w/candles.length)*0.6;
-    ctx.strokeStyle='rgba(255,255,255,0.05)';
+    const padding=50;
+    const chartH=displayH-padding*2;
+    const candleW=(displayW-20)/candles.length;
+    const bodyW=candleW*0.7;
+    
+    // Grid lines
+    ctx.strokeStyle='rgba(255,255,255,0.08)';
     ctx.lineWidth=1;
-    for(let i=0;i<=5;i++){
-        const y=padding+(chartH/5)*i;
-        ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
-        const priceLabel=max-(range/5)*i;
-        ctx.fillStyle='rgba(255,255,255,0.3)';
+    for(let i=0;i<=4;i++){
+        const y=padding+(chartH/4)*i;
+        ctx.beginPath();
+        ctx.moveTo(10,y);
+        ctx.lineTo(displayW-10,y);
+        ctx.stroke();
+        const priceLabel=max-(range/4)*i;
+        ctx.fillStyle='rgba(255,255,255,0.5)';
         ctx.font='11px system-ui';
-        ctx.textAlign='left';
-        ctx.fillText(formatPrice(priceLabel,symData.v),8,y-4);
+        ctx.textAlign='right';
+        ctx.fillText(formatPrice(priceLabel,symData.v),displayW-12,y+4);
     }
-    const lastCandle=candles[candles.length-1];
-    const currentY=h-padding-((midPrice-min)/range)*chartH;
+    
+    // Current price line
+    const currentY=padding+((max-midPrice)/range)*chartH;
     ctx.strokeStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent');
-    ctx.lineWidth=1;
-    ctx.setLineDash([5,5]);
-    ctx.beginPath();ctx.moveTo(0,currentY);ctx.lineTo(w,currentY);ctx.stroke();
+    ctx.lineWidth=1.5;
+    ctx.setLineDash([4,4]);
+    ctx.beginPath();
+    ctx.moveTo(10,currentY);
+    ctx.lineTo(displayW-10,currentY);
+    ctx.stroke();
     ctx.setLineDash([]);
+    
+    // Price label box
+    const labelW=70;
     ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue('--accent');
-    ctx.font='bold 12px system-ui';
-    ctx.textAlign='right';
-    ctx.fillText(formatPrice(midPrice,symData.v),w-8,currentY-6);
+    ctx.fillRect(displayW-labelW-5,currentY-10,labelW,20);
+    ctx.fillStyle='#000';
+    ctx.font='bold 11px system-ui';
+    ctx.textAlign='center';
+    ctx.fillText(formatPrice(midPrice,symData.v),displayW-labelW/2-5,currentY+4);
+    
+    // Candles
     candles.forEach((c,i)=>{
-        const x=i*(w/candles.length)+state.chart.offsetX;
-        if(x<-cw||x>w)return;
-        const yo=h-padding-((c.o-min)/range)*chartH;
-        const yc=h-padding-((c.c-min)/range)*chartH;
-        const yh=h-padding-((c.hi-min)/range)*chartH;
-        const yl=h-padding-((c.lo-min)/range)*chartH;
-        const isGreen=c.c>c.o;
-        const color=isGreen?getComputedStyle(document.documentElement).getPropertyValue('--positive'):getComputedStyle(document.documentElement).getPropertyValue('--negative');
+        const x=10+i*candleW+candleW/2;
+        const yOpen=padding+((max-c.o)/range)*chartH;
+        const yClose=padding+((max-c.c)/range)*chartH;
+        const yHigh=padding+((max-c.hi)/range)*chartH;
+        const yLow=padding+((max-c.lo)/range)*chartH;
+        const isGreen=c.c>=c.o;
+        const color=isGreen?'#00C853':'#FF3D3D';
+        
         ctx.strokeStyle=color;
+        ctx.lineWidth=1.5;
+        ctx.beginPath();
+        ctx.moveTo(x,yHigh);
+        ctx.lineTo(x,yLow);
+        ctx.stroke();
+        
         ctx.fillStyle=color;
-        ctx.lineWidth=1;
-        ctx.beginPath();ctx.moveTo(x+cw/2,yh);ctx.lineTo(x+cw/2,yl);ctx.stroke();
-        ctx.fillRect(x,Math.min(yo,yc),cw,Math.max(Math.abs(yc-yo),1));
+        const bodyTop=Math.min(yOpen,yClose);
+        const bodyHeight=Math.max(Math.abs(yClose-yOpen),2);
+        ctx.fillRect(x-bodyW/2,bodyTop,bodyW,bodyHeight);
     });
 }
 
-function resetChart(){state.chart.offsetX=0;state.chart.scale=1;drawChart();}
+function resetChart(){chartData={candles:[],currentPrice:0,symbol:null};drawChart();}
 
 function toggleObjectsMenu(e){e.stopPropagation();document.getElementById('objectsMenu').classList.toggle('active');}
 
@@ -1723,11 +1913,27 @@ function setLeverage(l){getCurrentAccount().leverage=parseInt(l);saveState();}
 function setDefaultLots(l){state.settings.defaultLots=parseFloat(l);saveState();}
 
 function createNewAccount(){
-    const acc={id:Date.now(),name:'Account Demo '+(state.accounts.length+1),broker:'icmarkets',type:'demo',currency:'EUR',balance:10000,equity:10000,margin:0,freeMargin:10000,leverage:100,trades:[],assets:[{id:'EUR',amt:6000,val:1},{id:'BTC',amt:0.04,val:85000},{id:'ETH',amt:0.4,val:3250}],active:false,created:Date.now()};
+    const acc={id:Date.now(),name:'Account '+(state.accounts.length+1),broker:'icmarkets',type:'standard',currency:'EUR',balance:10000,equity:10000,margin:0,freeMargin:10000,leverage:100,trades:[],assets:[{id:'EUR',amt:6000,val:1},{id:'BTC',amt:0.04,val:85000},{id:'ETH',amt:0.4,val:3250}],active:false,created:Date.now()};
     state.accounts.push(acc);
     renderAccounts();
     saveState();
     showToast('Nuovo account creato');
+}
+
+function deleteAccount(accId){
+    if(state.accounts.length<=1){showToast('Devi avere almeno un account');return;}
+    const acc=state.accounts.find(a=>a.id===accId);
+    if(!acc)return;
+    if(!confirm(`Eliminare "${acc.name}" con saldo ${acc.currency==='EUR'?'€':acc.currency==='USD'?'$':acc.currency}${formatNumber(acc.balance)}?`))return;
+    state.accounts=state.accounts.filter(a=>a.id!==accId);
+    if(acc.active&&state.accounts.length>0){
+        state.accounts[0].active=true;
+        state.currentAccount=state.accounts[0].id;
+    }
+    renderAccounts();
+    updateUI();
+    saveState();
+    showToast('Account eliminato');
 }
 
 function switchAccount(id){
@@ -1744,13 +1950,14 @@ function renderAccounts(){
     const list=document.getElementById('accountsList');
     const acc=getCurrentAccount();
     list.innerHTML=state.accounts.map(a=>`
-        <div class="account-card ${a.active?'active':''}" onclick="switchAccount(${a.id})">
-            <div class="account-header">
-                <span class="account-type ${a.type}">${a.type.toUpperCase()}</span>
-                ${a.active?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg>':''}
+        <div class="account-card ${a.active?'active':''}">
+            <div class="account-header" onclick="switchAccount(${a.id})">
+                <span class="account-name" style="font-weight:700;font-size:15px">${a.name}</span>
+                ${a.active?'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg>':'<span style="width:20px"></span>'}
             </div>
-            <div class="account-balance">${a.currency==='EUR'?'€':a.currency==='USD'?'$':a.currency}${formatNumber(a.balance)}</div>
-            <div class="account-broker">${brokers.find(b=>b.id===a.broker)?.name||a.broker}</div>
+            <div class="account-balance" onclick="switchAccount(${a.id})" style="cursor:pointer">${a.currency==='EUR'?'€':a.currency==='USD'?'$':a.currency}${formatNumber(a.balance)}</div>
+            <div class="account-broker" onclick="switchAccount(${a.id})" style="cursor:pointer">${brokers.find(b=>b.id===a.broker)?.name||a.broker}</div>
+            ${!a.active?`<button class="account-delete-btn" onclick="event.stopPropagation();deleteAccount(${a.id})" title="Elimina account"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></button>`:''}
         </div>
     `).join('');
     document.getElementById('accountsModalBody').innerHTML=list.innerHTML;
