@@ -566,6 +566,70 @@
         .pro-close-all{width:100%;padding:12px;margin-top:12px;background:rgba(255,61,61,0.1);border:1px solid rgba(255,61,61,0.2);border-radius:10px;color:#FF5252;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s ease}
         .pro-close-all:active{background:rgba(255,61,61,0.2)}
         
+        /* Trading Fullscreen */
+        .trading-fullscreen{display:flex;flex-direction:column;height:100%;background:#0a0a0a;padding-top:var(--safe-top)}
+        .tf-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#141414;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .tf-back{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.05);border:none;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+        .tf-back svg{width:20px;height:20px}
+        .tf-pair{display:flex;align-items:center;gap:6px;font-size:16px;font-weight:700;color:#fff;cursor:pointer;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,0.03)}
+        .tf-tf-selector{display:flex;gap:4px}
+        .tf-tf-btn{padding:6px 10px;border-radius:6px;background:transparent;border:none;color:#666;font-size:12px;font-weight:600;cursor:pointer;transition:all .2s}
+        .tf-tf-btn.active{background:#00D9FF;color:#000}
+        
+        /* Big Price */
+        .tf-price-big{display:flex;flex-direction:column;align-items:center;padding:20px;background:#0a0a0a}
+        .tf-price-main{font-size:48px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-1px}
+        .tf-price-change{display:flex;align-items:center;gap:6px;margin-top:4px;font-size:14px}
+        .tf-price-change .change-arrow{color:#00C853}
+        .tf-price-change .change-value{color:#00C853;font-weight:600}
+        .tf-price-change.down .change-arrow,.tf-price-change.down .change-value{color:#FF3D3D}
+        
+        /* Fullscreen Chart */
+        .tf-chart-full{flex:1;min-height:300px;background:#0f0f0f;position:relative}
+        .tf-chart-full canvas{width:100%;height:100%}
+        
+        /* Order Types */
+        .tf-order-types{display:flex;gap:8px;padding:12px 16px;background:#141414;border-top:1px solid rgba(255,255,255,0.05)}
+        .tf-type-btn{flex:1;padding:10px;border-radius:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#888;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s}
+        .tf-type-btn.active{background:#00D9FF;border-color:#00D9FF;color:#000}
+        
+        /* Scrollable Controls */
+        .tf-controls-scroll{flex:1;overflow-y:auto;padding:16px;background:#0a0a0a;scrollbar-width:none}
+        .tf-controls-scroll::-webkit-scrollbar{display:none}
+        .tf-control-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+        .tf-control-row label{font-size:12px;color:#888;text-transform:uppercase;font-weight:600}
+        .tf-vol-control{display:flex;align-items:center;gap:8px}
+        .tf-vol-control button{width:32px;height:32px;border-radius:8px;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:16px;font-weight:700;cursor:pointer}
+        .tf-vol-control input{width:70px;height:32px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:16px;font-weight:700;text-align:center}
+        .tf-control-row.sltp{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .tf-sltp-input{display:flex;flex-direction:column;gap:6px}
+        .tf-sltp-input label{font-size:10px;color:#666}
+        .tf-sltp-input input{height:40px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;color:#fff;font-size:14px;text-align:center}
+        .tf-sltp-input span{font-size:10px;color:#666;text-align:center}
+        
+        /* Risk Preview */
+        .tf-risk-preview{display:flex;justify-content:space-around;padding:16px;background:rgba(255,255,255,0.03);border-radius:12px;margin-bottom:16px}
+        .tf-risk-preview div{display:flex;flex-direction:column;align-items:center;gap:4px}
+        .tf-risk-preview .label{font-size:10px;color:#666;text-transform:uppercase}
+        .tf-risk-preview .value{font-size:14px;font-weight:700;color:#fff}
+        .tf-risk-preview .value.loss{color:#FF3D3D}
+        .tf-risk-preview .value.profit{color:#00C853}
+        
+        /* Big Action Buttons */
+        .tf-action-big{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+        .tf-sell-side,.tf-buy-side{display:flex;flex-direction:column;align-items:center;gap:8px}
+        .tf-price-label{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:1px}
+        .tf-price-value{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+        .tf-sell-side .tf-price-value{color:#FF3D3D}
+        .tf-buy-side .tf-price-value{color:#00C853}
+        .tf-spread-center{display:flex;flex-direction:column;align-items:center;gap:2px}
+        .tf-spread-val{font-size:14px;font-weight:700;color:#00D9FF}
+        .tf-spread-text{font-size:9px;color:#666;text-transform:uppercase}
+        .tf-btn-sell,.tf-btn-buy{width:100%;padding:16px;border:none;border-radius:12px;font-size:14px;font-weight:800;letter-spacing:0.5px;cursor:pointer;transition:all .15s ease}
+        .tf-btn-sell{background:#FF3D3D;color:#fff}
+        .tf-btn-buy{background:#00C853;color:#fff}
+        .tf-btn-sell:active,.tf-btn-buy:active{transform:scale(0.97)}
+        
         /* Trading Scroll */
         .trading-scroll-content{flex:1;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
         .trading-scroll-content::-webkit-scrollbar{display:none}
@@ -830,135 +894,95 @@
                 </div>
 
                 <div class="tab-panel" id="tabTrading">
-                    <div class="trading-pro-layout">
-                        <!-- Scrollable Content -->
-                        <div class="trading-scroll-content">
-                            <!-- Top Toolbar -->
-                            <div class="pro-toolbar">
-                                <button class="pro-toolbar-btn" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg></button>
-                                <div class="pro-symbol-center" onclick="openSymbolSearch()">
-                                    <span class="pro-symbol-pair" id="chartSymbol">EURUSD</span>
-                                    <span class="pro-symbol-desc" id="symbolDesc">Euro / US Dollar</span>
-                                </div>
-                                <button class="pro-toolbar-btn" onclick="toggleObjectsMenu(event)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4"/></svg></button>
+                    <div class="trading-fullscreen">
+                        <!-- Header -->
+                        <div class="tf-header">
+                            <button class="tf-back" onclick="switchTab('quotes')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+                            <div class="tf-pair" onclick="openSymbolSearch()">
+                                <span id="chartSymbol">EURUSD</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"><path d="m6 9 6 6 6-6"/></svg>
                             </div>
-
-                            <!-- Timeframe Bar -->
-                            <div class="pro-timeframe-scroll">
-                                <div class="pro-timeframe-bar">
-                                    <button class="pro-tf-btn" data-tf="1m">1m</button>
-                                    <button class="pro-tf-btn" data-tf="5m">5m</button>
-                                    <button class="pro-tf-btn active" data-tf="15m">15m</button>
-                                    <button class="pro-tf-btn" data-tf="30m">30m</button>
-                                    <button class="pro-tf-btn" data-tf="1h">1H</button>
-                                    <button class="pro-tf-btn" data-tf="4h">4H</button>
-                                    <button class="pro-tf-btn" data-tf="1d">1D</button>
-                                    <button class="pro-tf-btn" data-tf="1w">1W</button>
-                                </div>
+                            <div class="tf-tf-selector">
+                                <button class="tf-tf-btn active" data-tf="1m">1m</button>
+                                <button class="tf-tf-btn" data-tf="5m">5m</button>
+                                <button class="tf-tf-btn" data-tf="15m">15m</button>
+                                <button class="tf-tf-btn" data-tf="1h">1H</button>
                             </div>
-
-                            <!-- Main Chart Area -->
-                            <div class="pro-chart-wrapper">
-                                <div class="pro-chart-container">
-                                    <canvas id="tradingCanvas"></canvas>
-                                    <div class="chart-objects-menu" id="objectsMenu">
-                                        <button class="chart-object-btn" onclick="addObject('trendline')">📈 Trend Line</button>
-                                        <button class="chart-object-btn" onclick="addObject('horizontal')">➖ Horizontal</button>
-                                        <button class="chart-object-btn" onclick="addObject('fibonacci')">🌀 Fibonacci</button>
-                                        <button class="chart-object-btn" onclick="addObject('support')">🎯 S/R Level</button>
-                                    </div>
-                                </div>
+                        </div>
+                        
+                        <!-- Big Price Display -->
+                        <div class="tf-price-big">
+                            <div class="tf-price-main" id="chartPriceBig">1.08450</div>
+                            <div class="tf-price-change" id="priceChangeBig">
+                                <span class="change-arrow">▲</span>
+                                <span class="change-value">+0.15%</span>
                             </div>
-
-                            <!-- Price Ticker -->
-                            <div class="pro-price-ticker">
-                                <div class="pro-ticker-sell" onclick="executeTrade('sell')">
-                                    <div class="pro-ticker-label">SELL</div>
-                                    <div class="pro-ticker-price" id="sellPrice">1.08448</div>
-                                    <div class="pro-ticker-spread">Bid</div>
-                                </div>
-                                <div class="pro-ticker-spread-mid">
-                                    <div class="pro-spread-value" id="tradeSpread">0.2</div>
-                                    <div class="pro-spread-label">spread</div>
-                                </div>
-                                <div class="pro-ticker-buy" onclick="executeTrade('buy')">
-                                    <div class="pro-ticker-label">BUY</div>
-                                    <div class="pro-ticker-price" id="buyPrice">1.08452</div>
-                                    <div class="pro-ticker-spread">Ask</div>
+                        </div>
+                        
+                        <!-- Fullscreen Chart -->
+                        <div class="tf-chart-full">
+                            <canvas id="tradingCanvas"></canvas>
+                        </div>
+                        
+                        <!-- Order Types -->
+                        <div class="tf-order-types">
+                            <button class="tf-type-btn active" data-type="market">Market</button>
+                            <button class="tf-type-btn" data-type="limit">Limit</button>
+                            <button class="tf-type-btn" data-type="stop">Stop</button>
+                        </div>
+                        
+                        <!-- Scrollable Controls -->
+                        <div class="tf-controls-scroll">
+                            <!-- Volume -->
+                            <div class="tf-control-row">
+                                <label>Volume</label>
+                                <div class="tf-vol-control">
+                                    <button onclick="adjustVolume(-0.01)">−</button>
+                                    <input type="number" id="tradeLots" value="0.10" step="0.01" onchange="updateTradeCalc()">
+                                    <button onclick="adjustVolume(0.01)">+</button>
                                 </div>
                             </div>
-
-                            <!-- Order Panel -->
-                            <div class="pro-order-panel">
-                                <!-- Volume Row -->
-                                <div class="pro-order-row">
-                                    <label class="pro-order-label">Volume</label>
-                                    <div class="pro-volume-control">
-                                        <button class="pro-vol-minus" onclick="adjustVolume(-0.01)">−</button>
-                                        <input type="number" class="pro-vol-input" id="tradeLots" value="0.10" step="0.01" min="0.01" onchange="updateTradeCalc()">
-                                        <button class="pro-vol-plus" onclick="adjustVolume(0.01)">+</button>
-                                    </div>
-                                    <div class="pro-vol-presets">
-                                        <button class="pro-vol-pill" onclick="setQuickLot(0.01)">0.01</button>
-                                        <button class="pro-vol-pill" onclick="setQuickLot(0.10)">0.1</button>
-                                        <button class="pro-vol-pill" onclick="setQuickLot(1.00)">1.0</button>
-                                    </div>
+                            
+                            <!-- SL/TP -->
+                            <div class="tf-control-row sltp">
+                                <div class="tf-sltp-input">
+                                    <label>SL</label>
+                                    <input type="number" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
+                                    <span id="slPips">0 pips</span>
                                 </div>
-
-                                <!-- SL/TP Row -->
-                                <div class="pro-order-row sltp-row">
-                                    <div class="pro-sltp-group">
-                                        <label class="pro-order-label">Stop Loss</label>
-                                        <div class="pro-sltp-input">
-                                            <input type="number" id="tradeSL" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
-                                            <span class="pro-pips-tag" id="slPips">0 pips</span>
-                                        </div>
-                                    </div>
-                                    <div class="pro-sltp-group">
-                                        <label class="pro-order-label">Take Profit</label>
-                                        <div class="pro-sltp-input">
-                                            <input type="number" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
-                                            <span class="pro-pips-tag" id="tpPips">0 pips</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Risk Summary -->
-                                <div class="pro-risk-bar">
-                                    <div class="pro-risk-item">
-                                        <span class="pro-risk-label">Rischio</span>
-                                        <span class="pro-risk-value loss" id="potentialLoss">-€25.00</span>
-                                    </div>
-                                    <div class="pro-risk-divider">|</div>
-                                    <div class="pro-risk-item">
-                                        <span class="pro-risk-label">R/R</span>
-                                        <span class="pro-risk-value" id="riskReward">1:2.5</span>
-                                    </div>
-                                    <div class="pro-risk-divider">|</div>
-                                    <div class="pro-risk-item">
-                                        <span class="pro-risk-label">Profitto</span>
-                                        <span class="pro-risk-value profit" id="potentialProfit">+€62.50</span>
-                                    </div>
+                                <div class="tf-sltp-input">
+                                    <label>TP</label>
+                                    <input type="number" id="tradeTP" placeholder="0.00000" step="0.00001" onchange="updateTradeCalc()">
+                                    <span id="tpPips">0 pips</span>
                                 </div>
                             </div>
-
-                            <!-- Action Buttons -->
-                            <div class="pro-action-panel">
-                                <button class="pro-btn-sell" onclick="executeTrade('sell')">
-                                    <div class="pro-btn-main">
-                                        <span class="pro-btn-action">SELL</span>
-                                        <span class="pro-btn-price" id="sellBtnPrice">1.08448</span>
-                                    </div>
-                                    <div class="pro-btn-shorts">Short Position</div>
-                                </button>
-                                <button class="pro-btn-buy" onclick="executeTrade('buy')">
-                                    <div class="pro-btn-main">
-                                        <span class="pro-btn-action">BUY</span>
-                                        <span class="pro-btn-price" id="buyBtnPrice">1.08452</span>
-                                    </div>
-                                    <div class="pro-btn-shorts">Long Position</div>
-                                </button>
+                            
+                            <!-- Risk Preview -->
+                            <div class="tf-risk-preview">
+                                <div><span class="label">Risk</span><span class="value loss" id="potentialLoss">-€25.00</span></div>
+                                <div><span class="label">R/R</span><span class="value" id="riskReward">1:2.5</span></div>
+                                <div><span class="label">Reward</span><span class="value profit" id="potentialProfit">+€62.50</span></div>
                             </div>
+                            
+                            <!-- Big Action Buttons -->
+                            <div class="tf-action-big">
+                                <div class="tf-sell-side">
+                                    <div class="tf-price-label">SELL</div>
+                                    <div class="tf-price-value" id="sellPriceBig">1.08448</div>
+                                    <button class="tf-btn-sell" onclick="executeTrade('sell')">SELL NOW</button>
+                                </div>
+                                <div class="tf-spread-center">
+                                    <div class="tf-spread-val" id="tradeSpread">0.2</div>
+                                    <div class="tf-spread-text">spread</div>
+                                </div>
+                                <div class="tf-buy-side">
+                                    <div class="tf-price-label">BUY</div>
+                                    <div class="tf-price-value" id="buyPriceBig">1.08452</div>
+                                    <button class="tf-btn-buy" onclick="executeTrade('buy')">BUY NOW</button>
+                                </div>
+                            </div>
+                            
+                            <div style="height:100px"></div>
                         </div>
                     </div>
                 </div>
@@ -1194,7 +1218,8 @@ let state={
     currentSymbol:'EURUSD',
     currentCategory:'forex',
     chart:{tf:'15m',objects:[],scale:1,offsetX:0},
-    prices:{}
+    prices:{},
+    orderType:'market'
 };
 
 let priceInterval,marketInterval,chartInterval;
@@ -1373,6 +1398,23 @@ function setupListeners(){
             b.classList.add('active');
             state.chart.tf=b.dataset.tf;
             drawChart();
+        };
+    });
+    // Fullscreen trading timeframe buttons
+    document.querySelectorAll('.tf-tf-btn').forEach(b=>{
+        b.onclick=()=>{
+            document.querySelectorAll('.tf-tf-btn').forEach(x=>x.classList.remove('active'));
+            b.classList.add('active');
+            state.chart.tf=b.dataset.tf;
+            drawChart();
+        };
+    });
+    // Order type buttons
+    document.querySelectorAll('.tf-type-btn').forEach(b=>{
+        b.onclick=()=>{
+            document.querySelectorAll('.tf-type-btn').forEach(x=>x.classList.remove('active'));
+            b.classList.add('active');
+            state.orderType=b.dataset.type;
         };
     });
 }
@@ -1765,23 +1807,79 @@ function updateTradePanel(){
     const symbolDesc=document.getElementById('symbolDesc');
     if(symbolDesc)symbolDesc.textContent=symData.n;
     
-    // Update prices
-    const buyPrice=document.getElementById('buyPrice');
-    if(buyPrice)buyPrice.textContent=formatPrice(price.a,symData.v);
-    const sellPrice=document.getElementById('sellPrice');
-    if(sellPrice)sellPrice.textContent=formatPrice(price.b,symData.v);
-    const buyBtnPrice=document.getElementById('buyBtnPrice');
-    if(buyBtnPrice)buyBtnPrice.textContent=formatPrice(price.a,symData.v);
-    const sellBtnPrice=document.getElementById('sellBtnPrice');
-    if(sellBtnPrice)sellBtnPrice.textContent=formatPrice(price.b,symData.v);
+    // Update big prices (new fullscreen trading)
+    const buyPriceBig=document.getElementById('buyPriceBig');
+    if(buyPriceBig)buyPriceBig.textContent=formatPrice(price.a,symData.v);
+    const sellPriceBig=document.getElementById('sellPriceBig');
+    if(sellPriceBig)sellPriceBig.textContent=formatPrice(price.b,symData.v);
+    const chartPriceBig=document.getElementById('chartPriceBig');
+    if(chartPriceBig)chartPriceBig.textContent=formatPrice(price.a,symData.v);
     
     // Update spread
     const tradeSpread=document.getElementById('tradeSpread');
     if(tradeSpread)tradeSpread.textContent=((price.a-price.b)/symData.v).toFixed(state.currentCategory==='forex'?1:2);
     
+    // Update price change animation
+    const priceChangeBig=document.getElementById('priceChangeBig');
+    if(priceChangeBig){
+        const change=(Math.random()*0.3-0.15);
+        const isUp=change>=0;
+        priceChangeBig.className='tf-price-change '+(isUp?'':'down');
+        priceChangeBig.innerHTML=`<span class="change-arrow">${isUp?'▲':'▼'}</span><span class="change-value">${isUp?'+':''}${change.toFixed(2)}%</span>`;
+    }
+    
     updateSymbolIcon();
     updateTradeCalc();
     renderOpenTrades();
+    
+    // Force chart redraw
+    drawChart();
+}
+
+// Real-time price updater
+function startPriceUpdates(){
+    setInterval(()=>{
+        // Update all symbol prices with small random movements
+        Object.keys(symbols).forEach(cat=>{
+            symbols[cat].forEach(sym=>{
+                if(!state.prices[sym.s])state.prices[sym.s]={b:sym.b,a:sym.a};
+                const move=(Math.random()-0.5)*sym.v*0.001;
+                state.prices[sym.s].b+=move;
+                state.prices[sym.s].a+=move;
+            });
+        });
+        
+        // Update current symbol prices in trading
+        updateTradePanel();
+        
+        // Update wallet prices if visible
+        if(document.getElementById('tabWallet').classList.contains('active')){
+            updateWalletPrices();
+        }
+        
+        // Update quotes if visible
+        if(document.getElementById('tabQuotes').classList.contains('active')){
+            renderQuotes();
+        }
+        
+    },1000);
+}
+
+function updateWalletPrices(){
+    const acc=getCurrentAccount();
+    const assetList=document.getElementById('assetList');
+    if(!assetList)return;
+    
+    // Update each asset price in wallet
+    const assets=assetList.querySelectorAll('.asset-item');
+    assets.forEach(asset=>{
+        const symbol=asset.dataset.symbol;
+        if(!symbol)return;
+        const price=state.prices[symbol];
+        if(!price)return;
+        const priceEl=asset.querySelector('.asset-price');
+        if(priceEl)priceEl.textContent=formatPrice(price.a,5);
+    });
 }
 
 function updateOrderBook(price,dec){
